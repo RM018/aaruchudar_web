@@ -1,0 +1,1863 @@
+{
+  "quiz": {
+    "title": "Human Intelligence Assessment",
+    "description": "Discover your mental clarity and decision-making skills",
+    "timeLimit": 300,
+    "questions": [
+     {
+    "id": 1,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 1",
+    "difficulty": "EASY",
+    "question": "Why does your clarity decrease when you are tired?",
+    "options": [
+      "Brain relies on feeling instead of thinking",
+      "There are too many thoughts",
+      "Your energy is increased",
+      "Your focus increases"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 2,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 1",
+    "difficulty": "EASY",
+    "question": "What typically helps when you're confused?",
+    "options": [
+      "More ideas",
+      "An even louder argument",
+      "A small pause",
+      "Doing nothing"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 3,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 1",
+    "difficulty": "EASY",
+    "question": "Why is clarity important to work or study work?",
+    "options": [
+      "Skip effort",
+      "Be popular",
+      "Make good impressions",
+      "Save time and mistakes"
+    ],
+    "correct": 3
+  },
+  {
+    "id": 4,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 1",
+    "difficulty": "EASY",
+    "question": "What does clarity do when the mind is messy?",
+    "options": [
+      "Calm direction",
+      "Pressure",
+      "Anger",
+      "More doubt"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 5,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 1",
+    "difficulty": "EASY",
+    "question": "Clarity helps mainly in what?",
+    "options": [
+      "Good arguments",
+      "Making good choices",
+      "Control others together",
+      "Better productivity"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 6,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 1",
+    "difficulty": "MID",
+    "question": "What part of the brain filters unnecessary information?",
+    "options": [
+      "Reticular Activating System (RAS)",
+      "Hippocampus",
+      "Amygdala",
+      "Cerebellum"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 7,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 1",
+    "difficulty": "MID",
+    "question": "Why do clear people seem calmer?",
+    "options": [
+      "They avoid thinking",
+      "They know what matters most",
+      "They depend on luck",
+      "They speak less always"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 8,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 1",
+    "difficulty": "MID",
+    "question": "In a team, clarity spreads when—",
+    "options": [
+      "Everyone speaks with reason and listens with care",
+      "People talk louder",
+      "Everyone agrees blindly",
+      "Nobody asks questions"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 9,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 1",
+    "difficulty": "MID",
+    "question": "When clarity fades, what usually increases?",
+    "options": [
+      "Creativity flow",
+      "Focus",
+      "Memory power",
+      "Distraction and reaction"
+    ],
+    "correct": 3
+  },
+  {
+    "id": 10,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 1",
+    "difficulty": "MID",
+    "question": "You have two good choices. How to decide clearly?",
+    "options": [
+      "Pick the one people like",
+      "Compare each with your goal",
+      "Flip a coin",
+      "Wait and forget"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 11,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 1",
+    "difficulty": "HIGH",
+    "question": "What happens in the brain when you label your feelings clearly?",
+    "options": [
+      "Memory reduces",
+      "Amygdala becomes active",
+      "Amygdala calms down",
+      "Focus disappears"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 12,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 1",
+    "difficulty": "HIGH",
+    "question": "Which brain habit causes overthinking?",
+    "options": [
+      "Curiosity",
+      "Need for certainty",
+      "Calm reflection",
+      "Listening deeply"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 13,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 1",
+    "difficulty": "HIGH",
+    "question": "A team misunderstands your plan again and again. Where should clarity start?",
+    "options": [
+      "Your explanation pattern",
+      "Their attitude",
+      "Time limit",
+      "Luck"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 14,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 1",
+    "difficulty": "HIGH",
+    "question": "Which mental exercise best trains clarity?",
+    "options": [
+      "Copying quotes",
+      "Endless brainstorming",
+      "Watching random videos",
+      "Thought-sorting journaling"
+    ],
+    "correct": 3
+  },
+  {
+    "id": 15,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 1",
+    "difficulty": "HIGH",
+    "question": "Which daily question trains the mind for clarity?",
+    "options": [
+      "What truly matters right now?",
+      "What will impress others?",
+      "What's trending?",
+      "What if I fail?"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 16,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 2",
+    "difficulty": "EASY",
+    "question": "What is the most effective method of starting a clear task?",
+    "options": [
+      "Define your purpose",
+      "Jump into action",
+      "Ask others to do it",
+      "Wait for mood"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 17,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 2",
+    "difficulty": "EASY",
+    "question": "The habit of writing down one's thoughts is a great help to clarity, because —",
+    "options": [
+      "It distracts you",
+      "It wastes time",
+      "It hides confusion",
+      "It organizes ideas visually"
+    ],
+    "correct": 3
+  },
+  {
+    "id": 18,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 2",
+    "difficulty": "EASY",
+    "question": "When you are absolutely clear about what the next step is, your mind feels —",
+    "options": [
+      "Heavy and blank",
+      "Light and sure",
+      "Distracted",
+      "Angry"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 19,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 2",
+    "difficulty": "EASY",
+    "question": "What usually causes lack of clarity?",
+    "options": [
+      "Overthinking and hurry",
+      "Calm breathing",
+      "Writing thoughts down",
+      "Taking short breaks"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 20,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 2",
+    "difficulty": "EASY",
+    "question": "When you are clear, how do you decide?",
+    "options": [
+      "To please others",
+      "In a hurry",
+      "With purpose and calm",
+      "Without thinking"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 21,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 2",
+    "difficulty": "MID",
+    "question": "What action demonstrates the highest clarity of mind before making a difficult decision?",
+    "options": [
+      "Asking opinions of people that are not related to the matter",
+      "Checking facts, values, and results",
+      "Doing what is easiest without considering the consequences",
+      "Waiting for a long time"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 22,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 2",
+    "difficulty": "MID",
+    "question": "A leader is confused and challenged with a tough question in public. What would be the leader's show of clarity at that moment?",
+    "options": [
+      "Changing the subject",
+      "Giving a quick, confused answer",
+      "Ignoring the question",
+      "Reflecting the question, sharing a personal view, and signing off with a key statement"
+    ],
+    "correct": 3
+  },
+  {
+    "id": 23,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 2",
+    "difficulty": "MID",
+    "question": "You have two assignments due simultaneously. What demonstrates your mental clarity?",
+    "options": [
+      "Prioritizing the work depending on the urgency and the effect",
+      "Partially completing both",
+      "Not doing either and waiting until the last minute",
+      "Asking another person to choose"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 24,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 2",
+    "difficulty": "MID",
+    "question": "You have to pick the next step out of two good options. Which question helps bring clarity?",
+    "options": [
+      "Which one is easier right now?",
+      "Which one is in line with my long-term goal?",
+      "Which one is more liked by others?",
+      "Which one will give me quick praise?"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 25,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 2",
+    "difficulty": "MID",
+    "question": "Your team asks you to explain a complex concept in simple words. What clarity action comes before communication?",
+    "options": [
+      "Breaking down the idea to one simple, clear sentence",
+      "Detailing more",
+      "Using more complex terms",
+      "Not giving examples"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 26,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 2",
+    "difficulty": "HIGH",
+    "question": "What part of your brain helps you structure your thoughts and plans in an understandable manner?",
+    "options": [
+      "Prefrontal cortex",
+      "Amygdala",
+      "Cerebellum",
+      "Occipital lobe"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 27,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 2",
+    "difficulty": "HIGH",
+    "question": "When you identify your feelings accurately, what does your brain do?",
+    "options": [
+      "The amygdala calms down",
+      "The amygdala gets very active",
+      "The hippocampus becomes inactive",
+      "The prefrontal cortex stops"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 28,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 2",
+    "difficulty": "HIGH",
+    "question": "What serves as the link between the understanding of something and remembrance?",
+    "options": [
+      "Clarity lets the hippocampus use the facts more",
+      "Clarity stops learning",
+      "Memory gets worse with clarity",
+      "The brain stops storing facts"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 29,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 2",
+    "difficulty": "HIGH",
+    "question": "The communication in the brain between which two parts, among the others, gets the most improved when a person is making a clear decision?",
+    "options": [
+      "Prefrontal cortex and limbic system",
+      "Brainstem and spinal cord",
+      "Cerebellum and lungs",
+      "Amygdala and stomach"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 30,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 2",
+    "difficulty": "HIGH",
+    "question": "The hippocampus helps clarity mostly by —",
+    "options": [
+      "Properly recalling past experiences",
+      "Stopping emotions",
+      "Making people sleepy",
+      "Causing distractions"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 31,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "EASY",
+    "question": "How does organizing your tasks improve clarity?",
+    "options": [
+      "It reduces confusion and shows what matters first",
+      "It wastes time",
+      "It makes tasks harder",
+      "It creates stress"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 32,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "EASY",
+    "question": "How does pausing before making a decision help clarity?",
+    "options": [
+      "Gives time for the brain to focus and sort ideas",
+      "Causes delay",
+      "Makes things confusing",
+      "Reduces confidence"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 33,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "EASY",
+    "question": "Which habit improves clarity over time?",
+    "options": [
+      "Watching videos endlessly",
+      "Writing down key ideas every day",
+      "Talking about problems without reflecting",
+      "Checking social media repeatedly"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 34,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "EASY",
+    "question": "Why is taking a short pause helpful when confused?",
+    "options": [
+      "It makes things more complicated",
+      "It wastes time",
+      "It gives the brain a moment to organize ideas",
+      "It reduces confidence"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 35,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "EASY",
+    "question": "Which sign shows your mind is clear?",
+    "options": [
+      "You avoid decisions",
+      "You keep changing your mind constantly",
+      "You feel stressed and distracted",
+      "You can explain your idea simply and calmly"
+    ],
+    "correct": 3
+  },
+  {
+    "id": 36,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "MID",
+    "question": "Scenario: Your schedule is packed and you feel mentally overwhelmed. What helps maintain clarity?",
+    "options": [
+      "Keep working without a break until everything is done",
+      "Decide which tasks are most important and work on only those",
+      "Look at social media in order to relax",
+      "Skip less important tasks without consideration"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 37,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "MID",
+    "question": "Scenario: Brainstorming session, everyone talks at once. What is a clear-thinking strategy?",
+    "options": [
+      "Prepare your point, listen to others, and when it is your turn, speak in a calm manner",
+      "Loudly say your idea first to be noticed",
+      "Ignore the discussion and do not speak your mind",
+      "Imitate the idea of someone else"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 38,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "MID",
+    "question": "Scenario: You are preparing a complex report and realize several data points contradict each other. What's the most clear-thinking approach?",
+    "options": [
+      "Finish the report without paying attention to the contradictions",
+      "Point out the contradictions, look into them carefully one by one and then adjust your conclusions",
+      "Get help from a colleague to fix the report",
+      "Omit this section and save your time"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 39,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "MID",
+    "question": "Scenario: Receiving conflicting instructions from two senior team members, you are expected to deliver results by the end of the day. What's the most clarity-driven response?",
+    "options": [
+      "Select the simpler one and do it, forget the other",
+      "Study the scenarios carefully, check with both members about what should be done first, and devise a plan",
+      "Just go ahead and do both without letting anyone know",
+      "Give it to someone else to do without letting the boss know"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 40,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "MID",
+    "question": "Scenario: Two urgent tasks with overlapping deadlines are assigned to you. Both seemed equally important. What is the best way to proceed?",
+    "options": [
+      "I would first do the task that looked easier",
+      "Complete them both at the same time to shorten the time period",
+      "Determine first which task would have a bigger positive impact in the long run and then focus on it",
+      "Do nothing and wait until the manager comes to give you instructions first"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 41,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "HIGH",
+    "question": "Observing your surroundings mindfully for 3 minutes improves focus and clarity. Which brain part is most engaged?",
+    "options": [
+      "Prefrontal Cortex",
+      "Cerebellum",
+      "Hippocampus",
+      "Amygdala"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 42,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "HIGH",
+    "question": "Writing a short reflection about your emotions and thoughts strengthens clarity. Which brain part is primarily engaged?",
+    "options": [
+      "Hippocampus",
+      "Occipital Lobe",
+      "Amygdala",
+      "Prefrontal Cortex"
+    ],
+    "correct": 3
+  },
+  {
+    "id": 43,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "HIGH",
+    "question": "Doing a 2-3 minute \"pause and breathe\" exercise when stressed improves focus and clarity. Which brain part is mainly activated?",
+    "options": [
+      "Cerebellum",
+      "Amygdala",
+      "Prefrontal Cortex",
+      "Hippocampus"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 44,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "HIGH",
+    "question": "Practicing a short visualization of step-by-step solutions before deciding improves clarity. Which brain part is activated?",
+    "options": [
+      "Prefrontal Cortex",
+      "Amygdala",
+      "Hippocampus",
+      "Brainstem"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 45,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "HIGH",
+    "question": "Sitting quietly for a few minutes to label your emotions when stressed improves clarity. Which brain part is most engaged?",
+    "options": [
+      "Amygdala",
+      "Prefrontal Cortex",
+      "Hippocampus",
+      "Cerebellum"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 46,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "Clarity as a Culture means:",
+    "options": [
+      "Every person clearly explains the same thought.",
+      "The system is not only about clear talking but it also values transparent thinking.",
+      "People simplify their communication so that everyone understands without any problem.",
+      "In order to prevent confusion, leaders make all the decisions."
+    ],
+    "correct": 1
+  },
+  {
+    "id": 47,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "When you are given a question that you do not understand, a straightforward answer would be:",
+    "options": [
+      "I don't know yet.",
+      "Provide a safe, general answer.",
+      "Change the subject.",
+      "Make a confident guess."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 48,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "When someone's point is totally unclear to you, what would be your very first inner reaction?",
+    "options": [
+      "Inquire by asking a question in order to know their exact meaning.",
+      "Interpret their meaning according to your own perspective.",
+      "Rely on others to explain it first.",
+      "In your mind, you simply discard it since it is not clear."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 49,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "The speed with which a good decision is made is not the main factor of its recognition, but rather:",
+    "options": [
+      "The number of people who support it.",
+      "The clarity of the explanation of the decision.",
+      "The simplicity of the decision implementation.",
+      "The self-assurance in the decision presentation."
+    ],
+    "correct": 1
+  },
+  {
+    "id": 50,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "A team member expresses dissent towards your plan just before the deadline. The best decision of the moment would be to:",
+    "options": [
+      "Override their idea with yours to keep the process moving.",
+      "Disregard the disagreement and continue with the delivery as planned.",
+      "Take a moment to see if their point of view uncovers something you hadn't thought of.",
+      "Hold up the project until everyone agrees."
+    ],
+    "correct": 2
+  },
+  {
+    "id": 51,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "Two different mentors provide you with completely contradictory advice regarding your career change. The smartest thing to do would be to:",
+    "options": [
+      "Select the one whose result sounds more impressive.",
+      "Go by the one that gives you an emotional support.",
+      "See whose advice corresponds with your personal development pattern.",
+      "Not make a decision until you have a clear understanding of the situation."
+    ],
+    "correct": 2
+  },
+  {
+    "id": 52,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "One very obvious indication that one's focus is externally directed rather than internally is:",
+    "options": [
+      "It would be your weighing more over the feeling than the looking of things.",
+      "The content of your thoughts varies depending on the observer.",
+      "You are able to witness your emotional states without any involvement.",
+      "It is when you are so absorbed in your work that you do not realize the passing of time."
+    ],
+    "correct": 1
+  },
+  {
+    "id": 53,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "The difference between concentration and inner focus is that:",
+    "options": [
+      "Concentration is an effort from outside; inner focus is an awareness from inside.",
+      "Both mean the same thing.",
+      "Concentration helps to ignore distractions; inner focus acknowledges them.",
+      "Inner focus is influenced by surroundings; concentration is not."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 54,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "What most strongly hampers one's inner focus, apart from noise, is:",
+    "options": [
+      "The mind's addiction to the things it sees outside.",
+      "The loudness of the world.",
+      "The presence of people.",
+      "The absence of quiet places."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 55,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "Real listening is a kind of listening which:",
+    "options": [
+      "You keep quiet until the other person has finished.",
+      "You check if they agree with you.",
+      "You say their words over again.",
+      "You give up your thought of reply while they speak."
+    ],
+    "correct": 3
+  },
+  {
+    "id": 56,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "In a story that has both factual elements and emotional ones, an effective listener would most likely prioritize:",
+    "options": [
+      "Ignoring the feelings and focus on the facts only.",
+      "Ignoring the facts and focus on the feelings only.",
+      "Recognizing and relating the facts and the feelings.",
+      "Using your own experience to judge the story."
+    ],
+    "correct": 2
+  },
+  {
+    "id": 57,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "You are getting advice from a mentor, but the guidance is not making much sense to you. What would be the best listening step in this situation?",
+    "options": [
+      "Just go along with it without questioning because they have the experience.",
+      "By asking questions clarify and understand the meaning of the advice.",
+      "Pretend that you didn't hear it and trust your own judgment.",
+      "Keep it to yourself until another person helps you to understand it."
+    ],
+    "correct": 1
+  },
+  {
+    "id": 58,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "Two team members have a disagreement that they decide to keep to themselves but eventually, it starts affecting the other members of the group. What would be the most intelligent step to do:",
+    "options": [
+      "Talk to each one individually to get their point of view and then act as a mediator together.",
+      "Pretend that nothing is happening since it is a personal matter; it will sort itself out.",
+      "Organize forcibly a meeting with the entire team to confront the issue immediately.",
+      "Recommend everyone to make a compromise without talking about the details."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 59,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "The main part of successful conflict management is:",
+    "options": [
+      "Not having disagreements, at least trying.",
+      "Using your opinion to make sure that there will be no more conflicts.",
+      "Getting to know the source of the conflict before taking any action.",
+      "Deciding that a third party will come to your rescue."
+    ],
+    "correct": 2
+  },
+  {
+    "id": 60,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "A sign of weak conflict handling is:",
+    "options": [
+      "Pausing to reflect before responding.",
+      "Reacting emotionally and escalating the disagreement.",
+      "Exploring alternative solutions.",
+      "Acknowledging your own role in the conflict."
+    ],
+    "correct": 1
+  },
+  {
+    "id": 61,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "Systematic thinking is mainly a means to:",
+    "options": [
+      "Solve problems randomly and very fast.",
+      "Refrain from thinking too much about the details.",
+      "Concentrate solely on the immediate results.",
+      "Divide problems into smaller, manageable pieces."
+    ],
+    "correct": 3
+  },
+  {
+    "id": 62,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "Using systematic thinking, it is very important to consider the consequences of each chance because:",
+    "options": [
+      "It gives the assurance that one's personal preferences will be dominant.",
+      "It is very helpful to foresee the results and to take the most suitable decision.",
+      "The decision-making is made much quicker without any kind of reflection.",
+      "The biggest picture can be disregarded."
+    ],
+    "correct": 1
+  },
+  {
+    "id": 63,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "The essential part of planning a team project with limited time and resources is to decide on the most systematical approach:",
+    "options": [
+      "Dividing the work into segments, delegating the tasks, and making a schedule.",
+      "Simply doing the tasks you like and expecting others to follow.",
+      "Beginning with the simplest tasks and then deciding what to do next.",
+      "Giving the team complete freedom without a plan."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 64,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "Are you aware of what you are effectively vocalizing:",
+    "options": [
+      "Loudly as possible to be heard.",
+      "Clearly expressing your thoughts and at the same time taking into consideration the context and the impact.",
+      "Overpowering the conversations in order to show your point.",
+      "Speaking only when it is your turn."
+    ],
+    "correct": 1
+  },
+  {
+    "id": 65,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "Understanding your value in a team or group involves:",
+    "options": [
+      "Highlighting your achievements constantly.",
+      "Avoiding risks to maintain a safe image.",
+      "Waiting for others to recognize your worth.",
+      "Knowing your strengths and how they contribute to shared goals."
+    ],
+    "correct": 3
+  },
+  {
+    "id": 66,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "Displaying vulnerability in your communication is:",
+    "options": [
+      "Using a mistake or an uncertainty as a way of gaining trust.",
+      "Telling your complete life-story, even the things that don't make sense.",
+      "Not talking about things that are difficult in order to keep relationships friendly.",
+      "Reacting with your feelings, without control, in every situation."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 67,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "What kind of behavior is an example of authentic leadership?",
+    "options": [
+      "Pretending to be competent by using other people's methods.",
+      "Managing the situation, showing foresight, and motivating other people by being true to oneself.",
+      "Not taking risks and going with the crowd.",
+      "Highlighting personal advantage rather than the growth of the team."
+    ],
+    "correct": 1
+  },
+  {
+    "id": 68,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "The difference between a leader and a follower is:",
+    "options": [
+      "Leaders copy the successful methods of others without changing anything.",
+      "Followers are the ones who think for themselves whereas leaders just imitate.",
+      "Leaders analyze the situation and make a decision based on their understanding and principles.",
+      "Leaders try to stay away from giving out tasks so as not to get blamed for mistakes."
+    ],
+    "correct": 2
+  },
+  {
+    "id": 69,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 3",
+    "difficulty": "CONCEPTUAL",
+    "question": "A leader receives criticism that their methods are unconventional. The most genuine reaction would be:",
+    "options": [
+      "Consider the criticism, change if necessary, but keep being consistent with their own values.",
+      "Justify their actions by stubbornly insisting that they are right.",
+      "Imitate standard ways of doing things at once to be free from criticism.",
+      "Totally disregard the criticism and carry on as previously."
+    ],
+    "correct": 0
+  },
+  {
+    "id": 70,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 4",
+    "difficulty": "EASY",
+    "question": "If you confront a new situation, what is your first action?",
+    "options": [
+      "Observe silently",
+      "Immediately ask questions",
+      "Wait for others to act",
+      "React based on instinct"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 71,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 4",
+    "difficulty": "EASY",
+    "question": "What characteristic feature of a confident person?",
+    "options": [
+      "Loud and expressive",
+      "Consistent under pressure",
+      "Always dominating",
+      "Never wrong"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 72,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 4",
+    "difficulty": "EASY",
+    "question": "A person with self-awareness usually...",
+    "options": [
+      "Understands others more than self",
+      "Recognizes feelings and adjusts behavior",
+      "Focuses on others' mistakes",
+      "Rarely questions own actions"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 73,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 4",
+    "difficulty": "EASY",
+    "question": "Which behavior shows emotional maturity?",
+    "options": [
+      "Reacting fast to defend your view",
+      "Speaking louder to win an argument",
+      "Avoiding emotional discussions",
+      "Listening fully before responding"
+    ],
+    "correct": 3
+  },
+  {
+    "id": 74,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 4",
+    "difficulty": "EASY",
+    "question": "An empathetic person mostly tries to...",
+    "options": [
+      "Solve every problem for others",
+      "Feel and understand others' emotions",
+      "Avoid people's sadness",
+      "Stay quiet during conflicts"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 75,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 4",
+    "difficulty": "MID",
+    "question": "Which action supports building a responsible personality?",
+    "options": [
+      "Taking credit for all outcomes",
+      "Owning both mistakes and successes",
+      "Blaming others when under pressure",
+      "Avoiding decision-making roles"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 76,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 4",
+    "difficulty": "MID",
+    "question": "To grow a resilient personality, a person must...",
+    "options": [
+      "Avoid stress completely",
+      "Forget failures quickly without reflection",
+      "Wait for motivation to return",
+      "Reframe setbacks as learning chances"
+    ],
+    "correct": 3
+  },
+  {
+    "id": 77,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 4",
+    "difficulty": "MID",
+    "question": "To strengthen emotional stability, one should...",
+    "options": [
+      "Avoid all emotional triggers",
+      "Reflect after emotional situations",
+      "Ignore emotions completely",
+      "Depend on others' validation"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 78,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 4",
+    "difficulty": "MID",
+    "question": "To build better interpersonal personality, a person should...",
+    "options": [
+      "Interrupt to share opinions",
+      "Speak only about self",
+      "Listen actively during conversations",
+      "Pretend to agree for peace"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 79,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 4",
+    "difficulty": "MID",
+    "question": "Which action best builds integrity?",
+    "options": [
+      "Following rules only when watched",
+      "Being honest even in small choices",
+      "Changing behavior for approval",
+      "Avoiding difficult truths"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 80,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 4",
+    "difficulty": "HIGH",
+    "question": "When your values are tested, your true personality shows through your...",
+    "options": [
+      "Immediate emotions",
+      "Consistent choices under stress",
+      "Ability to avoid all conflict",
+      "Silence in group settings"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 81,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 4",
+    "difficulty": "HIGH",
+    "question": "A person with a growth mindset believes that...",
+    "options": [
+      "Abilities can be developed through effort",
+      "Personality is fixed from birth",
+      "Feedback is criticism",
+      "Failure defines intelligence"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 82,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 4",
+    "difficulty": "HIGH",
+    "question": "To deepen self-leadership, a person must...",
+    "options": [
+      "Wait for others to motivate them",
+      "Depend on external rewards",
+      "Hold themselves accountable for choices",
+      "Avoid taking risks"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 83,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 4",
+    "difficulty": "HIGH",
+    "question": "When your personal values conflict with external pressure, the best response is to...",
+    "options": [
+      "Compromise fully to maintain harmony",
+      "Stay calm and realign with your inner ethics",
+      "Ignore emotions and decide fast",
+      "Delay decision to escape conflict"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 84,
+    "lab": "LAB-1: CLARITY AS CULTURE",
+    "day": "Day 4",
+    "difficulty": "HIGH",
+    "question": "When building leadership personality, what is the core inner skill?",
+    "options": [
+      "Inspiring others through controlled emotions",
+      "Showing authority through dominance",
+      "Ignoring criticism from the team",
+      "Making decisions without empathy"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 85,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 5",
+    "difficulty": "EASY",
+    "question": "You have two tasks one urgent, one important. Which one should you finish first to have better long-term clarity?",
+    "options": [
+      "The urgent one",
+      "The important one",
+      "The shorter one",
+      "Both at the same time"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 86,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 5",
+    "difficulty": "EASY",
+    "question": "If before making a choice you always list pros and cons of the options, what kind of decision would it be?",
+    "options": [
+      "Emotional decision",
+      "Impulsive decision",
+      "Logical decision",
+      "Group decision"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 87,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 5",
+    "difficulty": "EASY",
+    "question": "Which of the following is not a part of decision-making?",
+    "options": [
+      "Identifying choices",
+      "Evaluating outcomes",
+      "Ignoring consequences",
+      "Choosing the best option"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 88,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 5",
+    "difficulty": "EASY",
+    "question": "If you decide to postpone every decision to later, what would be the result over time?",
+    "options": [
+      "You get more time always",
+      "Stress builds up slowly",
+      "You become more creative",
+      "Your brain rests"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 89,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 5",
+    "difficulty": "EASY",
+    "question": "When your mind is a clear decision is made.",
+    "options": [
+      "Confused",
+      "Calm and focused",
+      "Rushed",
+      "Distracted"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 90,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 5",
+    "difficulty": "MID",
+    "question": "You are responsible for selecting one student to be the class representative at a national competition. One of them is very skillful but arrogant; Another one is just average but helpful.",
+    "options": [
+      "Go with the skilled one to ensure a win",
+      "Pick the cooperative one for team harmony",
+      "Select randomly so that no one gets upset",
+      "Have the teacher decide"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 91,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 5",
+    "difficulty": "MID",
+    "question": "Two of your ideas are equally good. What is the best manner to decide?",
+    "options": [
+      "Get more opinions and compare the results",
+      "Flip a coin",
+      "Go with the option that is easier to implement",
+      "Take the decision that your friend prefers"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 92,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 5",
+    "difficulty": "MID",
+    "question": "You have to choose between two colleges: one close to home but with less exposure, the other is far but with more opportunities.",
+    "options": [
+      "Go with the one that is close to home",
+      "Choose the one with more exposure for personal development",
+      "Wait until a third alternative comes up",
+      "Let your parents decide"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 93,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 5",
+    "difficulty": "MID",
+    "question": "You have to pick a project topic within an hour. You very quickly decide the first idea you see online. What kind of decision is this?",
+    "options": [
+      "Intuitive",
+      "Data-based",
+      "Impulsive",
+      "Strategic"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 94,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 5",
+    "difficulty": "MID",
+    "question": "You get two job offers: one pays more but would be a source of stress for you; the other will give you balance but with less pay. What should be the main factor in your decision?",
+    "options": [
+      "Just the salary",
+      "What your friends would do",
+      "Your well-being in the long run",
+      "What looks to be the easiest way"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 95,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 5",
+    "difficulty": "HIGH",
+    "question": "If you are planning and evaluating your future goals, which brain region is most involved?",
+    "options": [
+      "Amygdala",
+      "Hippocampus",
+      "Prefrontal Cortex",
+      "Cerebellum"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 96,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 5",
+    "difficulty": "HIGH",
+    "question": "As a result of your fright, you decide a course of action impulsively. What single part in your brain is responsible for this interaction?",
+    "options": [
+      "Amygdala",
+      "Prefrontal Cortex",
+      "Parietal Lobe",
+      "Hippocampus"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 97,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 5",
+    "difficulty": "HIGH",
+    "question": "Before choosing your next move, you recall the previous instances. What brain region is your memory?",
+    "options": [
+      "Amygdala",
+      "Hippocampus",
+      "Temporal Lobe",
+      "Frontal Lobe"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 98,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 5",
+    "difficulty": "HIGH",
+    "question": "You gain the ability to perform a bold new decision and furthermore, retain focus. What brain part is your determination?",
+    "options": [
+      "Prefrontal Cortex",
+      "Amygdala",
+      "Cerebellum",
+      "Brainstem"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 99,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 5",
+    "difficulty": "HIGH",
+    "question": "Under pressure while deciding, you may experience that your body is tensed. What brain system is responsible for this?",
+    "options": [
+      "Limbic System",
+      "Occipital Lobe",
+      "Frontal lobe",
+      "Parietal lobe"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 100,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "EASY",
+    "question": "Why do quick emotional decisions sometimes fail?",
+    "options": [
+      "They miss full facts",
+      "They save time",
+      "They always work",
+      "They make you confident"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 101,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "EASY",
+    "question": "A \"good\" decision is one that",
+    "options": [
+      "Looks fancy",
+      "Makes everyone happy instantly",
+      "Solves the problem with the least damage",
+      "Avoids change"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 102,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "EASY",
+    "question": "When you choose between two snacks - fruit or chips - you are mainly using which skill?",
+    "options": [
+      "Logical filtering",
+      "Decision prioritization",
+      "Emotional reasoning",
+      "Impulse control"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 103,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "EASY",
+    "question": "What is the very first step before making any decision?",
+    "options": [
+      "Verify how you feel and what the facts indicate",
+      "Get opinions from everyone",
+      "Just wait until luck comes",
+      "Do something completely random"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 104,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "EASY",
+    "question": "People who decide emotionally will, in most cases, ...",
+    "options": [
+      "Have clearer thoughts",
+      "Overlook the logical side of things",
+      "Work faster and with better accuracy",
+      "Experience no stress"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 105,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "EASY",
+    "question": "A powerful decision is most likely to be in harmony with ...",
+    "options": [
+      "Your principles and facts",
+      "Random advice",
+      "The popularity",
+      "The shortcuts"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 106,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "EASY",
+    "question": "Why do people feel stuck while deciding?",
+    "options": [
+      "Too many options and little clarity",
+      "Because decisions are useless",
+      "No one ever helps",
+      "They always know the answer already"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 107,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "EASY",
+    "question": "What happens to decision-making when a lot of people give opinions is that it becomes ...",
+    "options": [
+      "Emotion-free",
+      "Easier and instant",
+      "Slow and unclear",
+      "Perfectly accurate"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 108,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "MID",
+    "question": "Why do overthinkers struggle with making choices?",
+    "options": [
+      "They come up with the solution too quickly",
+      "They disregard facts",
+      "They spend too much time analyzing each option",
+      "They don't have enough information"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 109,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "MID",
+    "question": "In case of a high time pressure, what stops wrong decisions?",
+    "options": [
+      "Remaining calm and focusing on the main priorities",
+      "Acting impulsively without thinking",
+      "Only following the first idea",
+      "Ignoring all input"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 110,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "MID",
+    "question": "Two job offers are given to you: one is safe and the other is challenging. What helps you to make a wise decision?",
+    "options": [
+      "Comparing each choice with the long-term goals",
+      "Choosing the one that everyone praises",
+      "Using a coin to make a decision",
+      "Postponing until both expire"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 111,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "MID",
+    "question": "What will it be if decision-making is delayed repeatedly?",
+    "options": [
+      "You get more clarity without your effort",
+      "Opportunities may be lost because of inactivity",
+      "The pressure disappears",
+      "The outcomes become perfect"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 112,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "MID",
+    "question": "In a group decision, clarity is lost when—",
+    "options": [
+      "Everyone listens attentively",
+      "One person dominates without hearing others",
+      "All opinions are taken into account",
+      "Facts are being summarized clearly"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 113,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "HIGH",
+    "question": "What part of a decision chart aids in figuring potential results before taking an action?",
+    "options": [
+      "Option evaluation",
+      "Action column",
+      "Reflection zone",
+      "Priority list"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 114,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "HIGH",
+    "question": "What can help in the emotional side of decision-making?",
+    "options": [
+      "Writing down options and logically scoring them",
+      "Instant reacting",
+      "Ignoring all logic",
+      "Asking a lot of people for advice"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 115,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "HIGH",
+    "question": "In order not to be mixed up, a decision maker should—",
+    "options": [
+      "Asking many people to decide for them",
+      "Selecting options based on popularity",
+      "Using only gut feeling",
+      "Defining criteria before rating options"
+    ],
+    "correct": 3
+  },
+  {
+    "id": 116,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "HIGH",
+    "question": "An \"evaluation step\" in a decision flow chart is about—",
+    "options": [
+      "Finding out the first idea",
+      "What option brings most overall benefit",
+      "Giving the credit",
+      "How quickly to decide"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 117,
+    "lab": "LAB-2: DECISION MAKING WITHOUT DRAMA",
+    "day": "Day 6",
+    "difficulty": "HIGH",
+    "question": "What is the main goal of \"decision mapping\"?",
+    "options": [
+      "To help seeing the alternative routes before taking an action",
+      "To add more complexity to the problem",
+      "To stop reflecting",
+      "To fully rely on the intuition"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 118,
+    "lab": "LAB-3: INNER FOCUS IN A NOISY WORLD",
+    "day": "Day 7",
+    "difficulty": "EASY",
+    "question": "When your attention starts drifting during a task, what's the first smart step to rebuild focus?",
+    "options": [
+      "Switch instantly to another big task",
+      "Take a 2-minute mental reset before continuing",
+      "Push yourself harder to finish quickly",
+      "Ignore the distraction and multitask"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 119,
+    "lab": "LAB-3: INNER FOCUS IN A NOISY WORLD",
+    "day": "Day 7",
+    "difficulty": "EASY",
+    "question": "A person reads one paragraph and forgets it immediately. What does this show about their focus state?",
+    "options": [
+      "They are reading too fast",
+      "Their mind is active but scattered",
+      "Their environment is too quiet",
+      "They are over-memorizing the words"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 120,
+    "lab": "LAB-3: INNER FOCUS IN A NOISY WORLD",
+    "day": "Day 7",
+    "difficulty": "EASY",
+    "question": "Which daily habit helps you stay naturally focused longer?",
+    "options": [
+      "Drinking water only when you feel tired",
+      "Checking notifications to refresh the brain",
+      "Setting micro-goals for short time slots",
+      "Listening to random background sounds"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 121,
+    "lab": "LAB-3: INNER FOCUS IN A NOISY WORLD",
+    "day": "Day 7",
+    "difficulty": "EASY",
+    "question": "If you constantly lose focus while studying, which is the most practical solution?",
+    "options": [
+      "Keep the phone close in silent mode",
+      "Study in chunks with small breaks",
+      "Increase the study duration continuously",
+      "Change subjects every 5 minutes"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 122,
+    "lab": "LAB-3: INNER FOCUS IN A NOISY WORLD",
+    "day": "Day 7",
+    "difficulty": "EASY",
+    "question": "What is a clear sign of focused attention?",
+    "options": [
+      "Awareness of background noise",
+      "Continuous re-reading of the same line",
+      "Losing track of time while working",
+      "Constantly planning the next task"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 123,
+    "lab": "LAB-3: INNER FOCUS IN A NOISY WORLD",
+    "day": "Day 7",
+    "difficulty": "MID",
+    "question": "You are preparing a report but your friend keeps talking beside you. What is the most focused response?",
+    "options": [
+      "Nod and continue writing",
+      "Politely pause, ask for silence, and refocus",
+      "Keep listening while typing fast",
+      "Move to another room after finishing the task"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 124,
+    "lab": "LAB-3: INNER FOCUS IN A NOISY WORLD",
+    "day": "Day 7",
+    "difficulty": "MID",
+    "question": "In a team meeting, your thoughts wander. What helps bring your attention back effectively?",
+    "options": [
+      "Writing down the next agenda point",
+      "Staring at the speaker without reacting",
+      "Mentally repeating what the speaker just said",
+      "Changing your sitting position"
+    ],
+    "correct": 2
+  },
+  {
+    "id": 125,
+    "lab": "LAB-3: INNER FOCUS IN A NOISY WORLD",
+    "day": "Day 7",
+    "difficulty": "MID",
+    "question": "You're reading a book, and your phone pings. You feel tempted to check it. What's a focused choice?",
+    "options": [
+      "Check quickly and return to reading",
+      "Put the phone away until the chapter ends",
+      "Read with one eye on notifications",
+      "Turn off the phone completely"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 126,
+    "lab": "LAB-3: INNER FOCUS IN A NOISY WORLD",
+    "day": "Day 7",
+    "difficulty": "MID",
+    "question": "A student finds it hard to focus during online classes. Which method will best train their attention?",
+    "options": [
+      "Use hand-written notes during class",
+      "Watch replays again and again",
+      "Listen to music while attending",
+      "Keep multiple tabs open for reference"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 127,
+    "lab": "LAB-3: INNER FOCUS IN A NOISY WORLD",
+    "day": "Day 7",
+    "difficulty": "MID",
+    "question": "You're working on an important project but feel mentally tired. What's the best decision for focus recovery?",
+    "options": [
+      "Drink an energy drink and continue",
+      "Take a short mindful walk",
+      "Scroll through social media to relax",
+      "Keep working till it's done"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 128,
+    "lab": "LAB-3: INNER FOCUS IN A NOISY WORLD",
+    "day": "Day 7",
+    "difficulty": "HIGH",
+    "question": "What inner skill helps you notice distractions faster before they break your focus?",
+    "options": [
+      "Self-awareness",
+      "External awareness",
+      "Fast reaction",
+      "Habit stacking"
+    ],
+    "correct": 0
+  },
+  {
+    "id": 129,
+    "lab": "LAB-3: INNER FOCUS IN A NOISY WORLD",
+    "day": "Day 7",
+    "difficulty": "HIGH",
+    "question": "When focus becomes effortless and time feels frozen, what brain state are you in?",
+    "options": [
+      "Alert state",
+      "Flow state",
+      "Memory mode",
+      "Sensory state"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 130,
+    "lab": "LAB-3: INNER FOCUS IN A NOISY WORLD",
+    "day": "Day 7",
+    "difficulty": "HIGH",
+    "question": "What does long-term focus practice improve the most in your brain?",
+    "options": [
+      "Impulse generation",
+      "Cognitive endurance",
+      "Emotional reactivity",
+      "Random memory recall"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 131,
+    "lab": "LAB-3: INNER FOCUS IN A NOISY WORLD",
+    "day": "Day 7",
+    "difficulty": "HIGH",
+    "question": "People who train focus daily are more likely to make decisions that are:",
+    "options": [
+      "Fast and emotion-driven",
+      "Slow but deliberate",
+      "Random and flexible",
+      "Avoidant and safe"
+    ],
+    "correct": 1
+  },
+  {
+    "id": 132,
+    "lab": "LAB-3: INNER FOCUS IN A NOISY WORLD",
+    "day": "Day 7",
+    "difficulty": "HIGH",
+    "question": "Why is focused thinking called \"mental energy conservation\"?",
+    "options": [
+      "It cuts down unnecessary processing",
+      "It reduces brain oxygen use",
+      "It increases body rest",
+      "It blocks emotional reactions fully"
+    ],
+    "correct": 0
+  }
+    ],
+    "scoring": {
+      "excellent": { "min": 8, "max": 10, "message": "Outstanding! You demonstrate exceptional clarity in thinking and decision-making. Your approach to problems and learning shows advanced human intelligence." },
+      "good": { "min": 6, "max": 7, "message": "Great work! You show strong thinking skills and good decision-making abilities. There's room for growth in developing even clearer mental frameworks." },
+      "fair": { "min": 4, "max": 5, "message": "You're on the right track! Your thinking shows potential, and with focused development, you can significantly enhance your clarity and decision-making skills." },
+      "needs-improvement": { "min": 0, "max": 3, "message": "This is a great starting point! Everyone can develop their thinking skills, and our programs are designed to help you build stronger mental clarity and decision-making abilities." }
+    }
+  }
+}
