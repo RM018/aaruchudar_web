@@ -852,3 +852,31 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #1a1a1a, #666666);
 }
+
+.module-border{
+  padding: 10px;
+}
+
+.category-border{
+padding: 4px;
+margin-bottom: 15px;
+}
+
+.Course-grid{
+  padding:5px;
+}
+
+.enroll-btn{
+  background-color: rgb(38, 95, 209);
+  color: white;
+  border-radius: 25px;
+  padding: 4px;
+  width: 100px;
+  text-align: center;
+  vertical-align: center;
+}
+
+.End-section-course{
+  height: 50px;
+  align-items: center;
+}
