@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 
+const inter = Inter({ subsets: ["latin"] });
+
 export const metadata: Metadata = {
-  title: "Aaruchudar - Awaken Human Intelligence",
-  description: "Discover your mental clarity and decision-making skills through innovative learning experiences.",
+  title: "Aaruchudar - Transform Your Mind",
+  description: "Enhance your mental capabilities and unlock your true potential",
 };
 
 export default function RootLayout({
@@ -13,13 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`antialiased`}
-        suppressHydrationWarning
-      >
+    <html lang="en" className={inter.className} suppressHydrationWarning>
+      <body className="min-h-screen flex flex-col" suppressHydrationWarning>
         <Navbar />
-        <main className="pt-20">{children}</main>
+        <main className="flex-grow pt-20">{children}</main>
       </body>
     </html>
   );

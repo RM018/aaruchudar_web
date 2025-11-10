@@ -5,9 +5,35 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import styles from './styles.module.css';
 
+// Predefined pattern positions to avoid hydration mismatch
+const PATTERN_POSITIONS = [
+  { left: 10, top: 20 },
+  { left: 20, top: 40 },
+  { left: 30, top: 60 },
+  { left: 40, top: 30 },
+  { left: 50, top: 70 },
+  { left: 60, top: 20 },
+  { left: 70, top: 50 },
+  { left: 80, top: 30 },
+  { left: 15, top: 80 },
+  { left: 25, top: 45 },
+  { left: 35, top: 65 },
+  { left: 45, top: 25 },
+  { left: 55, top: 85 },
+  { left: 65, top: 35 },
+  { left: 75, top: 75 },
+  { left: 85, top: 15 },
+  { left: 90, top: 40 },
+  { left: 20, top: 90 },
+  { left: 40, top: 10 },
+  { left: 60, top: 60 }
+];
+
 export default function HIWorkshopsPage() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const { scrollYProgress } = useScroll();
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.onChange((latest) => {
@@ -23,6 +49,32 @@ export default function HIWorkshopsPage() {
 
   return (
     <div className={styles.hiWorkshops}>
+      {/* Background Patterns */}
+      <div className={styles.patternOverlay}>
+        {PATTERN_POSITIONS.map((position, i) => (
+          <motion.div
+            key={i}
+            className={styles.pattern}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ 
+              opacity: [0.1, 0.3, 0.1],
+              scale: [1, 1.2, 1],
+              rotate: [0, 180, 360]
+            }}
+            transition={{
+              duration: 20,
+              delay: i * 0.5,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            style={{
+              left: `${position.left}%`,
+              top: `${position.top}%`,
+            }}
+          />
+        ))}
+      </div>
+
       {/* Scroll Progress */}
       <motion.div 
         className={styles.scrollProgress} 
@@ -32,31 +84,54 @@ export default function HIWorkshopsPage() {
       {/* Hero Section */}
       <section className={styles.hero}>
         {/* Neural Network Elements */}
-        <div className={styles.neuralNetwork}>
-          {[...Array(6)].map((_, i) => (
+        <motion.div 
+          className={styles.neuralNetwork}
+          style={{ opacity, scale }}
+        >
+          {[...Array(8)].map((_, i) => (
             <motion.div
               key={i}
               className={`${styles.neuralNode} ${styles[`node${i + 1}`]}`}
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 4, repeat: Infinity, delay: i * 0.5 }}
+              animate={{ 
+                scale: [1, 1.2, 1],
+                boxShadow: [
+                  '0 0 20px rgba(0, 255, 255, 0.3)',
+                  '0 0 40px rgba(0, 255, 255, 0.5)',
+                  '0 0 20px rgba(0, 255, 255, 0.3)'
+                ]
+              }}
+              transition={{ 
+                duration: 4, 
+                repeat: Infinity, 
+                delay: i * 0.5,
+                ease: "easeInOut"
+              }}
             />
           ))}
           
-          {[...Array(3)].map((_, i) => (
+          {[...Array(12)].map((_, i) => (
             <motion.div
               key={i}
               className={styles.neuralConnection}
               style={{
-                top: `${20 + i * 20}%`,
-                left: `${18 + i * 5}%`,
-                width: '200px',
-                transform: `rotate(${25 + i * 10}deg)`
+                top: `${15 + i * 15}%`,
+                left: `${15 + (i % 4) * 20}%`,
+                width: '150px',
+                transform: `rotate(${(i * 30) % 360}deg)`
               }}
-              animate={{ opacity: [0.3, 0.8, 0.3] }}
-              transition={{ duration: 3, repeat: Infinity, delay: i }}
+              animate={{ 
+                opacity: [0.2, 0.5, 0.2],
+                height: ['2px', '3px', '2px']
+              }}
+              transition={{ 
+                duration: 3, 
+                repeat: Infinity, 
+                delay: i * 0.2,
+                ease: "linear"
+              }}
             />
           ))}
-        </div>
+        </motion.div>
 
         {/* Brain-Inspired Floating Orbs */}
         <motion.div 
@@ -113,19 +188,20 @@ export default function HIWorkshopsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.5 }}
           >
-            Activate your mind's potential through immersive, practice-oriented workshops that rewire your thinking patterns and unlock new cognitive pathways.
+            Enhance your professional capabilities through structured, evidence-based workshops designed to develop advanced cognitive skills and strategic thinking methodologies.
           </motion.p>
-          <motion.a 
-            href="#workshops" 
-            className={styles.ctaPrimary}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 1.8 }}
-            whileHover={{ scale: 1.05, y: -8 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Activate Your Mind
-          </motion.a>
+          <Link href="#workshops">
+            <motion.div 
+              className={styles.ctaPrimary}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 1.8 }}
+              whileHover={{ scale: 1.05, y: -8 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Explore Programs
+            </motion.div>
+          </Link>
         </motion.div>
       </section>
 
@@ -139,7 +215,7 @@ export default function HIWorkshopsPage() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            Choose Your Neural Path
+            Professional Development Pathways
           </motion.h2>
           <motion.p 
             className={styles.sectionSubtitle}
@@ -148,7 +224,7 @@ export default function HIWorkshopsPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Three specialized pathways designed to optimize different areas of your cognitive architecture
+            Specialized programs designed to enhance leadership, decision-making, and strategic thinking capabilities
           </motion.p>
           
           <div className={styles.workshopsGrid}>
@@ -243,23 +319,23 @@ export default function HIWorkshopsPage() {
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <Link href="#signup" passHref>
-              <motion.a 
+            <Link href="#signup">
+              <motion.div 
                 className={styles.ctaPrimary}
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
               >
                 Start Your Neural Upgrade
-              </motion.a>
+              </motion.div>
             </Link>
-            <Link href="#calendar" passHref>
-              <motion.a 
+            <Link href="#calendar">
+              <motion.div 
                 className={styles.ctaSecondary}
                 whileHover={{ y: -5 }}
                 whileTap={{ scale: 0.95 }}
               >
                 Explore Workshop Calendar
-              </motion.a>
+              </motion.div>
             </Link>
           </motion.div>
         </div>

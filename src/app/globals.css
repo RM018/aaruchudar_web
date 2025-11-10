@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   /* Color System */
@@ -44,6 +47,9 @@
   --shadow-md: 0 4px 6px rgba(15, 23, 42, 0.1);
   --shadow-lg: 0 10px 15px rgba(15, 23, 42, 0.1);
   --shadow-xl: 0 20px 25px rgba(15, 23, 42, 0.1);
+
+  --section-padding: 6rem 2rem;
+  --container-width: 1280px;
 }
 
 /* Base Styles */
@@ -61,6 +67,7 @@ body {
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
   line-height: 1.6;
+  @apply antialiased text-gray-900;
 }
 
 html {
@@ -92,6 +99,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.2;
   color: var(--text-dark);
+  @apply tracking-tight font-bold;
 }
 
 .heading-1 {
@@ -1096,4 +1104,42 @@ h1, h2, h3, h4, h5, h6 {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary-dark);
+}
+
+/* Custom Container */
+.container-custom {
+  @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-[var(--container-width)];
+}
+
+/* Section Padding */
+.section-padding {
+  @apply py-16 md:py-24;
+}
+
+/* Consistent Button Styles */
+.btn-primary {
+  @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg transition-all duration-200;
+}
+
+/* Grid and Flex Layouts */
+.grid-layout {
+  @apply grid gap-8;
+}
+
+.flex-center {
+  @apply flex items-center justify-center;
+}
+
+.flex-between {
+  @apply flex items-center justify-between;
+}
+
+/* Section Spacing */
+.section {
+  @apply py-12 md:py-20 px-4 sm:px-6 lg:px-8;
+}
+
+/* Card Layout */
+.card {
+  @apply bg-white rounded-lg shadow-sm p-6;
 }

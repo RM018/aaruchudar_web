@@ -104,7 +104,7 @@ export default function Lab8Page() {
   };
 
   const handleBackToLabs = () => {
-    router.push('/hi-labs');
+    router.push('.rc/components/HILabs.tsx');
   };
 
   return (

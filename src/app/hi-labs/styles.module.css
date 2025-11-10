@@ -726,3 +726,12 @@
 .labContent {
   animation: fadeIn 0.3s ease-out;
 }
+
+.brainModelSection {
+  width: 100%;
+  height: 60vh;
+  margin-bottom: 2rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+}

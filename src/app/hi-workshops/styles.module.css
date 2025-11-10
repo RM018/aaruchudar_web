@@ -4,64 +4,112 @@
   color: white;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  position: relative;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, rgb(249 250 251), rgb(255 255 255));
+  overflow: hidden;
 }
 
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 6rem 2rem;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Hero Section */
 .hero {
-  height: 100vh;
+  min-height: 90vh;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   perspective: 2000px;
-  background: radial-gradient(ellipse at center, rgba(255, 165, 0, 0.1) 0%, rgba(0, 0, 0, 1) 70%);
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  padding: 4rem 2rem;
   overflow: hidden;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 .heroContent {
   text-align: center;
   z-index: 10;
   transform-style: preserve-3d;
-  max-width: 900px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  color: #ffffff;
+  z-index: 2;
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.hero h1 {
-  font-size: clamp(3.5rem, 8vw, 9rem);
-  font-weight: 800;
-  background: linear-gradient(135deg, #fff 0%, #ffd700 25%, #ff8c00 50%, #ff4500 75%, #fff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 2rem;
-  letter-spacing: -3px;
-  line-height: 0.85;
-  text-shadow: 0 0 80px rgba(255, 140, 0, 0.3);
-}
-
-.heroSubtitle {
-  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), rgba(255, 215, 0, 0.8));
+.heroContent h1 {
+  font-size: 4.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #4A90E2, #67B26F);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 1.5rem;
+  letter-spacing: -3px;
+  line-height: 0.85;
+  text-shadow: 0 0 80px rgba(255, 140, 0, 0.3);
+  font-size: 3.75rem;
+  font-weight: 700;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right, rgb(37 99 235), rgb(139 92 246));
+  text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.heroSubtitle {
+  font-size: 1.8rem;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), rgba(255, 215, 0, 0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 2rem;
   font-weight: 600;
+  color: #e0e0e0;
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  color: rgb(75 85 99);
+  font-weight: 300;
 }
 
 .heroTagline {
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 3rem;
-  max-width: 700px;
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.6;
+  line-height: 1.8;
+  color: #cccccc;
+  font-size: 1.125rem;
+  margin-top: 2rem;
+  color: rgb(75 85 99);
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.75;
 }
 
 /* Neural Network Elements */
@@ -73,6 +121,10 @@
   height: 100%;
   pointer-events: none;
   z-index: 1;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 .neuralNode {
@@ -85,6 +137,13 @@
   border: 2px solid rgba(255, 215, 0, 0.3);
   transform-style: preserve-3d;
   box-shadow: 0 0 40px rgba(255, 140, 0, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.1);
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 9999px;
+  background-color: rgba(6, 182, 212, 0.3);
+  backdrop-filter: blur(24px);
+  filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.3));
 }
 
 .neuralNode::after {
@@ -113,6 +172,10 @@
   height: 2px;
   background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.6), rgba(255, 140, 0, 0.4), transparent);
   transform-origin: left center;
+  position: absolute;
+  background-image: linear-gradient(to right, rgba(6, 182, 212, 0.2), rgba(59, 130, 246, 0.2));
+  border-radius: 9999px;
+  filter: blur(1px);
 }
 
 /* Brain Orbs */
@@ -123,6 +186,11 @@
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 215, 0, 0.2);
   transform-style: preserve-3d;
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  background-image: radial-gradient(circle at center, rgba(59, 130, 246, 0.2), rgba(99, 102, 241, 0.1));
+  backdrop-filter: blur(20px);
 }
 
 .orbLarge {
@@ -130,6 +198,10 @@
   height: 300px;
   top: 10%;
   right: 5%;
+  width: 24rem;
+  height: 24rem;
+  right: -12rem;
+  top: 25%;
 }
 
 .orbMedium {
@@ -137,6 +209,10 @@
   height: 200px;
   bottom: 20%;
   left: 5%;
+  width: 16rem;
+  height: 16rem;
+  left: -8rem;
+  top: 33.333333%;
 }
 
 .orbSmall {
@@ -144,6 +220,10 @@
   height: 120px;
   top: 50%;
   left: 15%;
+  width: 12rem;
+  height: 12rem;
+  left: 25%;
+  bottom: 25%;
 }
 
 /* Workshop Cards */
@@ -154,20 +234,33 @@
 
 .workshopsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-  gap: 50px;
-  margin-top: 80px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
 }
 
 .workshopCard {
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 30px;
-  padding: 50px;
-  backdrop-filter: blur(20px);
-  border: 2px solid rgba(255, 215, 0, 0.1);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  position: relative;
+  padding: 2rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(24px);
+  transition-property: all;
+  transition-duration: 500ms;
+  background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .workshopCard::before {
@@ -193,25 +286,37 @@
 }
 
 .workshopIcon {
-  font-size: 4.5rem;
-  margin-bottom: 30px;
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
   display: block;
   filter: drop-shadow(0 10px 30px rgba(255, 140, 0, 0.4));
+  font-size: 2.25rem;
+  margin-bottom: 1rem;
 }
 
 .workshopTitle {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 700;
-  margin-bottom: 25px;
+  margin-bottom: 1.5rem;
   background: linear-gradient(135deg, #fff 0%, #ffd700 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: #333;
+  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgb(31 41 55);
+  margin-bottom: 1rem;
 }
 
 .workshopList {
   list-style: none;
   margin-bottom: 40px;
+  padding: 0;
+  margin: 0 0 2rem;
+  margin-bottom: 2rem;
+  color: rgb(75 85 99);
 }
 
 .workshopList li {
@@ -221,6 +326,15 @@
   transition: all 0.4s ease;
   font-size: 1.05rem;
   line-height: 1.5;
+  padding: 0.8rem 0;
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
 }
 
 .workshopList li:hover {
@@ -229,21 +343,27 @@
 }
 
 .workshopList li::before {
-  content: '⚡';
-  color: #ff8c00;
+  content: '→';
+  color: #4A90E2;
   margin-right: 15px;
   font-size: 1.3rem;
   text-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+  position: absolute;
+  left: 0;
+  color: #4A90E2;
+  color: rgb(37 99 235);
+  display: inline-block;
+  margin-right: 0.5rem;
 }
 
 /* CTA Buttons */
 .ctaPrimary {
   display: inline-block;
-  padding: 25px 60px;
-  background: linear-gradient(135deg, #ffd700 0%, #ff8c00 50%, #ff4500 100%);
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, #4A90E2, #67B26F);
   border: none;
   border-radius: 60px;
-  color: #000;
+  color: white;
   font-size: 1.2rem;
   font-weight: 700;
   text-decoration: none;
@@ -251,11 +371,31 @@
   transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   box-shadow: 0 20px 60px rgba(255, 140, 0, 0.4);
   transform: translateZ(0);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-top: 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: rgb(255 255 255);
+  background-image: linear-gradient(to right, rgb(37 99 235), rgb(139 92 246));
+  border-radius: 9999px;
+  cursor: pointer;
+  transition-property: all;
+  transition-duration: 300ms;
 }
 
 .ctaSecondary {
   display: inline-block;
-  padding: 25px 50px;
+  padding: 1rem 2.5rem;
   background: transparent;
   border: 3px solid rgba(255, 215, 0, 0.4);
   border-radius: 50px;
@@ -266,6 +406,33 @@
   cursor: pointer;
   transition: all 0.5s ease;
   backdrop-filter: blur(15px);
+  background: transparent;
+  color: #4A90E2;
+  border: 2px solid #4A90E2;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 1rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-top: 2.5rem;
+  margin-left: 1rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: rgb(37 99 235);
+  border-width: 2px;
+  border-color: rgba(37 99 235, 0.2);
+  border-radius: 9999px;
+  cursor: pointer;
+  backdrop-filter: blur(24px);
+  transition-property: all;
+  transition-duration: 300ms;
 }
 
 .ctaSecondary:hover {
@@ -279,22 +446,32 @@
   min-height: 100vh;
   padding: 120px 0;
   position: relative;
+  position: relative;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .sectionTitle {
-  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-size: 3rem;
   font-weight: 800;
   text-align: center;
-  margin-bottom: 2rem;
-  background: linear-gradient(135deg, #fff 0%, #ffd700 50%, #ff8c00 100%);
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #4A90E2, #67B26F);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   letter-spacing: -2px;
+  font-size: 2.25rem;
+  font-weight: 700;
+  text-align: center;
+  color: rgb(31 41 55);
+  margin-bottom: 1.5rem;
 }
 
 .sectionSubtitle {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.8);
   text-align: center;
   margin-bottom: 4rem;
@@ -302,12 +479,27 @@
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+  line-height: 1.6;
+  font-size: 1.25rem;
+  text-align: center;
+  color: rgb(75 85 99);
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 4rem;
+  line-height: 1.75;
 }
 
 /* CTA Section */
 .ctaSection {
   background: radial-gradient(ellipse at center, rgba(255, 140, 0, 0.1) 0%, rgba(0, 0, 0, 1) 60%);
   text-align: center;
+  background-image: linear-gradient(to bottom, rgb(255 255 255), rgb(240 249 255));
 }
 
 .ctaButtons {
@@ -316,6 +508,16 @@
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 3rem;
 }
 
 /* Scroll Progress */
@@ -323,18 +525,27 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 5px;
-  background: linear-gradient(90deg, #ffd700, #ff8c00, #ff4500);
-  transform-origin: left;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #4A90E2, #67B26F);
+  transform-origin: 0%;
   z-index: 1000;
   box-shadow: 0 0 20px rgba(255, 140, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.25rem;
+  background-color: rgba(59, 130, 246, 0.5);
+  backdrop-filter: blur(24px);
+  transform-origin: left;
+  z-index: 50;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .container {
-    padding: 0 20px;
+    padding: 4rem 1.5rem;
   }
   
   .workshopsGrid {
@@ -357,5 +568,54 @@
   .neuralNode {
     width: 60px;
     height: 60px;
+  }
+
+  .heroContent h1 {
+    font-size: 3rem;
+  }
+  
+  .heroSubtitle {
+    font-size: 1.4rem;
+  }
+  
+  .ctaSecondary {
+    margin: 1rem 0 0 0;
+  }
+}
+
+.patternOverlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.pattern {
+  position: absolute;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 9999px;
+  background-color: rgba(219, 234, 254, 0.3);
+  backdrop-filter: blur(24px);
+  background-image: radial-gradient(circle at center, rgba(59, 130, 246, 0.1), rgba(99, 102, 241, 0.05));
+}
+
+.psychological {
+  background: linear-gradient(to bottom right, rgb(239 246 255), rgb(243 232 255));
+}
+
+.intellectual {
+  background: linear-gradient(to bottom right, rgb(236 254 255), rgb(219 234 254));
+}
+
+.innovative {
+  background: linear-gradient(to bottom right, rgb(243 232 255), rgb(252 231 243));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pattern, .neuralNode, .neuralConnection, .brainOrb {
+    animation: none;
+    transition: none;
   }
 }
