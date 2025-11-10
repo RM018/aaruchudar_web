@@ -1,0 +1,361 @@
+.hiWorkshops {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0a0a0a;
+  color: white;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 2000px;
+  background: radial-gradient(ellipse at center, rgba(255, 165, 0, 0.1) 0%, rgba(0, 0, 0, 1) 70%);
+  overflow: hidden;
+}
+
+.heroContent {
+  text-align: center;
+  z-index: 10;
+  transform-style: preserve-3d;
+  max-width: 900px;
+}
+
+.hero h1 {
+  font-size: clamp(3.5rem, 8vw, 9rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff 0%, #ffd700 25%, #ff8c00 50%, #ff4500 75%, #fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 2rem;
+  letter-spacing: -3px;
+  line-height: 0.85;
+  text-shadow: 0 0 80px rgba(255, 140, 0, 0.3);
+}
+
+.heroSubtitle {
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), rgba(255, 215, 0, 0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.heroTagline {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 3rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* Neural Network Elements */
+.neuralNetwork {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.neuralNode {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 215, 0, 0.3), rgba(255, 140, 0, 0.1));
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  transform-style: preserve-3d;
+  box-shadow: 0 0 40px rgba(255, 140, 0, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.neuralNode::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0%, #ffd700 100%);
+  transform: translate(-50%, -50%);
+}
+
+/* Neural Node Positions */
+.node1 { top: 15%; left: 10%; }
+.node2 { top: 25%; right: 15%; }
+.node3 { top: 60%; left: 8%; }
+.node4 { top: 70%; right: 12%; }
+.node5 { top: 40%; left: 20%; }
+.node6 { top: 45%; right: 25%; }
+
+/* Neural Connections */
+.neuralConnection {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.6), rgba(255, 140, 0, 0.4), transparent);
+  transform-origin: left center;
+}
+
+/* Brain Orbs */
+.brainOrb {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.4), rgba(255, 215, 0, 0.2), rgba(255, 140, 0, 0.05));
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  transform-style: preserve-3d;
+}
+
+.orbLarge {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  right: 5%;
+}
+
+.orbMedium {
+  width: 200px;
+  height: 200px;
+  bottom: 20%;
+  left: 5%;
+}
+
+.orbSmall {
+  width: 120px;
+  height: 120px;
+  top: 50%;
+  left: 15%;
+}
+
+/* Workshop Cards */
+.workshopsSection {
+  background: radial-gradient(ellipse at top, rgba(255, 140, 0, 0.05) 0%, #0a0a0a 50%);
+  padding: 150px 0;
+}
+
+.workshopsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 50px;
+  margin-top: 80px;
+}
+
+.workshopCard {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 30px;
+  padding: 50px;
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 215, 0, 0.1);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.workshopCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  border-radius: 30px 30px 0 0;
+}
+
+.psychological::before {
+  background: linear-gradient(90deg, #ffd700, #ff8c00);
+}
+
+.intellectual::before {
+  background: linear-gradient(90deg, #ff8c00, #ff4500);
+}
+
+.innovative::before {
+  background: linear-gradient(90deg, #ff4500, #ffd700);
+}
+
+.workshopIcon {
+  font-size: 4.5rem;
+  margin-bottom: 30px;
+  display: block;
+  filter: drop-shadow(0 10px 30px rgba(255, 140, 0, 0.4));
+}
+
+.workshopTitle {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  background: linear-gradient(135deg, #fff 0%, #ffd700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.workshopList {
+  list-style: none;
+  margin-bottom: 40px;
+}
+
+.workshopList li {
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+  color: rgba(255, 255, 255, 0.85);
+  transition: all 0.4s ease;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.workshopList li:hover {
+  color: #ffd700;
+  transform: translateX(15px);
+}
+
+.workshopList li::before {
+  content: '⚡';
+  color: #ff8c00;
+  margin-right: 15px;
+  font-size: 1.3rem;
+  text-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+}
+
+/* CTA Buttons */
+.ctaPrimary {
+  display: inline-block;
+  padding: 25px 60px;
+  background: linear-gradient(135deg, #ffd700 0%, #ff8c00 50%, #ff4500 100%);
+  border: none;
+  border-radius: 60px;
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 20px 60px rgba(255, 140, 0, 0.4);
+  transform: translateZ(0);
+}
+
+.ctaSecondary {
+  display: inline-block;
+  padding: 25px 50px;
+  background: transparent;
+  border: 3px solid rgba(255, 215, 0, 0.4);
+  border-radius: 50px;
+  color: #ffd700;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  backdrop-filter: blur(15px);
+}
+
+.ctaSecondary:hover {
+  border-color: #ffd700;
+  background: rgba(255, 215, 0, 0.1);
+  box-shadow: 0 20px 40px rgba(255, 140, 0, 0.2);
+}
+
+/* Section Styling */
+.scrollSection {
+  min-height: 100vh;
+  padding: 120px 0;
+  position: relative;
+}
+
+.sectionTitle {
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #fff 0%, #ffd700 50%, #ff8c00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -2px;
+}
+
+.sectionSubtitle {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  margin-bottom: 4rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* CTA Section */
+.ctaSection {
+  background: radial-gradient(ellipse at center, rgba(255, 140, 0, 0.1) 0%, rgba(0, 0, 0, 1) 60%);
+  text-align: center;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+/* Scroll Progress */
+.scrollProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #ffd700, #ff8c00, #ff4500);
+  transform-origin: left;
+  z-index: 1000;
+  box-shadow: 0 0 20px rgba(255, 140, 0, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+  
+  .workshopsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .workshopCard {
+    padding: 40px 30px;
+  }
+  
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .brainOrb {
+    display: none;
+  }
+  
+  .neuralNode {
+    width: 60px;
+    height: 60px;
+  }
+}
