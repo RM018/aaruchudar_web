@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import gsap from 'gsap';
 
 export default function Hero() {
@@ -77,9 +78,9 @@ export default function Hero() {
           </p>
 
           <div ref={ctaRef} className="hero-buttons-center">
-            <button className="btn-primary-lg">
+            <Link href="/quiz" className="btn-primary-lg">
               🎯 Take the Quiz
-            </button>
+            </Link>
             <button className="btn-outline-lg">
               🌐 Explore Website
             </button>
