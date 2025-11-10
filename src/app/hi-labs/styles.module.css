@@ -1,0 +1,728 @@
+.labContainer {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mainContent {
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+/* Header Styles */
+.header {
+  padding: 1.5rem 2rem;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(6, 255, 165, 0.2);
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.backButton, .homeButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(6, 255, 165, 0.5);
+  border-radius: 6px;
+  color: #06ffa5;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.backButton:hover, .homeButton:hover {
+  background: rgba(6, 255, 165, 0.1);
+}
+
+.labTitle h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #06ffa5;
+}
+
+.labTitle p {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: #cbd5e1;
+}
+
+/* Brain Viewer Styles */
+.brainViewerContainer {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  min-height: 600px;
+  background: rgba(0, 212, 255, 0.05);
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.brainViewer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* HUD Overlay */
+.hudOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.hudElement {
+  background: rgba(6, 255, 165, 0.1);
+  border: 1px solid rgba(6, 255, 165, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #06ffa5;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Brain Info Panel */
+.brainInfoPanel {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(6, 255, 165, 0.3);
+  padding: 12px;
+  border-radius: 8px;
+  min-width: 200px;
+  backdrop-filter: blur(10px);
+}
+
+.infoHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.regionIndicator {
+  width: 8px;
+  height: 8px;
+  background: #06ffa5;
+  border-radius: 50%;
+}
+
+.regionName {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.regionFunction {
+  color: #cbd5e1;
+  font-size: 12px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Navigation Section Styles */
+.navigationSection {
+  position: relative;
+  z-index: 3;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 2rem;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* Sidebar Styles */
+.navSidebar {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(6, 255, 165, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  height: fit-content;
+}
+
+.navTitle {
+  color: #06ffa5;
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
+}
+
+.navButtons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  margin-top: 1rem;
+}
+
+.navButton {
+  padding: 0.6rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  color: #fff;
+}
+
+.navButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(6, 255, 165, 0.3);
+}
+
+.navButtonActive {
+  background: rgba(6, 255, 165, 0.1);
+  border-color: #06ffa5;
+  color: #06ffa5;
+}
+
+/* Lab Controls */
+.labControls {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(6, 255, 165, 0.2);
+}
+
+.labControls {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.labControlsTitle {
+  color: #06ffa5;
+  margin: 0 0 1rem;
+  font-size: 1rem;
+}
+
+.labControlsTitle {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.labButtons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.labButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.labButton {
+  background: rgba(6, 255, 165, 0.05);
+  border: 1px solid rgba(6, 255, 165, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-align: left;
+  color: #fff;
+}
+
+.labButton {
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: #fff;
+  text-align: left;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.labButton:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(6, 255, 165, 0.2);
+}
+
+.labButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(4px);
+}
+
+.labButtonActive {
+  background: #06ffa5;
+  border-color: #06ffa5;
+  color: #000;
+}
+
+.labButtonActive {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+/* Brain Controls */
+.brainControls {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(6, 255, 165, 0.2);
+}
+
+.opacityControl {
+  margin-bottom: 1rem;
+}
+
+.opacityControl label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #cbd5e1;
+  font-size: 0.9rem;
+}
+
+.opacityControl input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  outline: none;
+  background: linear-gradient(90deg, #00d4ff, #06ffa5);
+}
+
+.opacityControl input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #06ffa5;
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.opacityControl input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(6, 255, 165, 0.5);
+}
+
+.rotateButton {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #06ffa5;
+  border-radius: 6px;
+  background: transparent;
+  color: #06ffa5;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.rotateButton:hover {
+  background: rgba(6, 255, 165, 0.1);
+}
+
+/* Main Panel Styles */
+.mainPanel {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(6, 255, 165, 0.2);
+  border-radius: 12px;
+  padding: 2rem;
+  min-height: 600px;
+}
+
+.labContentTitle {
+  color: #06ffa5;
+  margin: 0 0 1.5rem;
+  font-size: 1.8rem;
+}
+
+/* Section Styles */
+.overviewSection, .brainSection, .exercisesSection, .progressSection {
+  color: #cbd5e1;
+}
+
+.labDescription {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.labHighlights h3 {
+  color: #06ffa5;
+  margin: 0 0 1rem;
+}
+
+.labHighlights ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.labHighlights li {
+  padding: 0.75rem;
+  background: rgba(6, 255, 165, 0.1);
+  border: 1px solid rgba(6, 255, 165, 0.2);
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+/* Region Details */
+.regionDetails {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.regionCard {
+  padding: 1.5rem;
+  background: rgba(6, 255, 165, 0.05);
+  border: 1px solid rgba(6, 255, 165, 0.2);
+  border-radius: 12px;
+}
+
+.regionCard h3 {
+  color: #06ffa5;
+  margin: 0 0 1rem;
+}
+
+.functions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.function {
+  padding: 0.5rem 1rem;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+/* Exercise and Progress Cards */
+.exerciseCards, .progressCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.exerciseCard, .progressCard {
+  padding: 1.5rem;
+  background: rgba(6, 255, 165, 0.05);
+  border: 1px solid rgba(6, 255, 165, 0.2);
+  border-radius: 12px;
+}
+
+.exerciseCard h3, .progressCard h3 {
+  color: #06ffa5;
+  margin: 0 0 1rem;
+}
+
+/* HILabs Styles */
+.hiLabsContainer {
+  padding: 2rem;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.95));
+  min-height: 100vh;
+}
+
+.labsHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #ffffff;
+}
+
+.labsHeader h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(45deg, #00d4ff, #06ffa5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.labsHeader p {
+  color: #cbd5e1;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.labsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.labCard {
+  background: rgba(6, 255, 165, 0.05);
+  border: 1px solid rgba(6, 255, 165, 0.2);
+  border-radius: 15px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.labCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(6, 255, 165, 0.1);
+  border-color: #06ffa5;
+}
+
+.labContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.labIcon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.labContent h3 {
+  color: #06ffa5;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.labContent p {
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.labRegions {
+  margin-top: 1rem;
+}
+
+.labRegions h4 {
+  color: #00d4ff;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.regionTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.regionTag {
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid #00d4ff;
+  color: #00d4ff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+}
+
+.labStats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.statItem {
+  text-align: center;
+}
+
+.statValue {
+  color: #06ffa5;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: block;
+}
+
+.statLabel {
+  color: #cbd5e1;
+  font-size: 0.8rem;
+}
+
+.exploreButton {
+  background: linear-gradient(45deg, #00d4ff, #06ffa5);
+  color: black;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.exploreButton:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.dashboardPromo {
+  background: rgba(6, 255, 165, 0.05);
+  border: 1px solid rgba(6, 255, 165, 0.2);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-top: 3rem;
+}
+
+.promoContent {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.promoContent h2 {
+  color: #06ffa5;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.promoContent p {
+  color: #cbd5e1;
+  margin-bottom: 1.5rem;
+}
+
+.downloadButton {
+  background: linear-gradient(45deg, #00d4ff, #06ffa5);
+  color: black;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.downloadButton:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+@media (max-width: 1024px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .navSidebar {
+    position: sticky;
+    top: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+  }
+
+  .headerLeft {
+    gap: 1rem;
+  }
+
+  .labTitle h1 {
+    font-size: 1.2rem;
+  }
+
+  .navigationSection {
+    padding: 1rem;
+  }
+
+  .mainPanel {
+    padding: 1.5rem;
+  }
+
+  .brainViewerContainer {
+    height: 60vh;
+  }
+
+  .labButtons {
+    grid-template-columns: 1fr;
+  }
+
+  .hiLabsContainer {
+    padding: 1rem;
+  }
+  
+  .labsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .labsHeader h1 {
+    font-size: 2rem;
+  }
+  
+  .dashboardPromo {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .headerContent {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .headerLeft {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.labContent {
+  animation: fadeIn 0.3s ease-out;
+}
