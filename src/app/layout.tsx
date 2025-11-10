@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
   title: "Aaruchudar - Awaken Human Intelligence",
@@ -15,11 +16,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`antialiased`}
+        className={`antialiased min-h-screen flex flex-col`}
         suppressHydrationWarning
       >
         <Navbar />
-        <main className="pt-20">{children}</main>
+        <main className="pt-20 flex-grow">{children}</main>
+        <Footer />
       </body>
     </html>
   );

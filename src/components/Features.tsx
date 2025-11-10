@@ -87,7 +87,7 @@ function CardsPage() {
   };
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-20 px-8">
+    <div ref={containerRef} className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-20 px-8 md:px-12 lg:px-16">
       <style>{`
         @keyframes fadeInUp {
           from {
@@ -140,20 +140,20 @@ function CardsPage() {
         </h1>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 justify-items-center max-w-8xl mx-auto">
           {cards.map((card, index) => (
             <div
               key={index}
               ref={(el) => { cardsRef.current[index] = el; }}
-              className="card-container group relative h-[500px] rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
+              className="card-container group relative h-[500px] w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
               onMouseEnter={(e) => handleCardHover(e, true)}
               onMouseLeave={(e) => handleCardHover(e, false)}
             >
-              {/* Background Image */}
+              {/* Background Image - Centered */}
               <img
                 src={card.image}
                 alt={card.title}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover object-center"
               />
 
               {/* Overlay */}

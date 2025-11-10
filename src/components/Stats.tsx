@@ -117,21 +117,7 @@ export default function Stats() {
         </div>
       </div>
 
-      {/* Final CTA */}
-      <div className="cta-section">
-        <div className="container mx-auto px-6 py-20">
-          <div className="cta-box">
-            <h2 className="cta-title">
-              Ready to Awaken Your<br />
-              <span className="highlight">Human Intelligence</span>?
-            </h2>
-            <div className="cta-buttons">
-              <button className="btn-outline-white">Take Assessment</button>
-              <button className="btn-cta-primary">Get Started</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Final CTA removed per request */}
     </section>
   );
 }
