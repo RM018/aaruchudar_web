@@ -853,13 +853,22 @@ html {
   background: linear-gradient(180deg, #1a1a1a, #666666);
 }
 
+.module-section{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 .module-border{
   padding: 10px;
 }
 
 .category-border{
-padding: 4px;
+padding: 10px;
 margin-bottom: 15px;
+}
+
+.category-button{
+  padding: 8px;
 }
 
 .Course-grid{
@@ -879,9 +888,24 @@ margin-bottom: 15px;
 .End-section-course{
   height: 50px;
   align-items: center;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 
 .Header{
   padding-top: 50px;
+}
+
+.course-duration {
+  padding: 5px;
+}
+
+ .course-level{
+  padding: 5px;
+}
+
+.search-bar{
+  padding-left: 5px;
+  padding-right: 5px;
 }

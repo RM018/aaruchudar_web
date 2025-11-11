@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Search, Brain, Lightbulb, BookOpen, ChevronDown } from "lucide-react";
+import { Search, Brain, Lightbulb, BookOpen, ChevronDown, Clock, TrendingUp } from "lucide-react";
 
 interface Module {
   name: string;
@@ -33,9 +33,18 @@ const courses: Course[] = [
     image:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop",
     modules: [
-      { name: "Introduction to Clarity", description: "Learn the foundation of clarity and self-awareness." },
-      { name: "Mindset Shifts", description: "Understand how to reframe your thoughts and beliefs." },
-      { name: "Practical Applications", description: "Apply clarity techniques in your daily routines." },
+      {
+        name: "Introduction to Clarity",
+        description: "Learn the foundation of clarity and self-awareness.",
+      },
+      {
+        name: "Mindset Shifts",
+        description: "Understand how to reframe your thoughts and beliefs.",
+      },
+      {
+        name: "Practical Applications",
+        description: "Apply clarity techniques in your daily routines.",
+      },
     ],
   },
   {
@@ -50,9 +59,18 @@ const courses: Course[] = [
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
     modules: [
-      { name: "Decision Fatigue", description: "Identify how overthinking impacts choices." },
-      { name: "Emotional Detachment", description: "Techniques to reduce emotional interference." },
-      { name: "Frameworks for Clarity", description: "Use logical tools to evaluate options." },
+      {
+        name: "Decision Fatigue",
+        description: "Identify how overthinking impacts choices.",
+      },
+      {
+        name: "Emotional Detachment",
+        description: "Techniques to reduce emotional interference.",
+      },
+      {
+        name: "Frameworks for Clarity",
+        description: "Use logical tools to evaluate options.",
+      },
     ],
   },
   {
@@ -67,9 +85,18 @@ const courses: Course[] = [
     image:
       "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
     modules: [
-      { name: "Focus Fundamentals", description: "Learn attention training techniques." },
-      { name: "Digital Discipline", description: "Balance focus in tech-heavy environments." },
-      { name: "Deep Work", description: "Create systems for distraction-free productivity." },
+      {
+        name: "Focus Fundamentals",
+        description: "Learn attention training techniques.",
+      },
+      {
+        name: "Digital Discipline",
+        description: "Balance focus in tech-heavy environments.",
+      },
+      {
+        name: "Deep Work",
+        description: "Create systems for distraction-free productivity.",
+      },
     ],
   },
   {
@@ -84,9 +111,18 @@ const courses: Course[] = [
     image:
       "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
     modules: [
-      { name: "Understanding Listening", description: "Differentiate hearing from active listening." },
-      { name: "Empathetic Communication", description: "Connect emotionally through listening." },
-      { name: "Applied Practice", description: "Daily habits to enhance attention and response." },
+      {
+        name: "Understanding Listening",
+        description: "Differentiate hearing from active listening.",
+      },
+      {
+        name: "Empathetic Communication",
+        description: "Connect emotionally through listening.",
+      },
+      {
+        name: "Applied Practice",
+        description: "Daily habits to enhance attention and response.",
+      },
     ],
   },
   {
@@ -101,9 +137,18 @@ const courses: Course[] = [
     image:
       "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=400&fit=crop",
     modules: [
-      { name: "Conflict Psychology", description: "Understand emotional triggers in conflict." },
-      { name: "Resolution Strategies", description: "Tools for calm and effective dialogue." },
-      { name: "Healing Relationships", description: "Build resilience and trust after conflict." },
+      {
+        name: "Conflict Psychology",
+        description: "Understand emotional triggers in conflict.",
+      },
+      {
+        name: "Resolution Strategies",
+        description: "Tools for calm and effective dialogue.",
+      },
+      {
+        name: "Healing Relationships",
+        description: "Build resilience and trust after conflict.",
+      },
     ],
   },
   {
@@ -118,9 +163,18 @@ const courses: Course[] = [
     image:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop",
     modules: [
-      { name: "Systems Theory", description: "Explore system behavior and interrelations." },
-      { name: "Pattern Recognition", description: "Identify recurring dynamics in systems." },
-      { name: "Strategic Design", description: "Apply systemic thinking in problem-solving." },
+      {
+        name: "Systems Theory",
+        description: "Explore system behavior and interrelations.",
+      },
+      {
+        name: "Pattern Recognition",
+        description: "Identify recurring dynamics in systems.",
+      },
+      {
+        name: "Strategic Design",
+        description: "Apply systemic thinking in problem-solving.",
+      },
     ],
   },
   {
@@ -135,9 +189,18 @@ const courses: Course[] = [
     image:
       "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
     modules: [
-      { name: "Authentic Expression", description: "Unlock your voice through self-trust." },
-      { name: "Value Communication", description: "Learn to articulate personal worth." },
-      { name: "Embracing Vulnerability", description: "Build power through openness." },
+      {
+        name: "Authentic Expression",
+        description: "Unlock your voice through self-trust.",
+      },
+      {
+        name: "Value Communication",
+        description: "Learn to articulate personal worth.",
+      },
+      {
+        name: "Embracing Vulnerability",
+        description: "Build power through openness.",
+      },
     ],
   },
   {
@@ -152,9 +215,18 @@ const courses: Course[] = [
     image:
       "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=600&h=400&fit=crop",
     modules: [
-      { name: "Leadership Identity", description: "Discover your core leadership values." },
-      { name: "Authentic Guidance", description: "Lead with emotional intelligence and integrity." },
-      { name: "Empowerment Systems", description: "Create environments where others thrive." },
+      {
+        name: "Leadership Identity",
+        description: "Discover your core leadership values.",
+      },
+      {
+        name: "Authentic Guidance",
+        description: "Lead with emotional intelligence and integrity.",
+      },
+      {
+        name: "Empowerment Systems",
+        description: "Create environments where others thrive.",
+      },
     ],
   },
   {
@@ -169,9 +241,18 @@ const courses: Course[] = [
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
     modules: [
-      { name: "Creative Thinking", description: "Understand how creativity fuels innovation." },
-      { name: "Brainstorm Techniques", description: "Use structured methods for idea generation." },
-      { name: "Innovation Application", description: "Apply creative insights to real-world problems." },
+      {
+        name: "Creative Thinking",
+        description: "Understand how creativity fuels innovation.",
+      },
+      {
+        name: "Brainstorm Techniques",
+        description: "Use structured methods for idea generation.",
+      },
+      {
+        name: "Innovation Application",
+        description: "Apply creative insights to real-world problems.",
+      },
     ],
   },
 ];
@@ -217,8 +298,8 @@ export default function HICourses() {
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white flex flex-col justify-center items-center px-8 py-24">
-      {/* Centered Header */}
-      <div className=" Header text-center flex flex-col items-center justify-center gap-8 max-w-3xl mx-auto">
+      {/* Header */}
+      <div className="Header text-center flex flex-col items-center justify-center gap-8 max-w-3xl mx-auto">
         <div>
           <h1 className="text-5xl md:text-7xl font-extrabold mb-4 bg-gradient-to-r from-pink-400 to-blue-400 bg-clip-text text-transparent tracking-tight leading-tight">
             Explore Human Intelligence
@@ -230,7 +311,7 @@ export default function HICourses() {
         </div>
 
         {/* Search Bar */}
-        <div className="relative w-full max-w-xl mt-4">
+        <div className="search-bar relative w-full max-w-xl mt-4">
           <Search className="absolute left-5 top-2 text-gray-400" size={20} />
           <input
             type="text"
@@ -242,17 +323,17 @@ export default function HICourses() {
         </div>
 
         {/* Category Buttons */}
-        <div className="  flex flex-wrap justify-center gap-4 mt-4">
+        <div className="category-border flex flex-wrap justify-center gap-4 mt-4">
           {categories.map((cat) => (
             <button
               key={cat.key}
               onClick={() => setSelectedCategory(cat.key)}
-              className={` category-border flex items-center gap-2 px-6 py-3 rounded-full text-sm md:text-base font-semibold transition-all ${
+              className={`category-button flex items-center gap-2 px-6 py-3 rounded-full text-sm md:text-base font-semibold transition-all ${
                 selectedCategory === cat.key
                   ? "bg-pink-500 text-white shadow-lg shadow-pink-500/40 scale-105"
                   : "bg-white/10 hover:bg-white/20 text-gray-200"
               }`}
-            >
+            > 
               {cat.icon}
               {cat.label}
             </button>
@@ -260,21 +341,34 @@ export default function HICourses() {
         </div>
       </div>
 
-      {/* 🎓 Course Grid */}
-      <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 mt-24">
+      {/* Course Grid */}
+      <div className="Course-grid grid gap-10 sm:grid-cols-2 lg:grid-cols-3 mt-24">
         {filteredCourses.map((course) => (
           <div
             key={course.id}
-            className=" Course-grid group bg-white/10 rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300 border border-white/10 backdrop-blur-lg"
+            className="group bg-white/10 rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300 border border-white/10 backdrop-blur-lg"
           >
-            <div className="h-48 overflow-hidden">
+            {/* 🖼 Image Section with Overlay */}
+            <div className="relative h-48 overflow-hidden">
               <img
                 src={course.image}
                 alt={course.title}
                 className="w-full h-full rounded-lg object-cover group-hover:scale-110 transition-transform duration-500"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+              <div className="course-duration absolute top-3 left-4 bg-pink-600/70 px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 transition-all duration-300 backdrop-blur-md hover:bg-pink-500/50 hover:scale-105">
+                <Clock size={14} className="text-pink-200" />
+                {course.duration}
+              </div>
+
+              {/* 🎯 Level */}
+              <div className="course-level absolute top-3 right-4 bg-blue-600/70 px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1 transition-all duration-300 backdrop-blur-md hover:bg-blue-500/50 hover:scale-105">
+                <TrendingUp size={14} className="text-blue-200" />
+                {course.level}
+              </div>
             </div>
 
+            {/* 📘 Course Content */}
             <div className="p-6 space-y-3">
               <h3 className="text-xl font-bold text-pink-400 group-hover:text-pink-300 transition-colors">
                 {course.title}
@@ -285,17 +379,17 @@ export default function HICourses() {
 
               {/* 🔽 Modules */}
               {course.modules && (
-                <div className="mt-4 space-y-3 ">
+                <div className=" module-section mt-4 space-y-3">
                   {course.modules.map((module, index) => (
                     <div
                       key={index}
-                      className=" px-8 py-8 border border-white/20 bg-white/5 rounded-lg p-10  transition-all duration-300 hover:bg-white/10 hover:border-pink-400/40"
+                      className="module-border border border-white/20 bg-white/5 rounded-lg p-4 transition-all duration-300 hover:bg-white/10 hover:border-pink-400/40"
                     >
                       <div
-                        className=" module-border flex justify-between items-center cursor-pointer "
+                        className="flex justify-between items-center cursor-pointer"
                         onClick={() => toggleModule(course.id, index)}
                       >
-                        <span className="text-sm font-semibold text-gray-200 ">
+                        <span className="text-sm font-semibold text-gray-200">
                           {module.name}
                         </span>
                         <ChevronDown
@@ -324,20 +418,20 @@ export default function HICourses() {
                 </div>
               )}
 
-              <div className="End-section-course flex justify-between text-sm text-gray-400 pt-2">
-                <span>📅 {course.duration}</span>
-                <span>● {course.level}</span>
+              <div className=" End-section-course flex justify-between text-sm text-gray-400 pt-2">
                 <span className="text-green-400 font-semibold">
                   {course.price}
                 </span>
-                <button className="enroll-btn">Enroll</button>
+                <button className="enroll-btn bg-pink-600 px-4 py-1 rounded-full text-white hover:bg-pink-500 transition">
+                  Enroll
+                </button>
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* 🚫 No Results */}
+      {/* No Results */}
       {filteredCourses.length === 0 && (
         <div className="text-center text-gray-400 mt-12">
           <p className="text-lg">No courses found for your search.</p>
