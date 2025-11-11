@@ -28,11 +28,11 @@ function Navbar() {
 
 	const navItems = [
 		{ id: 'home', label: 'Home', href: '/', icon: '🏠' },
-		{ id: 'courses', label: 'HI Courses', href: '/hi-courses', icon: '📚' },
-		{ id: 'labs', label: 'HI Labs', href: '/hi-labs', icon: '🔬' },
-		{ id: 'workshops', label: 'Workshops', href: '/hi-workshops', icon: '⚡' },
-		{ id: 'events', label: 'Events', href: '/hi-events', icon: '🎯' },
+		{ id: 'blog', label: 'Blog', href: '/blog', icon: '📜' },
+		{ id: 'research', label: 'Research', href: '/research', icon: '🔬' },
 		{ id: 'quiz', label: 'Quiz', href: '/quiz', icon: '🧠' },
+		{ id: 'contact', label: 'Contact', href: '/contact', icon: '📧' }
+		
 	];
 
 	return (
@@ -53,7 +53,7 @@ function Navbar() {
 				</Link>
 
 				{/* Navigation Icons */}
-				<nav className="flex items-center gap-8 pr-24">
+				<nav className="flex items-center gap-8 pr-32">
 					{navItems.map((item) => {
 						const isActive = activeTab === item.id;
 						
