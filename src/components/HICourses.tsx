@@ -218,7 +218,7 @@ export default function HICourses() {
   return (
     <section className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white flex flex-col justify-center items-center px-8 py-24">
       {/* Centered Header */}
-      <div className="text-center flex flex-col items-center justify-center gap-8 max-w-3xl mx-auto">
+      <div className=" Header text-center flex flex-col items-center justify-center gap-8 max-w-3xl mx-auto">
         <div>
           <h1 className="text-5xl md:text-7xl font-extrabold mb-4 bg-gradient-to-r from-pink-400 to-blue-400 bg-clip-text text-transparent tracking-tight leading-tight">
             Explore Human Intelligence

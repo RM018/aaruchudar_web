@@ -1,36 +1,42 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation'; // ✅ Router import for navigation
 
 function CardsPage() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const cardsRef = useRef<Array<HTMLDivElement | null>>([]);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const router = useRouter(); // ✅ Initialize router
 
   const cards = [
     {
       title: "HI Labs",
       description: "Innovative research and development programs",
       tags: ["Clarity Labs", "Leadership Labs"],
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
+      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop",
+      link: "/hi-labs",
     },
     {
       title: "HI Courses",
       description: "Comprehensive learning experiences",
       tags: ["Career Intelligence", "Clarity Thinking", "Purpose Engineering"],
-      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop"
+      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop",
+      link: "/hi-courses", // ✅ Navigate here when clicked
     },
     {
       title: "HI Workshops",
       description: "Interactive and engaging sessions",
       tags: ["Design Thinking", "Team Building", "Strategy Sessions"],
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop"
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+      link: "/hi-workshops",
     },
     {
       title: "HI Events",
       description: "Transformative gatherings and experiences",
       tags: ["Conferences", "Retreats", "Seminars"],
-      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop"
-    }
+      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop",
+      link: "/hi-events",
+    },
   ];
 
   useEffect(() => {
@@ -86,6 +92,10 @@ function CardsPage() {
     }
   };
 
+  const handleCardClick = (link: string) => {
+    router.push(link); // ✅ Navigate to specific route
+  };
+
   return (
     <div ref={containerRef} className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-20 px-8">
       <style>{`
@@ -132,7 +142,7 @@ function CardsPage() {
 
       <div className="max-w-7xl mx-auto">
         {/* Title */}
-        <h1 
+        <h1
           ref={titleRef}
           className="text-7xl md:text-8xl font-black text-center mb-20 bg-gradient-to-r from-black via-gray-700 to-black bg-clip-text text-transparent"
         >
@@ -145,6 +155,7 @@ function CardsPage() {
             <div
               key={index}
               ref={(el) => { cardsRef.current[index] = el; }}
+              onClick={() => handleCardClick(card.link)} // ✅ Click navigation
               className="card-container group relative h-[500px] rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
               onMouseEnter={(e) => handleCardHover(e, true)}
               onMouseLeave={(e) => handleCardHover(e, false)}
@@ -180,10 +191,10 @@ function CardsPage() {
                 <button className="flex items-center gap-3 px-6 py-3 bg-white text-black rounded-full hover:bg-black hover:text-white border border-white transition-all duration-300 self-start group">
                   <span className="text-sm font-semibold">LEARN MORE</span>
                   <div className="w-8 h-8 bg-black group-hover:bg-white rounded-full flex items-center justify-center transition-all duration-300">
-                    <svg 
-                      className="w-4 h-4 text-white group-hover:text-black transition-colors duration-300 transform rotate-45" 
-                      fill="none" 
-                      stroke="currentColor" 
+                    <svg
+                      className="w-4 h-4 text-white group-hover:text-black transition-colors duration-300 transform rotate-45"
+                      fill="none"
+                      stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
