@@ -3,20 +3,17 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-zinc-900 via-zinc-800 to-black text-white relative overflow-hidden">
+    <footer className="bg-black text-white relative overflow-hidden">
       {/* Enhanced Background Pattern */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-emerald-400 rounded-full blur-3xl"></div>
-        <div className="absolute top-20 right-20 w-80 h-80 bg-cyan-400 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-yellow-400 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-20 w-80 h-80 bg-orange-400 rounded-full blur-3xl"></div>
+       
       </div>
 
       {/* Main CTA Section */}
       <div className="relative max-w-7xl mx-auto px-6 py-20">
         <div className="text-center mb-20">
-          <h2 className="text-6xl lg:text-8xl font-bold leading-tight mb-8">
-            Ready to
+          <h2 className="text-6xl lg:text-8xl font-bold leading-tight mb-8" style={{ color: '#ffffff' }}>
+            <span style={{ color: '#ffffff' }}>Ready to</span>
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-yellow-500">
               Transform?
             </span>
@@ -37,7 +34,7 @@ const Footer = () => {
 
             {/* Contact Info */}
             <div className="space-y-6">
-              <h4 className="text-xl font-semibold text-emerald-400 mb-4">&nbsp;&nbsp;&nbsp;Get in Touch</h4>
+              <h4 className="text-2xl font-bold mb-4" style={{ color: '#ffffff' }}>&nbsp;&nbsp;&nbsp;Get in Touch</h4>
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
                   
@@ -57,7 +54,7 @@ const Footer = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-12">
               {/* Programs */}
               <div className="space-y-6">
-                <h3 className="font-black text-white uppercase tracking-wider text-sm border-b-4 border-emerald-400 inline-block pb-2">
+                <h3 className="font-black uppercase tracking-wider text-sm border-b-4 border-emerald-400 inline-block pb-2" style={{ color: '#ffffff' }}>
                   Our Programs
                 </h3>
                 <ul className="space-y-4">
@@ -101,12 +98,13 @@ const Footer = () => {
 
               {/* Resources */}
               <div className="space-y-6">
-                <h3 className="font-black text-white uppercase tracking-wider text-sm border-b-4 border-cyan-400 inline-block pb-2">
-                <button>  Know Us!</button>
-                </h3><br/>
-                 <h3 className="font-black text-white uppercase tracking-wider text-sm border-b-4 border-cyan-400 inline-block pb-2">
-                <button>  Join Us!</button>
-                </h3>
+                <button suppressHydrationWarning className="font-black text-white uppercase tracking-wider text-base border-b-4 border-cyan-400 inline-block pb-2 hover:text-cyan-400 transition-colors duration-300">
+                  Know Us!
+                </button>
+                <br/>
+                <button suppressHydrationWarning className="font-black text-white uppercase tracking-wider text-base border-b-4 border-cyan-400 inline-block pb-2 hover:text-cyan-400 transition-colors duration-300">
+                  Join Us!
+                </button>
                 <ul className="space-y-4">
                   <li>
                     
@@ -134,7 +132,7 @@ const Footer = () => {
           <div className="lg:col-span-1 space-y-12">
             {/* Newsletter Signup */}
             <div className="space-y-6">
-              <h3 className="font-black text-white uppercase tracking-wider text-sm border-b-4 border-yellow-400 inline-block pb-2">
+              <h3 className="font-black uppercase tracking-wider text-base border-b-4 border-yellow-400 inline-block pb-2" style={{ color: '#14ed68ff' }}>
                 Stay Connected
               </h3>
              
@@ -142,9 +140,10 @@ const Footer = () => {
                 <input 
                   type="email" 
                   placeholder="Enter your email"
+                  suppressHydrationWarning
                   className="w-full px-6 py-4 bg-zinc-800 border border-zinc-700 rounded-full text-white placeholder-zinc-400 focus:outline-none focus:border-emerald-400 transition-colors duration-300"
                 />
-                <button className="w-full bg-gradient-to-r from-emerald-400 to-cyan-400 hover:from-emerald-500 hover:to-cyan-500 text-zinc-900 px-6 py-4 rounded-full font-bold transition-all duration-300 transform hover:scale-105">
+                <button suppressHydrationWarning className="w-full bg-gradient-to-r from-emerald-400 to-cyan-400 hover:from-emerald-500 hover:to-cyan-500 text-zinc-900 px-6 py-4 rounded-full font-bold transition-all duration-300 transform hover:scale-105">
                   Subscribe to Newsletter
                 </button>
               </div>
@@ -179,7 +178,7 @@ const Footer = () => {
         <div className="border-t border-zinc-700 pt-12 mb-12">
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-8 lg:space-y-0">
             <div className="space-y-4">
-              <h4 className="text-lg font-semibold text-emerald-400">Follow Our Journey</h4>
+              <h4 className="text-xl font-bold" style={{ color: '#ffffff' }}>Follow Our Journey</h4>
               <div className="flex space-x-6">
                 <a href="#" className="w-12 h-12 bg-zinc-800 hover:bg-emerald-400 rounded-full flex items-center justify-center transition-all duration-300 group">
                   <span className="text-emerald-400 group-hover:text-zinc-900 transition-colors duration-300">📘</span>

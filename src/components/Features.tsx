@@ -87,6 +87,7 @@ function CardsPage() {
   };
 
   return (
+    <center>
     <div ref={containerRef} className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-20 px-8 md:px-12 lg:px-16">
       <style>{`
         @keyframes fadeInUp {
@@ -140,8 +141,8 @@ function CardsPage() {
         </h1>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 justify-items-center max-w-8xl mx-auto">
-          {cards.map((card, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 justify-items-center max-w-5xl mx-auto">
+     {cards.map((card, index) => (
             <div
               key={index}
               ref={(el) => { cardsRef.current[index] = el; }}
@@ -161,7 +162,7 @@ function CardsPage() {
 
               {/* Content */}
               <div className="content absolute inset-0 p-8 flex flex-col justify-end text-white">
-                <h2 className="text-5xl font-bold mb-3">{card.title}</h2>
+                <h2 className="text-5xl font-semibold mb-3" style={{ color: '#ffffff' }}>{card.title}</h2>
                 <p className="text-lg text-gray-200 mb-6">{card.description}</p>
 
                 {/* Tags */}
@@ -177,7 +178,7 @@ function CardsPage() {
                 </div>
 
                 {/* Button */}
-                <button className="flex items-center gap-3 px-6 py-3 bg-white text-black rounded-full hover:bg-black hover:text-white border border-white transition-all duration-300 self-start group">
+                <button suppressHydrationWarning className="flex items-center gap-3 px-6 py-3 bg-white text-black rounded-full hover:bg-black hover:text-white border border-white transition-all duration-300 self-start group">
                   <span className="text-sm font-semibold">LEARN MORE</span>
                   <div className="w-8 h-8 bg-black group-hover:bg-white rounded-full flex items-center justify-center transition-all duration-300">
                     <svg 
@@ -201,6 +202,7 @@ function CardsPage() {
         </div>
       </div>
     </div>
+    </center>
   );
 }
 
