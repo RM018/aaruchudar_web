@@ -1,12 +1,30 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Script from 'next/script';
 
 export default function Chatbot() {
   const [showNotification, setShowNotification] = useState(false);
+  const [scriptsLoaded, setScriptsLoaded] = useState(false);
 
   useEffect(() => {
+    // Load Botpress scripts
+    const script1 = document.createElement('script');
+    script1.src = 'https://cdn.botpress.cloud/webchat/v3.3/inject.js';
+    script1.async = true;
+    
+    const script2 = document.createElement('script');
+    script2.src = 'https://files.bpcontent.cloud/2025/09/16/04/20250916041001-E90C098E.js';
+    script2.defer = true;
+
+    script1.onload = () => {
+      document.head.appendChild(script2);
+      script2.onload = () => {
+        setScriptsLoaded(true);
+      };
+    };
+
+    document.head.appendChild(script1);
+
     // Show notification after 3 seconds
     const timer = setTimeout(() => {
       setShowNotification(true);
@@ -33,17 +51,9 @@ export default function Chatbot() {
 
   return (
     <>
-      <Script 
-        src="https://cdn.botpress.cloud/webchat/v3.3/inject.js"
-        strategy="lazyOnload"
-      />
-      <Script 
-        src="https://files.bpcontent.cloud/2025/09/16/04/20250916041001-E90C098E.js"
-        strategy="lazyOnload"
-      />
 
       {/* Custom Notification Bubble */}
-      {showNotification && (
+      {scriptsLoaded && showNotification && (
         <div 
           className="chatbot-notification"
           onClick={handleNotificationClick}
