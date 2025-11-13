@@ -47,12 +47,12 @@ function ReviewsSection() {
               <div className="review-glow"></div>
               <div className="review-content-wrapper">
                 <div className="review-image-container">
-                  <Image
+                  <img
                     src={reviews[currentIndex].image}
                     alt={reviews[currentIndex].name}
-                    width={120}
-                    height={120}
                     className="review-avatar"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="avatar-ring"></div>
                 </div>
@@ -187,12 +187,16 @@ function ReviewsSection() {
 
         .review-image-container {
           position: relative;
+          width: 120px;
+          height: 120px;
+          display: inline-block;
         }
 
         .review-avatar {
-          width: 120px;
-          height: 120px;
-          border-radius: 50%;
+          display: block;
+          width: 100%;
+          height: 100%;
+          border-radius: 9999px;
           object-fit: cover;
           border: 4px solid #f093fb;
           box-shadow: 0 10px 30px rgba(240, 147, 251, 0.4);
@@ -202,13 +206,14 @@ function ReviewsSection() {
 
         .avatar-ring {
           position: absolute;
-          top: -10px;
-          left: -10px;
-          right: -10px;
-          bottom: -10px;
-          border-radius: 50%;
-          border: 2px solid rgba(240, 147, 251, 0.3);
+          top: -6px;
+          left: -6px;
+          right: -6px;
+          bottom: -6px;
+          border-radius: 9999px;
+          border: 3px solid rgba(240, 147, 251, 0.28);
           animation: pulse-ring 2s ease-in-out infinite;
+          pointer-events: none;
         }
 
         @keyframes pulse-ring {
@@ -297,10 +302,8 @@ function ReviewsSection() {
             margin-bottom: 2rem;
           }
 
-          .review-avatar {
-            width: 90px;
-            height: 90px;
-          }
+          .review-image-container { width: 90px; height: 90px; }
+          .review-avatar { width: 100%; height: 100%; }
 
           .review-text {
             font-size: 1.1rem;

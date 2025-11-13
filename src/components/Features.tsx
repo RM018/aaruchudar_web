@@ -1,10 +1,12 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function CardsPage() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const cardsRef = useRef<Array<HTMLDivElement | null>>([]);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const [particles, setParticles] = useState<Array<{left: string; delay: string; duration: string}>>([]);
 
   const cards = [
     {
@@ -34,6 +36,20 @@ function CardsPage() {
   ];
 
   useEffect(() => {
+    setMounted(true);
+    // Generate particle positions only on client side
+    setParticles(
+      [...Array(50)].map(() => ({
+        left: `${Math.random() * 100}%`,
+        delay: `${Math.random() * 5}s`,
+        duration: `${15 + Math.random() * 10}s`
+      }))
+    );
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     // Title animation
     if (titleRef.current) {
       titleRef.current.style.animation = 'fadeInUp 1.2s ease-out forwards';
@@ -67,7 +83,7 @@ function CardsPage() {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [mounted]);
 
   const handleCardHover = (e: React.MouseEvent<HTMLDivElement>, isEntering: boolean) => {
     const card = e.currentTarget as HTMLDivElement;
@@ -88,7 +104,41 @@ function CardsPage() {
 
   return (
     <center>
-    <div ref={containerRef} className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-20 px-8 md:px-12 lg:px-16">
+    <div ref={containerRef} className="relative min-h-screen overflow-hidden py-24 px-6 md:px-12 lg:px-16" style={{
+      background: '#ffffff',
+      backgroundImage: 'url(https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed'
+    }}>
+      {/* White overlay to soften the background */}
+      <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px]"></div>
+      
+      {/* Decorative Background Pattern */}
+      <div className="absolute inset-0" style={{
+        backgroundImage: `
+          radial-gradient(circle at 20% 30%, rgba(147, 51, 234, 0.04) 0%, transparent 50%),
+          radial-gradient(circle at 80% 70%, rgba(236, 72, 153, 0.04) 0%, transparent 50%),
+          radial-gradient(circle at 50% 50%, rgba(251, 146, 60, 0.03) 0%, transparent 50%)
+        `
+      }}></div>
+
+      {/* Animated Particles */}
+      <div className="absolute inset-0 particles-container">
+        {particles.map((particle, i) => (
+          <div 
+            key={i} 
+            className={`particle ${i % 2 === 0 ? 'particle-black' : 'particle-white'}`}
+            style={{
+              left: particle.left,
+              animationDelay: particle.delay,
+              animationDuration: particle.duration
+            }}
+          ></div>
+        ))}
+      </div>
+
       <style>{`
         @keyframes fadeInUp {
           from {
@@ -107,6 +157,15 @@ function CardsPage() {
           }
           to {
             transform: translateX(200%) skewX(-12deg);
+          }
+        }
+
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-20px);
           }
         }
 
@@ -129,16 +188,70 @@ function CardsPage() {
         .shine-effect {
           animation: shine 1s ease-out;
         }
+
+        .float-animation {
+          animation: float 6s ease-in-out infinite;
+        }
+
+        .particles-container {
+          pointer-events: none;
+        }
+
+        .particle {
+          position: absolute;
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          animation: floatParticle linear infinite;
+        }
+
+        .particle-black {
+          background: rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .particle-white {
+          background: rgba(255, 255, 255, 0.8);
+          box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes floatParticle {
+          0% {
+            transform: translateY(100vh) rotate(0deg);
+            opacity: 0;
+          }
+          10% {
+            opacity: 1;
+          }
+          90% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(-100px) rotate(360deg);
+            opacity: 0;
+          }
+        }
       `}</style>
 
-      <div className="max-w-7xl mx-auto">
-        {/* Title */}
-        <h1 
-          ref={titleRef}
-          className="text-7xl md:text-8xl font-black text-center mb-20 bg-gradient-to-r from-black via-gray-700 to-black bg-clip-text text-transparent"
-        >
-          Our Programs
-        </h1>
+      <div className="relative max-w-7xl mx-auto">
+        {/* Title Section */}
+        <div className="text-center mb-24">
+          <h1 
+            ref={titleRef}
+            className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 pb-8"
+            style={{ 
+              color: '#1a1a1a',
+              textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
+              lineHeight: '1.2',
+              overflow: 'visible'
+            }}
+          >
+            Our Programs
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-600 font-light max-w-3xl mx-auto leading-relaxed tracking-wide">
+            &nbsp;
+          </p>
+        </div>
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 justify-items-center max-w-5xl mx-auto">
@@ -161,16 +274,20 @@ function CardsPage() {
               <div className="overlay absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30 opacity-60" />
 
               {/* Content */}
-              <div className="content absolute inset-0 p-8 flex flex-col justify-end text-white">
-                <h2 className="text-5xl font-semibold mb-3" style={{ color: '#ffffff' }}>{card.title}</h2>
-                <p className="text-lg text-gray-200 mb-6">{card.description}</p>
+              <div className="content absolute inset-0 p-10 flex flex-col justify-end text-white">
+                <h2 className="text-5xl md:text-6xl font-black mb-4 tracking-tight leading-none" style={{ color: '#ffffff', textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>
+                  {card.title}
+                </h2>
+                <p className="text-lg md:text-xl text-gray-100 mb-8 font-light leading-relaxed tracking-wide max-w-md">
+                  {card.description}
+                </p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="flex flex-wrap gap-3 mb-8">
                   {card.tags.map((tag, tagIndex) => (
                     <span
                       key={tagIndex}
-                      className="px-4 py-2 border border-white/40 rounded-full text-sm backdrop-blur-sm hover:bg-white hover:text-black transition-all duration-300"
+                      className="px-5 py-2.5 border-2 border-white/50 rounded-full text-sm font-medium backdrop-blur-md bg-white/10 hover:bg-white hover:text-black transition-all duration-300 shadow-lg"
                     >
                       {tag}
                     </span>
@@ -178,16 +295,17 @@ function CardsPage() {
                 </div>
 
                 {/* Button */}
-                <button suppressHydrationWarning className="flex items-center gap-3 px-6 py-3 bg-white text-black rounded-full hover:bg-black hover:text-white border border-white transition-all duration-300 self-start group">
-                  <span className="text-sm font-semibold">LEARN MORE</span>
-                  <div className="w-8 h-8 bg-black group-hover:bg-white rounded-full flex items-center justify-center transition-all duration-300">
+                <button suppressHydrationWarning className="flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 hover:text-white border-2 border-white transition-all duration-300 self-start group shadow-2xl font-bold text-base tracking-wide">
+                  <span className="font-bold uppercase tracking-wider">Explore Now</span>
+                  <div className="w-10 h-10 bg-black group-hover:bg-white rounded-full flex items-center justify-center transition-all duration-300">
                     <svg 
-                      className="w-4 h-4 text-white group-hover:text-black transition-colors duration-300 transform rotate-45" 
+                      className="w-5 h-5 text-white group-hover:text-black transition-colors duration-300 transform rotate-45" 
                       fill="none" 
                       stroke="currentColor" 
                       viewBox="0 0 24 24"
+                      strokeWidth={3}
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
                     </svg>
                   </div>
                 </button>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Chatbot from "../components/Chatbot";
 
 export const metadata: Metadata = {
   title: "Aaruchudar - Awaken Human Intelligence",
@@ -22,6 +23,7 @@ export default function RootLayout({
         <Navbar />
         <main className="pt-20 flex-grow">{children}</main>
         <Footer />
+        <Chatbot />
       </body>
     </html>
   );

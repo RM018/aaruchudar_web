@@ -44,12 +44,35 @@ function Navbar() {
 			aria-label="Primary Navigation"
 		>
 			<div className="bg-gray-900 rounded-full px-96 py-2 shadow-2xl border border-white/10 backdrop-blur-lg flex items-center gap-32">
-				{/* Logo + Title */}
-				<Link href="/" className="flex items-center gap-8 pr-32 border-r border-white/20">
+				{/* Logo */}
+				<Link href="/" className="flex items-center gap-8 pr-8 border-r border-white/20">
 					<div className="w-10 h-10 bg-white/90 rounded-xl flex items-center justify-center overflow-hidden transition-transform duration-300 hover:scale-105">
 						<Image src="/logo2.png" alt="Aaruchudar logo" width={40} height={40} className="object-cover" />
 					</div>
-					<span className="text-xl font-bold text-white tracking-wide">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span>
+				</Link>
+
+				{/* Login Icon */}
+				<Link
+					href="/login"
+					onClick={() => setActiveTab('login')}
+					className={`
+						relative p-2 rounded-full transition-all duration-300 ease-in-out group
+						${activeTab === 'login'
+							? 'bg-gradient-to-br from-blue-400 to-blue-500 shadow-lg shadow-blue-500/50 scale-110' 
+							: 'hover:bg-gray-800 hover:scale-105'
+						}
+					`}
+					aria-label="Login"
+					aria-current={activeTab === 'login' ? 'page' : undefined}
+					title="Login"
+				>
+					<span className={`text-xl ${activeTab === 'login' ? '' : 'grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100'}`}>
+						👤
+					</span>
+					{/* Tooltip */}
+					<span className="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-lg">
+						Login
+					</span>
 				</Link>
 
 				{/* Navigation Icons */}
@@ -83,6 +106,8 @@ function Navbar() {
 							</Link>
 						);
 					})}
+					{/* spacer to give extra gap after the last icon */}
+					<div className="w-1" aria-hidden="true" />
 				</nav>
 			</div>
 		</header>
