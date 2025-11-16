@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 export default function Chatbot() {
   const [showNotification, setShowNotification] = useState(false);
   const [scriptsLoaded, setScriptsLoaded] = useState(false);
+  const [scriptsError, setScriptsError] = useState(false);
 
   useEffect(() => {
     // Load Botpress scripts
@@ -16,36 +17,84 @@ export default function Chatbot() {
     script2.src = 'https://files.bpcontent.cloud/2025/09/16/04/20250916041001-E90C098E.js';
     script2.defer = true;
 
+    const handleScriptError = (ev: any) => {
+      console.error('Botpress script failed to load', ev);
+      setScriptsError(true);
+    };
+
+    script1.onerror = handleScriptError;
+    script2.onerror = handleScriptError;
+
+    // Append first script; when it loads append the second and then poll for readiness
     script1.onload = () => {
       document.head.appendChild(script2);
+
+      // When script2 loads, start polling for the global webchat object
       script2.onload = () => {
-        setScriptsLoaded(true);
+        // Poll for the botpress webchat global to avoid using it before it's ready
+        const start = Date.now();
+        const timeout = 12000; // wait up to 12s for the webchat to initialize
+        const pollInterval = 500;
+
+        const poll = setInterval(() => {
+          // Detect the public API object injected by botpress
+          const ready = typeof window !== 'undefined' && (window as any).botpressWebChat && typeof (window as any).botpressWebChat.sendEvent === 'function';
+          if (ready) {
+            clearInterval(poll);
+            setScriptsLoaded(true);
+            return;
+          }
+
+          if (Date.now() - start > timeout) {
+            clearInterval(poll);
+            console.warn('Botpress webchat did not initialize within timeout');
+            setScriptsError(true);
+          }
+        }, pollInterval);
       };
     };
 
     document.head.appendChild(script1);
 
-    // Show notification after 3 seconds
-    const timer = setTimeout(() => {
-      setShowNotification(true);
-    }, 3000);
-
-    // Auto-hide notification after 10 seconds
-    const hideTimer = setTimeout(() => {
-      setShowNotification(false);
-    }, 13000);
-
     return () => {
-      clearTimeout(timer);
-      clearTimeout(hideTimer);
+      // nothing to clear here (timers handled in separate effect)
     };
   }, []);
 
+  // When scripts are loaded (or fail), show/hide notification appropriately
+  useEffect(() => {
+    if (scriptsError) {
+      // If scripts failed, ensure we don't show the notification
+      setShowNotification(false);
+      return;
+    }
+
+    if (!scriptsLoaded) return;
+
+    // Show notification shortly after webchat is ready
+    const showTimer = setTimeout(() => setShowNotification(true), 800);
+    // Auto-hide after 10 seconds
+    const hideTimer = setTimeout(() => setShowNotification(false), 10800);
+
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
+  }, [scriptsLoaded, scriptsError]);
+
   const handleNotificationClick = () => {
     setShowNotification(false);
-    // Try to open the Botpress chat widget
-    if (typeof window !== 'undefined' && (window as any).botpressWebChat) {
-      (window as any).botpressWebChat.sendEvent({ type: 'show' });
+    // Try to open the Botpress chat widget safely
+    try {
+      if (typeof window !== 'undefined' && (window as any).botpressWebChat && typeof (window as any).botpressWebChat.sendEvent === 'function') {
+        (window as any).botpressWebChat.sendEvent({ type: 'show' });
+        return;
+      }
+
+      // If not available, log for debugging and do nothing (avoid throwing)
+      console.warn('Botpress webchat not available to open');
+    } catch (err) {
+      console.error('Error while opening Botpress webchat', err);
     }
   };
 
