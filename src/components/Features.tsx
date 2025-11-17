@@ -1,5 +1,10 @@
 'use client';
+<<<<<<< Updated upstream
 import { useEffect, useRef } from 'react';
+=======
+import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+>>>>>>> Stashed changes
 
 function CardsPage() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -11,25 +16,36 @@ function CardsPage() {
       title: "HI Labs",
       description: "Innovative research and development programs",
       tags: ["Clarity Labs", "Leadership Labs"],
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
+      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop",
+      href: "/hi-labs"
     },
     {
       title: "HI Courses",
       description: "Comprehensive learning experiences",
       tags: ["Career Intelligence", "Clarity Thinking", "Purpose Engineering"],
-      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop"
+      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop",
+      href: "/hi-courses"
     },
     {
       title: "HI Workshops",
       description: "Interactive and engaging sessions",
       tags: ["Design Thinking", "Team Building", "Strategy Sessions"],
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop"
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+      href: "/hi-workshops"
     },
     {
       title: "HI Events",
       description: "Transformative gatherings and experiences",
       tags: ["Conferences", "Retreats", "Seminars"],
-      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop"
+      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop",
+      href: "/hi-events"
+    },
+    {
+      title: "Blog",
+      description: "Insights & Innovation from our experts",
+      tags: ["Innovation", "Psychology", "Research"],
+      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop",
+      href: "/blog"
     }
   ];
 
@@ -176,10 +192,17 @@ function CardsPage() {
                   ))}
                 </div>
 
+<<<<<<< Updated upstream
                 {/* Button */}
                 <button className="flex items-center gap-3 px-6 py-3 bg-white text-black rounded-full hover:bg-black hover:text-white border border-white transition-all duration-300 self-start group">
                   <span className="text-sm font-semibold">LEARN MORE</span>
                   <div className="w-8 h-8 bg-black group-hover:bg-white rounded-full flex items-center justify-center transition-all duration-300">
+=======
+                {/* Button -> Link */}
+                <Link href={card.href} className="flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 hover:text-white border-2 border-white transition-all duration-300 self-start group shadow-2xl font-bold text-base tracking-wide">
+                  <span className="font-bold uppercase tracking-wider">Explore Now</span>
+                  <div className="w-10 h-10 bg-black group-hover:bg-white rounded-full flex items-center justify-center transition-all duration-300">
+>>>>>>> Stashed changes
                     <svg 
                       className="w-4 h-4 text-white group-hover:text-black transition-colors duration-300 transform rotate-45" 
                       fill="none" 
@@ -189,7 +212,7 @@ function CardsPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
                     </svg>
                   </div>
-                </button>
+                </Link>
               </div>
 
               {/* Shine effect on hover */}
