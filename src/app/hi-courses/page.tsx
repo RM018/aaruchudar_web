@@ -4,7 +4,7 @@ export default function HICoursesPage() {
   const courses = [
     {
       category: 'Intellectual Courses',
-      description: 'Enhance critical thinking, logical reasoning, and analytical skills',
+      description: ' Enhance critical thinking, logical reasoning, and analytical skills',
       courses: ['Advanced Logic', 'Critical Analysis', 'Strategic Thinking', 'Problem Solving']
     },
     {
