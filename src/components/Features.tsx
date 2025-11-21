@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function CardsPage() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -305,9 +305,8 @@ function CardsPage() {
                   ))}
                 </div>
 
-<<<<<<< Updated upstream
                 {/* Button */}
-                <button className="flex items-center gap-3 px-6 py-3 bg-white text-black rounded-full hover:bg-black hover:text-white border border-white transition-all duration-300 self-start group">
+                <a href={card.href} className="flex items-center gap-3 px-6 py-3 bg-white text-black rounded-full hover:bg-black hover:text-white border border-white transition-all duration-300 self-start group">
                   <span className="text-sm font-semibold">LEARN MORE</span>
                   <div className="w-8 h-8 bg-black group-hover:bg-white rounded-full flex items-center justify-center transition-all duration-300">
                     <svg 
@@ -320,7 +319,7 @@ function CardsPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
                     </svg>
                   </div>
-                </Link>
+                </a>
               </div>
 
               {/* Shine effect on hover */}

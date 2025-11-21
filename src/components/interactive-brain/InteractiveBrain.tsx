@@ -4,6 +4,7 @@ import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stage, Html, Loader } from '@react-three/drei';
 import { BrainScene } from './BrainScene';
+import * as THREE from 'three';
 
 export type RegionKey = 'Frontal' | 'Parietal' | 'Temporal' | 'Occipital' | 'Cerebellum' | 'Brainstem';
 
@@ -111,7 +112,16 @@ export function InteractiveBrain({
 }: InteractiveBrainProps) {
   return (
     <div style={{ width: '100%', height: '100%', minHeight: '600px', position: 'relative' }}>
-      <Canvas camera={{ position: [0, 0, 3], fov: 45 }}>
+      <Canvas 
+        camera={{ position: [0, 0, 4], fov: 45 }}
+        gl={{ antialias: true }}
+        onCreated={(state) => {
+          state.gl.toneMapping = THREE.ACESFilmicToneMapping;
+          // @ts-ignore three r152+
+          state.gl.outputColorSpace = THREE.SRGBColorSpace;
+        }}
+        style={{ background: 'transparent' }}
+      >
         <ambientLight intensity={0.8} />
         <directionalLight position={[5, 5, 5]} intensity={0.6} />
         <Suspense fallback={
@@ -148,7 +158,7 @@ export function InteractiveBrain({
           enableZoom={true}
           enableRotate={true}
           minDistance={1.5}
-          maxDistance={5}
+          maxDistance={6}
           minPolarAngle={Math.PI / 6}
           maxPolarAngle={Math.PI - Math.PI / 6}
           target={[0, 0, 0]}

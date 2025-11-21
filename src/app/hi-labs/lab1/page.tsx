@@ -1,11 +1,9 @@
 'use client';
 
-import React, { useState, Suspense } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Stage, Html } from '@react-three/drei';
+// Removed Canvas/drei imports since InteractiveBrain manages its own Canvas
 import { InteractiveBrain, RegionKey } from '@/components/interactive-brain/InteractiveBrain';
-import * as THREE from 'three';
 import styles from '../styles.module.css';
 
 const labData = {
@@ -75,44 +73,13 @@ export default function Lab1Page() {
 
         <div className={styles.brainViewerContainer}>
           <div className={styles.brainViewer} style={{ width: '100%', height: '500px', position: 'relative' }}>
-            <Canvas
-              gl={{ 
-                antialias: true,
-                toneMapping: THREE.ACESFilmicToneMapping,
-                outputColorSpace: THREE.SRGBColorSpace
-              }}
-              camera={{ 
-                position: [0, 0, 5], 
-                fov: 45,
-                near: 0.1,
-                far: 1000
-              }}
-              style={{ background: 'transparent' }}
-            >
-              <Suspense fallback={<Html center>Loading Brain Model...</Html>}>
-                <Stage 
-                  intensity={0.8}
-                  environment="city"
-                  adjustCamera={false}
-                >
-                  <InteractiveBrain 
-                    activeRegions={[activeBrainRegion]}
-                    labHighlight={true}
-                    autoRotate={autoRotate}
-                    onRegionSelect={(region) => region && setActiveBrainRegion(region)}
-                  />
-                </Stage>
-                <OrbitControls 
-                  enablePan={false}
-                  enableZoom={true}
-                  enableRotate={true}
-                  autoRotate={autoRotate}
-                  autoRotateSpeed={0.5}
-                  minDistance={2}
-                  maxDistance={6}
-                />
-              </Suspense>
-            </Canvas>
+            {/* Render InteractiveBrain directly (it manages its own Canvas) */}
+            <InteractiveBrain 
+              activeRegions={[activeBrainRegion]}
+              labHighlight={true}
+              autoRotate={autoRotate}
+              onRegionSelect={(region) => region && setActiveBrainRegion(region)}
+            />
 
             <button
               onClick={() => setAutoRotate(!autoRotate)}
