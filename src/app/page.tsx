@@ -6,23 +6,23 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Main Content */}
-      <div className="flex-grow">
+    <main className="overflow-hidden bg-white min-h-screen">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Hero />
-        
-        <div className="container-custom">
+        <section className="mt-12">
           <Features />
-          <div className="space-y-24 py-24">
-            
-            
-          </div>
+        </section>
+
+        <section className="mt-12">
           <Stats />
+        </section>
+
+        <section className="mt-12">
           <Testimonials />
-        </div>
+        </section>
       </div>
-      
+
       <Footer />
-    </div>
-  )
+    </main>
+  );
 }

@@ -367,17 +367,17 @@ export default function Stats() {
   ];
 
   return (
-    <section ref={sectionRef}>
+    <section ref={sectionRef} className="w-full">
       {/* HI Events Section */}
-      <div className="integration-section">
-        <div className="container mx-auto px-6 py-20">
-          <div className="text-center mb-12">
-            <h2 className="integration-title">HI Events & Community</h2>
-            <p className="integration-subtitle">
-              Join our vibrant community through engaging webinars, meetups,<br />
-              and our annual summit dedicated to awakening human intelligence.
+      <div className="integration-section w-full">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-10">
+          <div className="text-center mb-4 sm:mb-6 md:mb-8 px-4">
+            <h2 className="integration-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl">Connect & Grow Together</h2>
+            <p className="integration-subtitle text-sm sm:text-base md:text-lg px-4 sm:px-6">
+              Be part of a transformative learning ecosystem where innovation meets collaboration. 
+              Access exclusive resources, connect with thought leaders, and accelerate your growth journey.
             </p>
-            <button suppressHydrationWarning className="btn-link">Explore Events →</button>
+            <button suppressHydrationWarning className="btn-link text-xs sm:text-sm">Join Our Community →</button>
           </div>
           
           <div className="integration-grid">
@@ -394,12 +394,12 @@ export default function Stats() {
       <ReviewsSection />
 
       {/* Stats */}
-      <div className="stats-section">
-        <div className="container mx-auto px-6 py-16">
-          <div className="stats-grid">
+      <div className="stats-section w-full">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 md:py-16">
+          <div className="stats-grid px-2 sm:px-4">
             <div className="stat-box">
-              <div className="stat-value">8</div>
-              <div className="stat-label">Innovation Labs</div>
+              <div className="stat-value">9</div>
+              <div className="stat-label">Human Intelligence Labs</div>
             </div>
             <div className="stat-box">
               <div className="stat-value">100+</div>

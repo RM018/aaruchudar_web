@@ -127,6 +127,36 @@ export default function Chatbot() {
         </div>
       )}
 
+      {/* Fallback when botpress fails to load */}
+      {scriptsError && (
+        <div className="chatbot-notification fallback" onClick={() => {
+          // open mail client as a fallback contact method
+          try {
+            window.location.href = 'mailto:hi@aaruchudar.com?subject=Assistant%20Fallback%20Request&body=Hi%20team%2C%20the%20chatbot%20is%20unavailable.%20Please%20reach%20out.';
+          } catch (e) {
+            // ignore
+          }
+        }}>
+          <div className="notification-content">
+            <div className="notification-icon">✉️</div>
+            <div className="notification-text">
+              <strong>Ask Assistant</strong>
+              <p>Hey Human, Know Us !</p>
+            </div>
+            <button 
+              className="notification-close"
+              onClick={(e) => {
+                e.stopPropagation();
+                setScriptsError(false);
+              }}
+              aria-label="Close notification"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
+
       <style jsx>{`
         .chatbot-notification {
           position: fixed;

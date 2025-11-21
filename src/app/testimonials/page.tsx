@@ -43,6 +43,8 @@ export default function TestimonialsPage() {
   ];
 
   return (
+  <center>
+    
     <div className="testimonials-page-wrapper">
       {/* Hero Section */}
       <section className="testimonials-hero">
@@ -322,5 +324,6 @@ export default function TestimonialsPage() {
         }
       `}</style>
     </div>
+    </center>
   );
 }

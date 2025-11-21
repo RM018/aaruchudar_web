@@ -5,50 +5,36 @@ function CardsPage() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const cardsRef = useRef<Array<HTMLDivElement | null>>([]);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const carouselRef = useRef<HTMLDivElement | null>(null);
   const [mounted, setMounted] = useState(false);
   const [particles, setParticles] = useState<Array<{left: string; delay: string; duration: string}>>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const cards = [
     {
       title: "HI Labs",
-      description: "Innovative research and development programs",
-      tags: ["Clarity Labs", "Leadership Labs"],
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop",
-      href: "/hi-labs"
+      description: "Cutting-edge research and experiential learning spaces designed to foster innovation, critical thinking, and leadership development",
+      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop&q=80"
     },
     {
       title: "HI Courses",
-      description: "Comprehensive learning experiences",
-      tags: ["Career Intelligence", "Clarity Thinking", "Purpose Engineering"],
-      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop",
-      href: "/hi-courses"
+      description: "Transformative educational programs that blend practical skills with deep personal insights for holistic career growth",
+      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=800&fit=crop&q=80"
     },
     {
       title: "HI Workshops",
-      description: "Interactive and engaging sessions",
-      tags: ["Design Thinking", "Team Building", "Strategy Sessions"],
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
-      href: "/hi-workshops"
+      description: "Hands-on collaborative sessions that empower teams with practical tools for creative problem-solving and strategic execution",
+      image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&h=800&fit=crop&q=80"
     },
     {
       title: "HI Events",
-      description: "Transformative gatherings and experiences",
-      tags: ["Conferences", "Retreats", "Seminars"],
-      image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop",
-      href: "/hi-events"
-    },
-    {
-      title: "Blog",
-      description: "Insights & Innovation from our experts",
-      tags: ["Innovation", "Psychology", "Research"],
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop",
-      href: "/blog"
+      description: "Immersive gatherings that bring together thought leaders, innovators, and change-makers for meaningful connections and growth",
+      image: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=1200&h=800&fit=crop&q=80"
     }
   ];
 
   useEffect(() => {
     setMounted(true);
-    // Generate particle positions only on client side
     setParticles(
       [...Array(50)].map(() => ({
         left: `${Math.random() * 100}%`,
@@ -61,20 +47,10 @@ function CardsPage() {
   useEffect(() => {
     if (!mounted) return;
 
-    // Title animation
     if (titleRef.current) {
       titleRef.current.style.animation = 'fadeInUp 1.2s ease-out forwards';
     }
 
-    // Stagger cards animation
-    cardsRef.current.forEach((card, index) => {
-      if (card) {
-        card.style.animation = `fadeInUp 1s ease-out ${0.3 + index * 0.2}s forwards`;
-        card.style.opacity = '0';
-      }
-    });
-
-    // Scroll animation observer
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -96,6 +72,16 @@ function CardsPage() {
     return () => observer.disconnect();
   }, [mounted]);
 
+  useEffect(() => {
+    if (carouselRef.current) {
+      const cardWidth = carouselRef.current.clientWidth;
+      carouselRef.current.scrollTo({
+        left: currentIndex * cardWidth,
+        behavior: 'smooth'
+      });
+    }
+  }, [currentIndex, cards.length]);
+
   const handleCardHover = (e: React.MouseEvent<HTMLDivElement>, isEntering: boolean) => {
     const card = e.currentTarget as HTMLDivElement;
     const img = card.querySelector('img') as HTMLImageElement | null;
@@ -113,9 +99,16 @@ function CardsPage() {
     }
   };
 
+  const handlePrevious = () => {
+    setCurrentIndex((prev) => Math.max(0, prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => Math.min(cards.length - 1, prev + 1));
+  };
+
   return (
-    <center>
-    <div ref={containerRef} className="relative min-h-screen overflow-hidden py-24 px-6 md:px-12 lg:px-16" style={{
+    <div ref={containerRef} className="relative min-h-screen overflow-hidden py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12 w-full" style={{
       background: '#ffffff',
       backgroundImage: 'url(https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop)',
       backgroundSize: 'cover',
@@ -123,10 +116,8 @@ function CardsPage() {
       backgroundRepeat: 'no-repeat',
       backgroundAttachment: 'fixed'
     }}>
-      {/* White overlay to soften the background */}
       <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px]"></div>
       
-      {/* Decorative Background Pattern */}
       <div className="absolute inset-0" style={{
         backgroundImage: `
           radial-gradient(circle at 20% 30%, rgba(147, 51, 234, 0.04) 0%, transparent 50%),
@@ -135,7 +126,6 @@ function CardsPage() {
         `
       }}></div>
 
-      {/* Animated Particles */}
       <div className="absolute inset-0 particles-container">
         {particles.map((particle, i) => (
           <div 
@@ -154,7 +144,7 @@ function CardsPage() {
         @keyframes fadeInUp {
           from {
             opacity: 0;
-            transform: translateY(100px);
+            transform: translateY(80px);
           }
           to {
             opacity: 1;
@@ -168,15 +158,6 @@ function CardsPage() {
           }
           to {
             transform: translateX(200%) skewX(-12deg);
-          }
-        }
-
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
           }
         }
 
@@ -194,14 +175,6 @@ function CardsPage() {
 
         .content {
           transition: transform 0.4s ease-out;
-        }
-
-        .shine-effect {
-          animation: shine 1s ease-out;
-        }
-
-        .float-animation {
-          animation: float 6s ease-in-out infinite;
         }
 
         .particles-container {
@@ -245,93 +218,150 @@ function CardsPage() {
       `}</style>
 
       <div className="relative max-w-7xl mx-auto">
-        {/* Title Section */}
-        <div className="text-center mb-24">
+        <div className="text-center mb-12 sm:mb-16 md:mb-20 lg:mb-24 px-4">
           <h1 
             ref={titleRef}
-            className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 pb-8"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-6 sm:mb-8 pb-2"
             style={{ 
-              color: '#1a1a1a',
-              textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
-              lineHeight: '1.2',
-              overflow: 'visible'
+              color: '#0a0a0a',
+              textShadow: '3px 3px 6px rgba(0,0,0,0.15)',
+              lineHeight: '1.1',
+              overflow: 'visible',
+              letterSpacing: '-0.02em'
             }}
           >
             Our Programs
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 font-light max-w-3xl mx-auto leading-relaxed tracking-wide">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-700 font-light max-w-4xl mx-auto leading-relaxed tracking-wide">
             &nbsp;
           </p>
         </div>
 
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 justify-items-center max-w-5xl mx-auto">
-     {cards.map((card, index) => (
-            <div
-              key={index}
-              ref={(el) => { cardsRef.current[index] = el; }}
-              className="card-container group relative h-[500px] w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
-              onMouseEnter={(e) => handleCardHover(e, true)}
-              onMouseLeave={(e) => handleCardHover(e, false)}
+        <div className="relative max-w-7xl mx-auto">
+          {/* Navigation Buttons - Fixed Positioning */}
+          <div className="relative w-full">
+            <button
+              onClick={handlePrevious}
+              disabled={currentIndex === 0}
+              className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 w-14 h-14 sm:w-16 sm:h-16 bg-white/95 backdrop-blur-md rounded-full shadow-2xl flex items-center justify-center hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white transition-all duration-300 disabled:opacity-20 disabled:cursor-not-allowed hover:scale-110"
+              style={{ left: '1rem' }}
             >
-              {/* Background Image - Centered */}
-              <img
-                src={card.image}
-                alt={card.title}
-                className="absolute inset-0 w-full h-full object-cover object-center"
-              />
+              <svg className="w-7 h-7 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
 
-              {/* Overlay */}
-              <div className="overlay absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30 opacity-60" />
+            <button
+              onClick={handleNext}
+              disabled={currentIndex === cards.length - 1}
+              className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 w-14 h-14 sm:w-16 sm:h-16 bg-white/95 backdrop-blur-md rounded-full shadow-2xl flex items-center justify-center hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white transition-all duration-300 disabled:opacity-20 disabled:cursor-not-allowed hover:scale-110"
+              style={{ right: '1rem' }}
+            >
+              <svg className="w-7 h-7 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
 
-              {/* Content */}
-              <div className="content absolute inset-0 p-10 flex flex-col justify-end text-white">
-                <h2 className="text-5xl md:text-6xl font-black mb-4 tracking-tight leading-none" style={{ color: '#ffffff', textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>
-                  {card.title}
-                </h2>
-                <p className="text-lg md:text-xl text-gray-100 mb-8 font-light leading-relaxed tracking-wide max-w-md">
-                  {card.description}
-                </p>
+          <div 
+            ref={carouselRef}
+            className="overflow-hidden rounded-3xl"
+          >
+            <div 
+              className="flex transition-transform duration-500"
+              style={{ display: 'flex', scrollSnapType: 'x mandatory' }}
+            >
+              {cards.map((card, index) => (
+                <div
+                  key={index}
+                  ref={(el) => { cardsRef.current[index] = el; }}
+                  className="card-container group relative flex-shrink-0 w-full px-2 sm:px-4 md:px-8"
+                  style={{
+                    height: '550px',
+                    minHeight: '450px',
+                    scrollSnapAlign: 'center'
+                  }}
+                  onMouseEnter={(e) => handleCardHover(e, true)}
+                  onMouseLeave={(e) => handleCardHover(e, false)}
+                >
+                  <div className="relative h-full rounded-3xl overflow-hidden shadow-2xl">
+                    <img
+                      src={card.image}
+                      alt={card.title}
+                      className="absolute inset-0 w-full h-full object-cover object-center"
+                      loading="lazy"
+                    />
 
-                {/* Tags */}
-                <div className="flex flex-wrap gap-3 mb-8">
-                  {card.tags.map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      className="px-5 py-2.5 border-2 border-white/50 rounded-full text-sm font-medium backdrop-blur-md bg-white/10 hover:bg-white hover:text-black transition-all duration-300 shadow-lg"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                    <div className="overlay absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-70" />
 
-                {/* Button */}
-                <a href={card.href} className="flex items-center gap-3 px-6 py-3 bg-white text-black rounded-full hover:bg-black hover:text-white border border-white transition-all duration-300 self-start group">
-                  <span className="text-sm font-semibold">LEARN MORE</span>
-                  <div className="w-8 h-8 bg-black group-hover:bg-white rounded-full flex items-center justify-center transition-all duration-300">
-                    <svg 
-                      className="w-5 h-5 text-white group-hover:text-black transition-colors duration-300 transform rotate-45" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24"
-                      strokeWidth={3}
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                    </svg>
+                    <div className="content absolute inset-0 flex flex-col text-white">
+                      <div className="flex-1 p-6 sm:p-8 md:p-10 lg:p-12 flex flex-col justify-end">
+                        <div className="mb-4 sm:mb-6">
+                          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-3 sm:mb-4 tracking-tight leading-tight" 
+                              style={{ 
+                                color: '#ffffff', 
+                                textShadow: '0 4px 30px rgba(0,0,0,0.8)',
+                                letterSpacing: '-0.02em'
+                              }}>
+                            {card.title}
+                          </h2>
+                          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-100 font-light leading-relaxed max-w-2xl"
+                             style={{ textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>
+                            {card.description}
+                          </p>
+                        </div>
+
+                        {/* tags removed per request */}
+                      </div>
+
+                      <div className="flex items-center justify-center pb-32 sm:pb-36 md:pb-40">
+                        <button 
+                          suppressHydrationWarning 
+                          className="flex items-center justify-center gap-2 sm:gap-3 bg-white text-black rounded-full hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white border-2 border-white transition-all duration-300 shadow-2xl font-bold text-xs sm:text-sm tracking-wide px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-3.5 hover:scale-105 hover:shadow-3xl"
+                        >
+                          <span className="font-bold uppercase tracking-wider">Explore Now</span>
+                          <div className="w-6 h-6 sm:w-7 sm:h-7 bg-black group-hover:bg-white rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0">
+                            <svg 
+                              className="w-3 h-3 sm:w-4 sm:h-4 text-white group-hover:text-black transition-colors duration-300 transform rotate-45" 
+                              fill="none" 
+                              stroke="currentColor" 
+                              viewBox="0 0 24 24"
+                              strokeWidth={3}
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                            </svg>
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -translate-x-full group-hover:animate-[shine_1.2s_ease-out]" />
+                    </div>
                   </div>
-                </a>
-              </div>
-
-              {/* Shine effect on hover */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover:animate-[shine_1s_ease-out]" />
-              </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Dot Indicators */}
+          <div className="flex justify-center gap-3 mt-8 sm:mt-12">
+            {cards.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`transition-all duration-300 rounded-full ${
+                  currentIndex === index 
+                    ? 'w-12 h-3 bg-gradient-to-r from-purple-600 to-pink-600' 
+                    : 'w-3 h-3 bg-gray-400 hover:bg-gray-600'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
-    </center>
   );
 }
 

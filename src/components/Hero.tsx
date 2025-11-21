@@ -70,7 +70,7 @@ export default function Hero() {
   }, [mounted]);
 
   return (
-    <section ref={heroRef} className="hero-section-with-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section ref={heroRef} className="hero-section-with-bg min-h-screen flex items-center justify-center relative overflow-hidden w-full">
       {/* Background Image with Overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -104,19 +104,19 @@ export default function Hero() {
         ))}
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="max-w-4xl mx-auto text-center w-full">
           {/* Badge */}
           
           
           {/* Main Title */}
-          <h1 ref={titleRef} className="hero-title-modern mb-6">
+          <h1 ref={titleRef} className="hero-title-modern mb-4 sm:mb-6 px-2">
             <span className="block text-white">Unlock Your</span>
             <span className="gradient-text-modern">Cognitive Potential</span>
           </h1>
           
           {/* Description */}
-          <p ref={subtitleRef} className="hero-description-modern mb-8">
+          <p ref={subtitleRef} className="hero-description-modern mb-6 sm:mb-8 px-4 sm:px-6">
             Discover powerful programs designed to enhance your mental clarity, 
             critical thinking, and decision-making skills through innovative 
             learning experiences and personalized assessments.
@@ -157,6 +157,7 @@ export default function Hero() {
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                 <span>Expert Certified</span>
+                
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
