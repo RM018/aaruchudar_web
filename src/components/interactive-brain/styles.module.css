@@ -114,3 +114,256 @@
     height: 300px;
   }
 }
+
+.brain-info-panel-simple {
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(6, 255, 165, 0.3);
+  border-radius: 8px;
+  padding: 12px;
+  min-width: 200px;
+  max-width: 300px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.info-header-simple {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.region-indicator-simple {
+  width: 8px;
+  height: 8px;
+  background: #06ffa5;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(6, 255, 165, 0.5);
+}
+
+.region-name-simple {
+  color: #06ffa5;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.info-content-simple {
+  color: #ffffff;
+}
+
+.region-function-simple {
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.viewport-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.canvas-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hud-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.hud-element {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(6, 255, 165, 0.3);
+  color: #06ffa5;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: monospace;
+  backdrop-filter: blur(4px);
+}
+
+/* Lab Selection Styles */
+.lab-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.lab-button {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(6, 255, 165, 0.3);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.lab-button:hover {
+  background: rgba(6, 255, 165, 0.2);
+  border-color: #06ffa5;
+}
+
+.lab-button.active {
+  background: #06ffa5;
+  color: #000000;
+  font-weight: 600;
+}
+
+/* Loading State */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  color: #06ffa5;
+  font-size: 18px;
+  backdrop-filter: blur(4px);
+}
+
+/* Neural Stats */
+.neural-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.stat-box {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(6, 255, 165, 0.3);
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stat-value {
+  color: #06ffa5;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  color: #ffffff;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.viewport {
+  width: 100%;
+  height: 100%;
+  min-height: 600px;
+  background: rgba(0, 212, 255, 0.05);
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hudOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.hudElement {
+  background: rgba(6, 255, 165, 0.1);
+  border: 1px solid rgba(6, 255, 165, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #06ffa5;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.brainInfoPanel {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(6, 255, 165, 0.3);
+  padding: 12px;
+  border-radius: 8px;
+  min-width: 200px;
+  backdrop-filter: blur(10px);
+}
+
+.infoHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.regionIndicator {
+  width: 8px;
+  height: 8px;
+  background: #06ffa5;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(6, 255, 165, 0.5);
+  animation: pulse 2s infinite;
+}
+
+.regionName {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.regionFunction {
+  color: #cbd5e1;
+  font-size: 12px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stage, Html } from '@react-three/drei';
 import { InteractiveBrain, RegionKey } from '@/components/interactive-brain/InteractiveBrain';
+import * as THREE from 'three';
 import styles from '../styles.module.css';
 
 const labData = {
@@ -73,8 +74,21 @@ export default function Lab1Page() {
         </header>
 
         <div className={styles.brainViewerContainer}>
-          <div className={styles.brainViewer}>
-            <Canvas>
+          <div className={styles.brainViewer} style={{ width: '100%', height: '500px', position: 'relative' }}>
+            <Canvas
+              gl={{ 
+                antialias: true,
+                toneMapping: THREE.ACESFilmicToneMapping,
+                outputColorSpace: THREE.SRGBColorSpace
+              }}
+              camera={{ 
+                position: [0, 0, 5], 
+                fov: 45,
+                near: 0.1,
+                far: 1000
+              }}
+              style={{ background: 'transparent' }}
+            >
               <Suspense fallback={<Html center>Loading Brain Model...</Html>}>
                 <Stage 
                   intensity={0.8}

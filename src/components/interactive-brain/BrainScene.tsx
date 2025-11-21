@@ -5,6 +5,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import type { RegionKey } from './InteractiveBrain';
+import { REGION_INFO } from './InteractiveBrain';
 import type { MeshStandardMaterial } from 'three';
 
 // Pre-load the model
@@ -235,26 +236,69 @@ export function BrainScene({
           style={{
             pointerEvents: 'none',
             transform: 'translate(-50%, -100%)',
-            zIndex: 10000
+            zIndex: 100000,
+            width: 'auto',
+            maxHeight: '80vh',
+            display: 'flex',
+            flexDirection: 'column'
           }}
+          portal={{ current: document.body }}
         >
           <div style={{
-            background: 'rgba(0, 0, 0, 0.8)',
-            padding: '8px 12px',
-            borderRadius: '8px',
+            background: 'rgba(0, 0, 0, 0.95)',
+            padding: '16px',
+            borderRadius: '12px',
             border: '1px solid rgba(6, 255, 165, 0.3)',
-            backdropFilter: 'blur(4px)'
+            backdropFilter: 'blur(10px)',
+            minWidth: '250px',
+            maxWidth: '350px',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
+            overflowY: 'auto',
+            maxHeight: '300px',
+            position: 'relative',
+            scrollbarWidth: 'thin',
+            scrollbarColor: '#06ffa5 rgba(0, 0, 0, 0.3)'
           }}>
-            <div style={{ color: '#06ffa5', fontWeight: '600' }}>
-              {hoveredRegion}
+            <div style={{ 
+              color: '#06ffa5', 
+              fontWeight: '600',
+              fontSize: '1.2em',
+              marginBottom: '8px',
+              borderBottom: '1px solid rgba(6, 255, 165, 0.2)',
+              paddingBottom: '8px'
+            }}>
+              {REGION_INFO[hoveredRegion].title}
+            </div>
+            <div style={{ 
+              color: '#ffffff',
+              fontSize: '0.95em',
+              marginBottom: '12px',
+              lineHeight: '1.5'
+            }}>
+              {REGION_INFO[hoveredRegion].short}
+            </div>
+            <div style={{
+              color: '#cbd5e1',
+              fontSize: '0.9em',
+              lineHeight: '1.5',
+              opacity: 0.9
+            }}>
+              {REGION_INFO[hoveredRegion].details}
             </div>
             {activeRegions.includes(hoveredRegion) && (
               <div style={{ 
                 color: '#00d4ff',
-                fontSize: '0.8em',
-                marginTop: '4px'
+                fontSize: '0.9em',
+                marginTop: '12px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px',
+                background: 'rgba(0, 212, 255, 0.1)',
+                borderRadius: '6px'
               }}>
-                ✨ Active in this lab
+                <span style={{ fontSize: '1.2em' }}>✨</span>
+                Active in this lab
               </div>
             )}
           </div>

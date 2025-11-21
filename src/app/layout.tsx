@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import Chatbot from "../components/Chatbot";
 
 export const metadata: Metadata = {
-  title: "Aaruchudar - Awaken Human Intelligence",
-  description: "Discover your mental clarity and decision-making skills through innovative learning experiences.",
+  title: "Aaruchudar - Transform Your Mind",
+  description: "Enhance your mental capabilities and unlock your true potential",
 };
 
 export default function RootLayout({
@@ -17,13 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`antialiased min-h-screen flex flex-col`}
+        className={`antialiased`}
         suppressHydrationWarning
       >
         <Navbar />
-        <main className="pt-20 flex-grow">{children}</main>
-        <Footer />
-        <Chatbot />
+        <main className="pt-20">{children}</main>
       </body>
     </html>
   );

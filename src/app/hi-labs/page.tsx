@@ -1,366 +1,170 @@
 'use client';
 
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { InteractiveBrain, type RegionKey } from '@/components/interactive-brain/InteractiveBrain';
 import styles from './styles.module.css';
+import { InteractiveBrain, RegionKey } from '@/components/interactive-brain/InteractiveBrain';
 
-// Lab data with proper typing for Next.js implementation
-const labData = {
+const LAB_BRAIN_MAP = {
   lab1: {
-    id: 1,
     name: "Clarity as Culture",
     description: "Breaking confusion, Building thinking clarity",
-    regions: ['Frontal' as RegionKey],
-    brainParts: {
-      'Frontal': {
-        title: "Prefrontal Cortex & Anterior Cingulate Cortex",
-        description: "The CEO of your thinking and error detection system",
-        functions: ["Executive control", "Decision making", "Error detection", "Attention control"]
-      }
-    }
+    regions: ["Frontal"] as RegionKey[],
+    details: "Activates Prefrontal Cortex and Anterior Cingulate Cortex for clear thinking and error detection"
   },
   lab2: {
-    id: 2,
     name: "Decision Making Without Drama",
     description: "Emotional Intelligence, decision-making",
-    regions: ['Frontal' as RegionKey, 'Temporal' as RegionKey],
-    brainParts: {
-      'Frontal': {
-        title: "Prefrontal Decision Centers",
-        description: "Rational decision making and emotional regulation",
-        functions: ["Decision processing", "Emotional regulation", "Planning", "Judgment"]
-      },
-      'Temporal': {
-        title: "Emotional Memory Processing",
-        description: "Memory integration with decision making",
-        functions: ["Emotional processing", "Memory consolidation", "Social cognition"]
-      }
-    }
+    regions: ["Frontal", "Temporal"] as RegionKey[],
+    details: "Activates multiple prefrontal regions, amygdala, and insula for balanced decision-making"
   },
   lab3: {
-    id: 3,
     name: "Inner Focus in a Noisy World",
     description: "Improving focus and Reducing distractions",
-    regions: ['Frontal' as RegionKey, 'Parietal' as RegionKey],
-    brainParts: {
-      'Frontal': {
-        title: "Attention Control Network",
-        description: "Executive attention and distraction management",
-        functions: ["Sustained attention", "Task switching", "Inhibitory control"]
-      },
-      'Parietal': {
-        title: "Spatial and Sensory Integration",
-        description: "Processing and filtering sensory information",
-        functions: ["Spatial attention", "Sensory integration", "Attention orientation"]
-      }
-    }
+    regions: ["Frontal", "Parietal"] as RegionKey[],
+    details: "Activates attention networks, basal ganglia, and insula for sustained focus"
   },
   lab4: {
-    id: 4,
     name: "The Power of Listening",
     description: "Listening deeply and Understanding others",
-    regions: ['Temporal' as RegionKey, 'Frontal' as RegionKey],
-    brainParts: {
-      'Temporal': {
-        title: "Auditory Processing Centers",
-        description: "Language comprehension and social cue processing",
-        functions: ["Language processing", "Social cognition", "Emotional recognition"]
-      },
-      'Frontal': {
-        title: "Social Mirror Network",
-        description: "Understanding others' intentions and emotions",
-        functions: ["Empathy", "Social understanding", "Communication"]
-      }
-    }
+    regions: ["Temporal", "Frontal"] as RegionKey[],
+    details: "Activates temporal lobes, mirror neuron system, and social cognition networks"
   },
   lab5: {
-    id: 5,
     name: "Intelligent Conflict and Recovery",
     description: "Handling conflicts with emotional maturity",
-    regions: ['Frontal' as RegionKey, 'Temporal' as RegionKey, 'Cerebellum' as RegionKey],
-    brainParts: {
-      'Frontal': {
-        title: "Emotional Regulation Center",
-        description: "Managing emotions and conflict response",
-        functions: ["Conflict resolution", "Emotional control", "Response inhibition"]
-      },
-      'Temporal': {
-        title: "Emotional Memory & Learning",
-        description: "Processing emotional experiences and memories",
-        functions: ["Emotional processing", "Memory formation", "Pattern recognition"]
-      },
-      'Cerebellum': {
-        title: "Emotional Balance",
-        description: "Coordinating emotional responses",
-        functions: ["Response timing", "Emotional balance", "Learning from experience"]
-      }
-    }
+    regions: ["Frontal", "Temporal", "Cerebellum"] as RegionKey[],
+    details: "Activates amygdala, orbitofrontal cortex, hippocampus, and prefrontal regions"
   },
   lab6: {
-    id: 6,
     name: "Systematic Thinking",
     description: "Complex Thinking and Patterns forming",
-    regions: ['Frontal' as RegionKey, 'Parietal' as RegionKey, 'Cerebellum' as RegionKey],
-    brainParts: {
-      'Frontal': {
-        title: "Pattern Recognition Network",
-        description: "Complex problem solving and pattern identification",
-        functions: ["Pattern recognition", "Strategic thinking", "Problem solving"]
-      },
-      'Parietal': {
-        title: "Information Integration Hub",
-        description: "Connecting multiple streams of information",
-        functions: ["Data integration", "Spatial reasoning", "Abstract thinking"]
-      },
-      'Cerebellum': {
-        title: "Learning Optimization",
-        description: "Fine-tuning cognitive processes",
-        functions: ["Cognitive automation", "Skill refinement", "Process optimization"]
-      }
-    }
+    regions: ["Frontal", "Parietal", "Cerebellum"] as RegionKey[],
+    details: "Activates prefrontal cortex, parietal regions, precuneus, and cerebellum"
   },
   lab7: {
-    id: 7,
     name: "Voice, Value, and Vulnerability",
     description: "Speaking truth and Building confidence",
-    regions: ['Frontal' as RegionKey, 'Temporal' as RegionKey],
-    brainParts: {
-      'Frontal': {
-        title: "Self-Expression Network",
-        description: "Confidence and authentic communication",
-        functions: ["Self-expression", "Confidence building", "Truth speaking"]
-      },
-      'Temporal': {
-        title: "Social Understanding Center",
-        description: "Processing social context and feedback",
-        functions: ["Social awareness", "Communication", "Emotional expression"]
-      }
-    }
+    regions: ["Frontal", "Temporal"] as RegionKey[],
+    details: "Activates ventromedial prefrontal cortex, insula, PAG, and posterior cingulate"
   },
   lab8: {
-    id: 8,
     name: "Leadership Without Imitation",
     description: "Leading with originality and Inner clarity",
-    regions: ['Frontal' as RegionKey, 'Parietal' as RegionKey],
-    brainParts: {
-      'Frontal': {
-        title: "Leadership Command Center",
-        description: "Original thinking and decision making",
-        functions: ["Original thinking", "Decision making", "Vision creation"]
-      },
-      'Parietal': {
-        title: "Strategic Integration Hub",
-        description: "Connecting vision with execution",
-        functions: ["Strategic planning", "Resource integration", "Execution planning"]
-      }
-    }
+    regions: ["Frontal", "Parietal"] as RegionKey[],
+    details: "Activates medial and ventrolateral prefrontal regions, default mode network, and motor circuits"
   }
+} as const;
+
+interface LabStats {
+  experiments: number;
+  successRate: number;
+}
+
+type LabStatsMap = {
+  [key: string]: LabStats;
 };
 
-export default function HILabsPage() {
+export default function HILabs() {
   const router = useRouter();
-  const [autoRotate, setAutoRotate] = useState(true);
-  const [activeSection, setActiveSection] = useState('overview');
-  const [selectedLab, setSelectedLab] = useState('lab1');
-  const [activeBrainRegion, setActiveBrainRegion] = useState<RegionKey>('Frontal');
+  const [selectedRegion, setSelectedRegion] = useState<RegionKey | null>(null);
   const [isolationOpacity, setIsolationOpacity] = useState(0.12);
+  const [selectedLab, setSelectedLab] = useState<keyof typeof LAB_BRAIN_MAP | null>(null);
+  const [labStats, setLabStats] = useState<LabStatsMap>({});
 
-  const sections = {
-    overview: 'Lab Overview',
-    brain: 'Brain Activation',
-    exercises: 'Lab Exercises',
-    progress: 'Progress Tracking'
-  };
+  // Generate random stats once when component mounts
+  useEffect(() => {
+    const stats: LabStatsMap = {};
+    Object.keys(LAB_BRAIN_MAP).forEach(key => {
+      stats[key] = {
+        experiments: Math.floor(Math.random() * 50) + 20,
+        successRate: Math.floor(Math.random() * 100) + 50
+      };
+    });
+    setLabStats(stats);
+  }, []);
 
-  // Function to handle lab selection
-  const handleLabSelect = (labId: string) => {
-    setSelectedLab(labId);
-    const lab = labData[labId as keyof typeof labData];
-    if (lab && lab.regions.length > 0) {
-      setActiveBrainRegion(lab.regions[0]);
-    }
+  const handleLabClick = (labId: number) => {
+    router.push(`/hi-labs/lab${labId}`);
   };
 
   return (
-    <main className={styles.labContainer}>
-      <div className={styles.contentOverlay} />
+    <div className={styles.hiLabsContainer}>
+      <div className={styles.brainModelSection}>
+        <InteractiveBrain
+          activeRegions={selectedLab ? LAB_BRAIN_MAP[selectedLab].regions as RegionKey[] : []}
+          labHighlight={!!selectedLab}
+          autoRotate={!selectedLab && !selectedRegion}
+          onRegionSelect={setSelectedRegion}
+          isolationOpacity={isolationOpacity}
+        />
+      </div>
       
-      <div className={styles.mainContent}>
-        {/* Brain Viewer Section */}
-        <div className={styles.brainViewerContainer}>
-          <div className={styles.brainViewer}>
-            <InteractiveBrain 
-              activeRegions={selectedLab ? labData[selectedLab as keyof typeof labData].regions : [activeBrainRegion]}
-              labHighlight={true}
-              autoRotate={autoRotate}
-              onRegionSelect={(region) => region && setActiveBrainRegion(region)}
-              isolationOpacity={isolationOpacity}
-            />
-          </div>
-        </div>
+      <div className={styles.labsHeader}>
+        <h1>Human Intelligence Labs</h1>
+        <p>Explore our advanced human intelligence research facilities and cutting-edge brain analysis tools</p>
+      </div>
 
-        {/* Header Section */}
-        <header className={styles.header}>
-          <div className={styles.headerContent}>
-            <div className={styles.headerLeft}>
-              <Link href="/labs" className={styles.backButton}>
-                ← Back to Labs
-              </Link>
-              <div className={styles.labTitle}>
-                <h1>AARUCHUDAR HI LABS</h1>
-                <p>Advanced Human Intelligence Research</p>
-              </div>
-            </div>
-            <Link href="/" className={styles.homeButton}>
-              Home
-            </Link>
-          </div>
-        </header>
-
-        {/* Main Content Grid */}
-        <div className={styles.navigationSection}>
-          <div className={styles.contentGrid}>
-            {/* Navigation Sidebar */}
-            <div className={styles.navSidebar}>
-              <h2 className={styles.navTitle}>Lab Navigation</h2>
-              <div className={styles.navButtons}>
-                {Object.entries(sections).map(([key, title]) => (
-                  <button
-                    key={key}
-                    onClick={() => setActiveSection(key)}
-                    className={`${styles.navButton} ${
-                      activeSection === key ? styles.navButtonActive : ''
-                    }`}
-                  >
-                    {title}
-                  </button>
-                ))}
-              </div>
-              
-              {/* Lab Selection Controls */}
-              <div className={styles.labControls}>
-                <h3 className={styles.labControlsTitle}>Select Lab</h3>
-                <div className={styles.labButtons}>
-                  {Object.entries(labData).map(([labId, lab]) => (
-                    <button
-                      key={labId}
-                      onClick={() => {
-                        handleLabSelect(labId);
-                        router.push(`/hi-labs/${labId}`);
-                      }}
-                      className={`${styles.labButton} ${
-                        selectedLab === labId ? styles.labButtonActive : ''
-                      }`}
-                    >
-                      Lab {lab.id}: {lab.name}
-                    </button>
-                  ))}
+      <div className={styles.labsGrid}>
+        {Object.entries(LAB_BRAIN_MAP).map(([key, lab], index) => {
+          const labNumber = index + 1;
+          const stats = labStats[key];
+          
+          return (
+            <div 
+              key={key} 
+              className={styles.labCard} 
+              onClick={() => handleLabClick(labNumber)}
+            >
+              <div className={styles.labContent}>
+                <div className={styles.labIcon}>🧪</div>
+                <h3>{lab.name}</h3>
+                <p>{lab.description}</p>
+                
+                <div className={styles.labRegions}>
+                  <h4>Active Brain Regions:</h4>
+                  <div className={styles.regionTags}>
+                    {lab.regions.map((region, i) => (
+                      <span key={i} className={styles.regionTag}>
+                        {region}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              {/* Brain Controls */}
-              <div className={styles.brainControls}>
-                <div className={styles.opacityControl}>
-                  <label>Neural Isolation: {isolationOpacity.toFixed(2)}</label>
-                  <input
-                    type="range"
-                    min="0.02"
-                    max="0.9"
-                    step="0.01"
-                    value={isolationOpacity}
-                    onChange={(e) => setIsolationOpacity(parseFloat(e.target.value))}
-                  />
+                <div className={styles.labStats}>
+                  <div className={styles.statItem}>
+                    <span className={styles.statValue}>
+                      {stats?.experiments || '-'}
+                    </span>
+                    <span className={styles.statLabel}>Experiments</span>
+                  </div>
+                  <div className={styles.statItem}>
+                    <span className={styles.statValue}>
+                      {stats?.successRate ? `${stats.successRate}%` : '-'}
+                    </span>
+                    <span className={styles.statLabel}>Success Rate</span>
+                  </div>
                 </div>
-                <button
-                  onClick={() => setAutoRotate(!autoRotate)}
-                  className={styles.rotateButton}
-                >
-                  {autoRotate ? 'Pause Rotation' : 'Auto Rotate'}
+
+                <button className={styles.exploreButton}>
+                  Explore Lab {labNumber}
                 </button>
               </div>
             </div>
+          );
+        })}
+      </div>
 
-            {/* Main Content Panel */}
-            <div className={styles.mainPanel}>
-              {selectedLab && labData[selectedLab as keyof typeof labData] && (
-                <div className={styles.labContent}>
-                  <h2 className={styles.labContentTitle}>
-                    {labData[selectedLab as keyof typeof labData].name}
-                  </h2>
-                  
-                  {activeSection === 'overview' && (
-                    <div className={styles.overviewSection}>
-                      <p className={styles.labDescription}>
-                        {labData[selectedLab as keyof typeof labData].description}
-                      </p>
-                      <div className={styles.labHighlights}>
-                        <h3>Key Focus Areas</h3>
-                        <ul>
-                          {labData[selectedLab as keyof typeof labData].regions.map((region) => (
-                            <li key={region}>
-                              {labData[selectedLab as keyof typeof labData].brainParts[region]?.title}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-
-                  {activeSection === 'brain' && (
-                    <div className={styles.brainSection}>
-                      <div className={styles.regionDetails}>
-                        {labData[selectedLab as keyof typeof labData].regions.map((region) => (
-                          <div key={region} className={styles.regionCard}>
-                            <h3>{labData[selectedLab as keyof typeof labData].brainParts[region]?.title}</h3>
-                            <p>{labData[selectedLab as keyof typeof labData].brainParts[region]?.description}</p>
-                            <div className={styles.functions}>
-                              {labData[selectedLab as keyof typeof labData].brainParts[region]?.functions.map((func, i) => (
-                                <span key={i} className={styles.function}>{func}</span>
-                              ))}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {activeSection === 'exercises' && (
-                    <div className={styles.exercisesSection}>
-                      <div className={styles.exerciseCards}>
-                        <div className={styles.exerciseCard}>
-                          <h3>Cognitive Training</h3>
-                          <p>Interactive exercises designed to strengthen neural pathways.</p>
-                        </div>
-                        <div className={styles.exerciseCard}>
-                          <h3>Practical Applications</h3>
-                          <p>Real-world scenarios for applying learned cognitive skills.</p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {activeSection === 'progress' && (
-                    <div className={styles.progressSection}>
-                      <div className={styles.progressCards}>
-                        <div className={styles.progressCard}>
-                          <h3>Neural Metrics</h3>
-                          <p>Track improvements in brain region activation and function.</p>
-                        </div>
-                        <div className={styles.progressCard}>
-                          <h3>Performance Analytics</h3>
-                          <p>Detailed analysis of cognitive enhancement progress.</p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
+      <div className={styles.dashboardPromo}>
+        <div className={styles.promoContent}>
+          <h2>Download Research Dashboard</h2>
+          <p>Access comprehensive analytics and visualization tools for brain pattern analysis</p>
+          <button className={styles.downloadButton}>
+            Get Sample Report ⬇️
+          </button>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
