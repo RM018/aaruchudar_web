@@ -108,14 +108,16 @@ function CardsPage() {
   };
 
   return (
-    <div ref={containerRef} className="relative min-h-screen overflow-hidden py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12 w-full" style={{
-      background: '#ffffff',
-      backgroundImage: 'url(https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop)',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      backgroundAttachment: 'fixed'
-    }}>
+    <div className="flex flex-col items-center w-full">
+      <div className="w-full max-w-[100vw]">
+        <div ref={containerRef} className="relative min-h-screen overflow-hidden py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 lg:px-12 w-full" style={{
+          background: '#ffffff',
+          backgroundImage: 'url(https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed'
+        }}>
       <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px]"></div>
       
       <div className="absolute inset-0" style={{
@@ -216,8 +218,9 @@ function CardsPage() {
           }
         }
       `}</style>
-
+ <center>
       <div className="relative max-w-7xl mx-auto">
+
         <div className="text-center mb-12 sm:mb-16 md:mb-20 lg:mb-24 px-4">
           <h1 
             ref={titleRef}
@@ -359,6 +362,9 @@ function CardsPage() {
               />
             ))}
           </div>
+        </div>
+      </div>
+      </center>
         </div>
       </div>
     </div>

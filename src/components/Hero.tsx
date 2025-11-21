@@ -70,41 +70,44 @@ export default function Hero() {
   }, [mounted]);
 
   return (
-    <section ref={heroRef} className="hero-section-with-bg min-h-screen flex items-center justify-center relative overflow-hidden w-full">
-      {/* Background Image with Overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url('/gem.png')`,
-        }}
-      >
-        {/* Dark Overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/50"></div>
-        
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/70 via-purple-900/60 to-indigo-900/70 mix-blend-overlay"></div>
-      </div>
+    <div className="flex flex-col items-center w-full">
+      <div className="w-full max-w-[100vw]">
+        <section ref={heroRef} className="hero-section-with-bg min-h-screen flex items-center justify-center relative overflow-hidden w-full">
+          {/* Background Image with Overlay */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url('/gem.png')`,
+            }}
+          >
+            {/* Dark Overlay for better text readability */}
+            <div className="absolute inset-0 bg-black/50"></div>
+            
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-900/70 via-purple-900/60 to-indigo-900/70 mix-blend-overlay"></div>
+          </div>
 
-      {/* Floating Background Elements */}
-      <div ref={floatingRef} className="absolute inset-0 overflow-hidden">
-        <div className="float-circle circle-1"></div>
-        <div className="float-circle circle-2"></div>
-        <div className="float-circle circle-3"></div>
-        <div className="float-circle circle-4"></div>
-      </div>
+          {/* Floating Background Elements */}
+          <div ref={floatingRef} className="absolute inset-0 overflow-hidden">
+            <div className="float-circle circle-1"></div>
+            <div className="float-circle circle-2"></div>
+            <div className="float-circle circle-3"></div>
+            <div className="float-circle circle-4"></div>
+          </div>
 
-      {/* Animated Particles */}
-      <div className="absolute inset-0 particles-container">
-        {particles.map((particle, i) => (
-          <div key={i} className="particle" style={{
-            left: particle.left,
-            animationDelay: particle.delay,
-            animationDuration: particle.duration
-          }}></div>
-        ))}
-      </div>
+          {/* Animated Particles */}
+          <div className="absolute inset-0 particles-container">
+            {particles.map((particle, i) => (
+              <div key={i} className="particle" style={{
+                left: particle.left,
+                animationDelay: particle.delay,
+                animationDuration: particle.duration
+              }}></div>
+            ))}
+          </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <center>
         <div className="max-w-4xl mx-auto text-center w-full">
           {/* Badge */}
           
@@ -166,6 +169,7 @@ export default function Hero() {
             </div>
           </div>
         </div>
+        </center>
       </div>
 
       <style jsx>{`
@@ -389,6 +393,8 @@ export default function Hero() {
           }
         }
       `}</style>
-    </section>
+        </section>
+      </div>
+    </div>
   );
 }
