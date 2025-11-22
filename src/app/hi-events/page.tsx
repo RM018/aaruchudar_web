@@ -181,12 +181,16 @@ const HIEventsPage = () => {
       </div>
 
       {/* Tab Navigation */}
-      <div className={styles.tabNav}>
+      <div className={styles.tabNav} role="tablist" aria-label="Event tabs">
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-2 shadow-lg">
           <div className="flex space-x-2">
             {['upcoming', 'past'].map((tab) => (
               <motion.button
                 key={tab}
+                role="tab"
+                aria-selected={activeTab === tab}
+                aria-controls={`panel-${tab}`}
+                id={`tab-${tab}`}
                 onClick={() => setActiveTab(tab)}
                 className={`${styles.tabButton} ${activeTab === tab ? styles.active : ''}`}
                 whileHover={{ scale: 1.02 }}
@@ -206,7 +210,10 @@ const HIEventsPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="grid md:grid-cols-2 gap-8"
+          className="grid gap-6 sm:gap-8 md:grid-cols-2"
+          id={`panel-${activeTab}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${activeTab}`}
         >
           {(activeTab === 'upcoming' ? upcomingEvents : pastEvents).map((event, idx) => (
             <motion.div
@@ -231,7 +238,7 @@ const HIEventsPage = () => {
                 <h3 className={styles.eventTitle}>{event.title}</h3>
                 <p className={styles.eventDescription}>{event.description}</p>
 
-                <div className={styles.eventDetails}>
+                <div className={styles.eventDetails} aria-label="Event details">
                   <div className={styles.eventDetail}>
                     <svg className={styles.eventDetailIcon} viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
@@ -263,7 +270,7 @@ const HIEventsPage = () => {
                   </div>
                 </div>
 
-                <button className={styles.registerButton}>
+                <button className={styles.registerButton} aria-label={`Register for ${event.title}`}>
                   Register Now
                 </button>
               </div>

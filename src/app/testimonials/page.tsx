@@ -45,14 +45,14 @@ export default function TestimonialsPage() {
   return (
   <center>
     
-    <div className="testimonials-page-wrapper">
+    <div className="testimonials-page-wrapper" role="main" aria-label="Testimonials page">
       {/* Hero Section */}
-      <section className="testimonials-hero">
+      <section className="testimonials-hero" aria-labelledby="testimonials-heading">
         <div className="testimonials-container">
           <Link href="/" className="back-link">
             ← Back to Home
           </Link>
-          <h1 className="testimonials-main-title" style={{ color: '#ffffff' }}>What Our Community Says</h1>
+          <h1 id="testimonials-heading" className="testimonials-main-title" style={{ color: '#ffffff' }}>What Our Community Says</h1>
           <p className="testimonials-subtitle" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
             Real stories from real people who have experienced transformation through our programs
           </p>
@@ -62,9 +62,9 @@ export default function TestimonialsPage() {
       {/* Testimonials Grid */}
       <section className="testimonials-grid-section">
         <div className="testimonials-container">
-          <div className="testimonials-grid">
+          <div className="testimonials-grid" role="list" aria-label="Testimonials list">
             {testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="testimonial-card">
+              <div key={testimonial.id} className="testimonial-card" role="listitem" aria-label={`Testimonial from ${testimonial.name}`}>
                 <div className="testimonial-header">
                   <img
                     src={testimonial.image}
@@ -97,7 +97,7 @@ export default function TestimonialsPage() {
         <div className="testimonials-container">
           <h2 className="cta-title" style={{ color: '#ffffff' }}>Ready to Start Your Journey?</h2>
           <p className="cta-text" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Join hundreds of others who have transformed their thinking</p>
-          <Link href="/" className="cta-button">
+          <Link href="/" className="cta-button" aria-label="Explore programs">
             Explore Our Programs
           </Link>
         </div>
@@ -111,7 +111,7 @@ export default function TestimonialsPage() {
 
         .testimonials-hero {
           background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-          padding: 120px 24px 80px !important;
+          padding: 140px 24px 80px !important;
           text-align: center !important;
           position: relative !important;
           overflow: hidden !important;
@@ -320,6 +320,12 @@ export default function TestimonialsPage() {
 
           .testimonials-cta {
             padding: 60px 20px !important;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .testimonials-hero {
+            padding-top: 120px !important;
           }
         }
       `}</style>

@@ -550,6 +550,7 @@
   background: linear-gradient(45deg, #00d4ff, #06ffa5);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text; /* standard property for compatibility */
   margin-bottom: 1rem;
 }
 
@@ -809,4 +810,203 @@
   background-color: rgba(0, 0, 0, 0.05);
   border-radius: 12px;
   overflow: hidden;
+}
+
+.regionLegend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin: 0 auto 2rem;
+  max-width: 900px;
+}
+.regionLegendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.regionLegendItem:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-2px);
+}
+.regionSwatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.regionLegendActive {
+  border-color: #06ffa5;
+  box-shadow: 0 0 12px rgba(6,255,165,0.4);
+}
+.clearSelectionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(6,255,165,0.08);
+  border: 1px solid rgba(6,255,165,0.3);
+  color: #06ffa5;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 auto 1.5rem;
+}
+.clearSelectionBtn:hover {
+  background: rgba(6,255,165,0.18);
+}
+
+.labMappingGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1440px;
+  margin: 0 auto 2.5rem;
+  align-items: stretch;
+}
+@media (max-width: 1024px) {
+  .labMappingGrid { grid-template-columns: 1fr; }
+}
+
+.brainFilterPanel, .labMappingPanel {
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(6,255,165,0.18);
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem 1.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-height: 340px;
+}
+.brainFilterPanel::before, .labMappingPanel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(6,255,165,0.05));
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.panelTitle {
+  margin: 0 0 .75rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  background: linear-gradient(45deg,#00d4ff,#06ffa5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.panelSubtitle {
+  margin: 0 0 1.25rem;
+  font-size: .9rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+.panelTitleSecondary {
+  margin: 0 0 .75rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #06ffa5;
+}
+
+.brainFilterButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-bottom: 0.5rem;
+}
+.brainFilterBtn, .resetMapBtn {
+  font-size: .75rem;
+  padding: .55rem .75rem;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #fff;
+  cursor: pointer;
+  letter-spacing: .02em;
+  transition: .25s ease;
+  position: relative;
+}
+.brainFilterBtn:hover, .resetMapBtn:hover { background: rgba(255,255,255,0.15); }
+.brainFilterBtnActive { background: #06ffa5; color: #000; border-color: #06ffa5; }
+.resetMapBtn { background: rgba(139,92,246,0.15); border-color: rgba(139,92,246,0.4); }
+.resetMapBtn:hover { background: rgba(139,92,246,0.35); }
+.brainFilterBtn:active, .resetMapBtn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.networkMappingBlock {
+  background: rgba(6,255,165,0.05);
+  border: 1px solid rgba(6,255,165,0.18);
+  padding: 1rem .9rem .85rem;
+  border-radius: 12px;
+  margin-top: auto;
+}
+.networkMappingBlock h4 {
+  margin: 0 0 .6rem;
+  font-size: .8rem;
+  color: #06ffa5;
+  letter-spacing: .05em;
+  font-weight: 700;
+}
+.networkList { list-style: none; padding: 0; margin: 0 0 .75rem; display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: .4rem; }
+.networkItem { display: flex; align-items: center; gap: .45rem; font-size: .75rem; background: rgba(0,212,255,0.06); padding: .4rem .5rem; border: 1px solid rgba(0,212,255,0.25); border-radius: 6px; line-height: 1.1; color: #e2f8ff; }
+.networkItem span:last-child { flex: 1; }
+.networkDot { width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 6px rgba(0,0,0,0.4); }
+.opacityControlInline { display: flex; flex-direction: column; gap: .35rem; }
+.opacityControlInline label { font-size: .65rem; color: #8b9fb5; }
+.opacityControlInline input[type=range] { 
+  width: 100%; 
+  height: 6px; 
+  background: linear-gradient(90deg, rgba(0,212,255,0.4), rgba(6,255,165,0.6)); 
+  border-radius: 4px; 
+}
+.opacityControlInline input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px; height: 16px; border-radius: 50%; background:#06ffa5; border:2px solid #0a0a0a; box-shadow:0 0 0 3px rgba(6,255,165,0.35);
+}
+.opacityControlInline input[type=range]:hover::-webkit-slider-thumb { box-shadow:0 0 0 4px rgba(6,255,165,0.55); }
+
+.labMappingButtons { display: flex; flex-wrap: wrap; gap: .55rem; margin: .5rem 0 1rem; justify-content: flex-start; }
+.labMapBtn { padding: .55rem .9rem; font-size: .7rem; background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.18); color:#fff; border-radius:8px; cursor:pointer; transition:.25s; position: relative; }
+.labMapBtn:hover { background: rgba(255,255,255,0.15); }
+.labMapBtnActive { background:#06ffa5; color:#000; border-color:#06ffa5; }
+.labMapBtn:active { transform: translateY(1px) scale(0.98); }
+.labMappingActions { display:flex; gap:.6rem; margin-bottom:.75rem; flex-wrap: wrap; }
+.clearAllBtn, .exploreLabBtn { flex:0 0 auto; padding:.55rem .9rem; font-size:.7rem; border-radius:8px; border:1px solid rgba(6,255,165,0.3); background:rgba(6,255,165,0.08); color:#06ffa5; cursor:pointer; transition:.25s; position: relative; }
+.clearAllBtn:hover, .exploreLabBtn:hover { background:rgba(6,255,165,0.18); }
+.clearAllBtn:active, .exploreLabBtn:active { transform: translateY(1px) scale(0.98); }
+.exploreLabBtn { background: linear-gradient(90deg,#00d4ff,#06ffa5); color:#000; border:none; box-shadow:0 0 12px rgba(6,255,165,0.3); }
+.exploreLabBtn:hover { filter: brightness(1.1); }
+.mappingHint { font-size:.65rem; color:#8b9fb5; margin:0 0 .85rem; }
+.activeLabDetails { background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.18); padding:.85rem .9rem; border-radius:10px; margin-top: auto; }
+.activeLabDetails h4 { color:#06ffa5; margin:0 0 .4rem; font-size:.9rem; }
+.activeLabDetails p { color:#cbd5e1; font-size:.65rem; line-height:1.35; }
+.activeLabHeader { font-size:.55rem; letter-spacing:.15em; font-weight:700; color:#06ffa5; margin-bottom:.4rem; background:rgba(6,255,165,0.1); padding:.3rem .55rem; border-radius:6px; display:inline-block; }
+.activeRegionsWrap { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.55rem; }
+.activeRegionTag { padding:.35rem .6rem; font-size:.6rem; color:#fff; font-weight:600; border-radius:6px; box-shadow:0 0 10px rgba(0,0,0,0.45); letter-spacing: .04em; border:1px solid rgba(255,255,255,0.35); text-shadow:0 1px 2px rgba(0,0,0,0.6); }
+
+.spacer { flex-grow: 1; }
+
+@media (max-width: 1024px) {
+  .brainFilterPanel, .labMappingPanel { min-height: unset; }
+}
+
+@media (max-width: 640px) {
+  .brainFilterButtons { gap:.45rem; }
+  .labMappingButtons { gap:.45rem; }
+  .labMappingGrid { gap: 1.25rem; }
+  .panelTitle { font-size:1.15rem; }
+  .activeLabDetails { margin-top: 0.5rem; }
 }

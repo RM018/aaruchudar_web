@@ -1,9 +1,54 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
 import styles from './styles.module.css';
+
+// Type & data extraction for clarity and scalability
+interface Workshop {
+  type: string;
+  icon: string;
+  title: string;
+  items: string[];
+  accent: string; // semantic accent label
+}
+
+const WORKSHOPS: Workshop[] = [
+  {
+    type: 'psychological',
+    icon: '🧠',
+    title: 'Mind Architecture',
+    accent: 'Psychological Pathway',
+    items: [
+      'Neural Detox Protocol – Advanced stress release + cognitive restructuring',
+      'Emotional Intelligence Engine – Master emotional processing algorithms',
+      'Decision Matrix Optimization – High-speed clarity and choice frameworks'
+    ]
+  },
+  {
+    type: 'intellectual',
+    icon: '⚡',
+    title: 'Cognitive Networks',
+    accent: 'Intellectual Pathway',
+    items: [
+      'Critical Thinking Accelerator – Process complex problems with AI-like precision',
+      'Deep Listening Protocols – Enhanced neural reception and processing',
+      'Conflict Resolution Engine – Transform chaos into structured solutions'
+    ]
+  },
+  {
+    type: 'innovative',
+    icon: '🚀',
+    title: 'Innovation Circuits',
+    accent: 'Innovation Pathway',
+    items: [
+      'Creative Neural Networks – Rapid ideation under pressure conditions',
+      'Leadership Algorithm Labs – Authentic influence without replication',
+      'Innovation Sprint Engine – Build and deploy breakthrough ideas fast'
+    ]
+  }
+];
 
 // Predefined pattern positions to avoid hydration mismatch
 const PATTERN_POSITIONS = [
@@ -32,173 +77,82 @@ const PATTERN_POSITIONS = [
 export default function HIWorkshopsPage() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const { scrollYProgress } = useScroll();
+  const prefersReducedMotion = useReducedMotion();
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
 
   useEffect(() => {
-    const unsubscribe = scrollYProgress.onChange((latest) => {
-      setScrollProgress(latest);
-    });
+    const unsubscribe = scrollYProgress.onChange(setScrollProgress);
     return () => unsubscribe();
   }, [scrollYProgress]);
 
-  const exploreWorkshop = (type: string) => {
-    // TODO: Implement workshop exploration functionality
-    console.log(`Exploring ${type} workshop`);
+  // Placeholder action – would navigate or open modal in future
+  const logExplore = (type: string) => {
+    console.log(`Workshop path selected: ${type}`);
   };
 
   return (
-    <div className={styles.hiWorkshops}>
-      {/* Background Patterns */}
-      <div className={styles.patternOverlay}>
+    <div className={styles.hiWorkshops} role="main" aria-label="HI Workshops professional development pathways">
+      {/* Background Patterns (decorative) */}
+      <div className={`${styles.patternOverlay} hidden xs:block`} aria-hidden="true">
         {PATTERN_POSITIONS.map((position, i) => (
           <motion.div
             key={i}
             className={styles.pattern}
             initial={{ opacity: 0, scale: 0 }}
-            animate={{ 
-              opacity: [0.1, 0.3, 0.1],
-              scale: [1, 1.2, 1],
-              rotate: [0, 180, 360]
-            }}
-            transition={{
-              duration: 20,
-              delay: i * 0.5,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            style={{
-              left: `${position.left}%`,
-              top: `${position.top}%`,
-            }}
+            animate={prefersReducedMotion ? {} : { opacity: [0.08, 0.25, 0.08], scale: [1, 1.15, 1], rotate: [0, 180, 360] }}
+            transition={{ duration: 24, delay: i * 0.4, repeat: Infinity, ease: 'linear' }}
+            style={{ left: `${position.left}%`, top: `${position.top}%` }}
           />
         ))}
       </div>
 
       {/* Scroll Progress */}
-      <motion.div 
-        className={styles.scrollProgress} 
-        style={{ scaleX: scrollProgress }}
-      />
+      <motion.div className={styles.scrollProgress} style={{ scaleX: scrollProgress }} aria-hidden="true" />
 
       {/* Hero Section */}
-      <section className={styles.hero}>
-        {/* Neural Network Elements */}
-        <motion.div 
-          className={styles.neuralNetwork}
-          style={{ opacity, scale }}
-        >
+      <section className={styles.hero} aria-labelledby="hero-heading" aria-describedby="hero-tagline">
+        <motion.div className={styles.neuralNetwork} style={{ opacity, scale }} aria-hidden="true">
           {[...Array(8)].map((_, i) => (
             <motion.div
               key={i}
               className={`${styles.neuralNode} ${styles[`node${i + 1}`]}`}
-              animate={{ 
-                scale: [1, 1.2, 1],
-                boxShadow: [
-                  '0 0 20px rgba(0, 255, 255, 0.3)',
-                  '0 0 40px rgba(0, 255, 255, 0.5)',
-                  '0 0 20px rgba(0, 255, 255, 0.3)'
-                ]
-              }}
-              transition={{ 
-                duration: 4, 
-                repeat: Infinity, 
-                delay: i * 0.5,
-                ease: "easeInOut"
-              }}
+              animate={prefersReducedMotion ? {} : { scale: [1, 1.15, 1], boxShadow: ['0 0 16px rgba(0, 153, 255, 0.25)', '0 0 32px rgba(0, 153, 255, 0.45)', '0 0 16px rgba(0, 153, 255, 0.25)'] }}
+              transition={{ duration: 6, repeat: Infinity, delay: i * 0.4, ease: 'easeInOut' }}
             />
           ))}
-          
-          {[...Array(12)].map((_, i) => (
+          {[...Array(10)].map((_, i) => (
             <motion.div
               key={i}
               className={styles.neuralConnection}
-              style={{
-                top: `${15 + i * 15}%`,
-                left: `${15 + (i % 4) * 20}%`,
-                width: '150px',
-                transform: `rotate(${(i * 30) % 360}deg)`
-              }}
-              animate={{ 
-                opacity: [0.2, 0.5, 0.2],
-                height: ['2px', '3px', '2px']
-              }}
-              transition={{ 
-                duration: 3, 
-                repeat: Infinity, 
-                delay: i * 0.2,
-                ease: "linear"
-              }}
+              style={{ top: `${15 + i * 7}%`, left: `${12 + (i % 5) * 15}%`, width: '140px', transform: `rotate(${(i * 27) % 360}deg)` }}
+              animate={prefersReducedMotion ? {} : { opacity: [0.15, 0.5, 0.15] }}
+              transition={{ duration: 5, repeat: Infinity, delay: i * 0.25, ease: 'linear' }}
             />
           ))}
         </motion.div>
 
-        {/* Brain-Inspired Floating Orbs */}
-        <motion.div 
-          className={`${styles.brainOrb} ${styles.orbLarge}`}
-          animate={{
-            y: [0, -30, 0],
-            x: [0, 15, 0],
-            rotateY: [0, 180, 360]
-          }}
-          transition={{ duration: 20, repeat: Infinity }}
-        />
-        <motion.div 
-          className={`${styles.brainOrb} ${styles.orbMedium}`}
-          animate={{
-            y: [0, -40, 0],
-            x: [0, -20, 0],
-            rotateX: [0, 180, 360]
-          }}
-          transition={{ duration: 18, repeat: Infinity, delay: -5 }}
-        />
-        <motion.div 
-          className={`${styles.brainOrb} ${styles.orbSmall}`}
-          animate={{
-            y: [0, -25, 0],
-            rotateZ: [0, 360]
-          }}
-          transition={{ duration: 12, repeat: Infinity, delay: -8 }}
-        />
-        
-        <motion.div 
-          className={styles.heroContent}
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          <motion.h1
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.8 }}
-          >
+        {/* Brain Inspired Orbs */}
+        {!prefersReducedMotion && (
+          <>
+            <motion.div className={`${styles.brainOrb} ${styles.orbLarge}`} animate={{ y: [0, -30, 0], x: [0, 20, 0] }} transition={{ duration: 26, repeat: Infinity }} aria-hidden="true" />
+            <motion.div className={`${styles.brainOrb} ${styles.orbMedium}`} animate={{ y: [0, -35, 0], x: [0, -18, 0] }} transition={{ duration: 24, repeat: Infinity, delay: -6 }} aria-hidden="true" />
+            <motion.div className={`${styles.brainOrb} ${styles.orbSmall}`} animate={{ y: [0, -20, 0] }} transition={{ duration: 18, repeat: Infinity, delay: -9 }} aria-hidden="true" />
+          </>
+        )}
+
+        <motion.div className={styles.heroContent} initial={{ opacity: 0, y: 64 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>
+          <motion.h1 id="hero-heading" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9, delay: 0.5 }}>
             HI Workshops
           </motion.h1>
-          <motion.p 
-            className={styles.heroSubtitle}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.2 }}
-          >
-            🧠 Neural Networks of Learning
+          <motion.p className={styles.heroSubtitle} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.7 }}>
+            Neural Networks of Learning
           </motion.p>
-          <motion.p 
-            className={styles.heroTagline}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.5 }}
-          >
-            Enhance your professional capabilities through structured, evidence-based workshops designed to develop advanced cognitive skills and strategic thinking methodologies.
+          <motion.p id="hero-tagline" className={styles.heroTagline} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.9 }}>
+            Enhance professional capabilities through structured, evidence-based workshops developing advanced cognitive skills and strategic thinking methodology.
           </motion.p>
-          <Link href="#workshops">
-            <motion.div 
-              className={styles.ctaPrimary}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 1.8 }}
-              whileHover={{ scale: 1.05, y: -8 }}
-              whileTap={{ scale: 0.95 }}
-            >
+          <Link href="#workshops" aria-label="Explore professional development programs">
+            <motion.div className={styles.ctaPrimary} initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, delay: 1.1 }} whileHover={{ scale: 1.04, y: -6 }} whileTap={{ scale: 0.95 }}>
               Explore Programs
             </motion.div>
           </Link>
@@ -206,134 +160,67 @@ export default function HIWorkshopsPage() {
       </section>
 
       {/* Workshops Section */}
-      <section className={`${styles.scrollSection} ${styles.workshopsSection}`} id="workshops">
+      <section className={`${styles.scrollSection} ${styles.workshopsSection}`} id="workshops" aria-labelledby="workshops-heading">
         <div className={styles.container}>
-          <motion.h2 
-            className={styles.sectionTitle}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
+          <motion.h2 id="workshops-heading" className={styles.sectionTitle} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
             Professional Development Pathways
           </motion.h2>
-          <motion.p 
-            className={styles.sectionSubtitle}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            Specialized programs designed to enhance leadership, decision-making, and strategic thinking capabilities
+          <motion.p className={styles.sectionSubtitle} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }} viewport={{ once: true }}>
+            Specialized programs enhancing leadership, decision-making, and strategic cognition.
           </motion.p>
-          
-          <div className={styles.workshopsGrid}>
-            {[
-              {
-                type: 'psychological',
-                icon: '🧠',
-                title: 'Mind Architecture',
-                items: [
-                  'Neural Detox Protocol – Advanced stress release + cognitive restructuring',
-                  'Emotional Intelligence Engine – Master emotional processing algorithms',
-                  'Decision Matrix Optimization – High-speed clarity and choice frameworks'
-                ]
-              },
-              {
-                type: 'intellectual',
-                icon: '⚡',
-                title: 'Cognitive Networks',
-                items: [
-                  'Critical Thinking Accelerator – Process complex problems with AI-like precision',
-                  'Deep Listening Protocols – Enhanced neural reception and processing',
-                  'Conflict Resolution Engine – Transform chaos into structured solutions'
-                ]
-              },
-              {
-                type: 'innovative',
-                icon: '🚀',
-                title: 'Innovation Circuits',
-                items: [
-                  'Creative Neural Networks – Rapid ideation under pressure conditions',
-                  'Leadership Algorithm Labs – Authentic influence without replication',
-                  'Innovation Sprint Engine – Build and deploy breakthrough ideas fast'
-                ]
-              }
-            ].map((workshop, index) => (
-              <motion.div 
-                key={index}
+
+          <div className={styles.workshopsGrid} role="list" aria-label="Workshop pathways">
+            {WORKSHOPS.map((workshop, index) => (
+              <motion.article
+                key={workshop.type}
                 className={`${styles.workshopCard} ${styles[workshop.type]}`}
-                initial={{ opacity: 0, y: 100 }}
+                initial={{ opacity: 0, y: 72 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                transition={{ duration: 0.7, delay: index * 0.15 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -15, scale: 1.02 }}
+                whileHover={{ y: -12, scale: 1.015 }}
+                role="listitem"
+                aria-label={`${workshop.title} – ${workshop.accent}`}
               >
-                <div className={styles.workshopIcon}>{workshop.icon}</div>
+                <div className={styles.workshopIcon} aria-hidden="true">{workshop.icon}</div>
                 <h3 className={styles.workshopTitle}>{workshop.title}</h3>
-                <ul className={styles.workshopList}>
-                  {workshop.items.map((item, i) => (
-                    <li key={i}>{item}</li>
+                <ul className={styles.workshopList} aria-label={`${workshop.title} key modules`}>
+                  {workshop.items.map((item) => (
+                    <li key={item}>{item}</li>
                   ))}
                 </ul>
-                <motion.button 
-                  className={styles.ctaPrimary}
-                  onClick={() => exploreWorkshop(workshop.type)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                <Link
+                  href={`/hi-workshops/${workshop.type}`}
+                  onClick={() => logExplore(workshop.type)}
+                  aria-label={`Explore ${workshop.title} pathway`}
                 >
-                  Explore Path
-                </motion.button>
-              </motion.div>
+                  <motion.div className={styles.ctaPrimary} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.95 }}>
+                    Explore Path
+                  </motion.div>
+                </Link>
+              </motion.article>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className={`${styles.scrollSection} ${styles.ctaSection}`}>
+      <section className={`${styles.scrollSection} ${styles.ctaSection}`} aria-labelledby="cta-heading">
         <div className={styles.container}>
-          <motion.h2 
-            className={styles.sectionTitle}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
+          <motion.h2 id="cta-heading" className={styles.sectionTitle} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
             Ready to Rewire Your Mind?
           </motion.h2>
-          <motion.p 
-            className={styles.sectionSubtitle}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            Join our neural network of learners and transform your cognitive capabilities through immersive workshops
+          <motion.p className={styles.sectionSubtitle} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }} viewport={{ once: true }}>
+            Join our network and transform cognitive capability through immersive workshops.
           </motion.p>
-          
-          <motion.div 
-            className={styles.ctaButtons}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <Link href="#signup">
-              <motion.div 
-                className={styles.ctaPrimary}
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-              >
+          <motion.div className={styles.ctaButtons} initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }} viewport={{ once: true }}>
+            <Link href="#signup" aria-label="Start your professional development journey">
+              <motion.div className={styles.ctaPrimary} whileHover={{ scale: 1.04, y: -4 }} whileTap={{ scale: 0.95 }}>
                 Start Your Neural Upgrade
               </motion.div>
             </Link>
-            <Link href="#calendar">
-              <motion.div 
-                className={styles.ctaSecondary}
-                whileHover={{ y: -5 }}
-                whileTap={{ scale: 0.95 }}
-              >
+            <Link href="#calendar" aria-label="View workshop calendar">
+              <motion.div className={styles.ctaSecondary} whileHover={{ y: -4 }} whileTap={{ scale: 0.95 }}>
                 Explore Workshop Calendar
               </motion.div>
             </Link>

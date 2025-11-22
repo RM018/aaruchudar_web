@@ -12,13 +12,13 @@ import type { MeshStandardMaterial } from 'three';
 useGLTF.preload('/models/brain_areas.glb');
 
 // Define colors for each brain region
-const regionColors = {
-  'Frontal': 0x3B82F6,    // Blue
-  'Parietal': 0x10B981,   // Green  
-  'Temporal': 0xF59E0B,   // Orange
-  'Occipital': 0xEF4444,  // Red
-  'Cerebellum': 0x8B5CF6, // Purple
-  'Brainstem': 0x06B6D4   // Cyan
+const defaultRegionColors = {
+  'Frontal': 0xFF6B6B,    // Coral
+  'Parietal': 0x6BCB77,   // Soft Green  
+  'Temporal': 0xFFD93D,   // Warm Yellow
+  'Occipital': 0x4D96FF,  // Bright Blue
+  'Cerebellum': 0x9D4EDD, // Vivid Purple
+  'Brainstem': 0x40E0D0   // Turquoise
 } as const;
 
 // Lab highlight color (brighter for lab mode)
@@ -31,6 +31,8 @@ interface BrainSceneProps {
   onLoad?: () => void;
   onRegionSelect?: (region: RegionKey | null) => void;
   isolationOpacity?: number;
+  regionColorsOverride?: Partial<Record<RegionKey, number>>; // allow overriding colors
+  onHoverRegion?: (region: RegionKey | null) => void; // new callback
 }
 
 export function BrainScene({ 
@@ -39,12 +41,20 @@ export function BrainScene({
   autoRotate = true,
   onLoad,
   onRegionSelect,
-  isolationOpacity = 0.12
+  isolationOpacity = 0.12,
+  regionColorsOverride,
+  onHoverRegion
 }: BrainSceneProps) {
   const { scene } = useGLTF('/models/brain_areas.glb');
   const [hoveredRegion, setHoveredRegion] = useState<RegionKey | null>(null);
   const [hoveredMesh, setHoveredMesh] = useState<THREE.Mesh | null>(null);
   const [hoveredPosition, setHoveredPosition] = useState<[number, number, number]>([0, 0, 0]);
+
+  // Merge default colors with overrides
+  const regionColors = useMemo(() => ({
+    ...defaultRegionColors,
+    ...(regionColorsOverride || {})
+  }), [regionColorsOverride]);
 
   // Adjust scene position and rotation
   useEffect(() => {
@@ -63,10 +73,10 @@ export function BrainScene({
     }
   }, [scene, onLoad]);
 
-  // Handle auto-rotation
+  // Handle continuous slow rotation (always active)
   useFrame((state, delta) => {
-    if (autoRotate && scene) {
-      scene.rotation.y += delta * 0.5;
+    if (scene) {
+      scene.rotation.y += delta * 0.15; // slow, constant rotation
     }
   });
 
@@ -124,7 +134,7 @@ export function BrainScene({
       }
     });
     return m;
-  }, [scene]);
+  }, [scene, regionColors]);
 
   // Update mesh materials based on active regions
   useEffect(() => {
@@ -164,7 +174,7 @@ export function BrainScene({
       material.depthWrite = material.opacity > 0.5;
       material.needsUpdate = true;
     });
-  }, [meshes, activeRegions, labHighlight, hoveredMesh, isolationOpacity]);
+  }, [meshes, activeRegions, labHighlight, hoveredMesh, isolationOpacity, regionColors]);
 
   // Event handlers
   function onPointerEnter(e: any) {
@@ -183,6 +193,7 @@ export function BrainScene({
     
     setHoveredMesh(picked);
     setHoveredRegion(region);
+    onHoverRegion?.(region);
     
     if (typeof document !== 'undefined') {
       document.body.style.cursor = 'pointer';
@@ -191,6 +202,7 @@ export function BrainScene({
 
   function onPointerLeave(e: any) {
     e.stopPropagation();
+    onHoverRegion?.(null);
     setHoveredMesh(null);
     setHoveredRegion(null);
     setHoveredPosition([0, 0, 0]);
@@ -228,82 +240,6 @@ export function BrainScene({
         onPointerMove={onPointerMove}
         onPointerDown={onPointerDown}
       />
-      
-      {hoveredRegion && (
-        <Html
-          position={[hoveredPosition[0] + 0.3, hoveredPosition[1] + 0.5, hoveredPosition[2] + 0.2]}
-          center
-          style={{
-            pointerEvents: 'none',
-            transform: 'translate(-50%, -100%)',
-            zIndex: 100000,
-            width: 'auto',
-            maxHeight: '80vh',
-            display: 'flex',
-            flexDirection: 'column'
-          }}
-          portal={{ current: document.body }}
-        >
-          <div style={{
-            background: 'rgba(0, 0, 0, 0.95)',
-            padding: '16px',
-            borderRadius: '12px',
-            border: '1px solid rgba(6, 255, 165, 0.3)',
-            backdropFilter: 'blur(10px)',
-            minWidth: '250px',
-            maxWidth: '350px',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
-            overflowY: 'auto',
-            maxHeight: '300px',
-            position: 'relative',
-            scrollbarWidth: 'thin',
-            scrollbarColor: '#06ffa5 rgba(0, 0, 0, 0.3)'
-          }}>
-            <div style={{ 
-              color: '#06ffa5', 
-              fontWeight: '600',
-              fontSize: '1.2em',
-              marginBottom: '8px',
-              borderBottom: '1px solid rgba(6, 255, 165, 0.2)',
-              paddingBottom: '8px'
-            }}>
-              {REGION_INFO[hoveredRegion].title}
-            </div>
-            <div style={{ 
-              color: '#ffffff',
-              fontSize: '0.95em',
-              marginBottom: '12px',
-              lineHeight: '1.5'
-            }}>
-              {REGION_INFO[hoveredRegion].short}
-            </div>
-            <div style={{
-              color: '#cbd5e1',
-              fontSize: '0.9em',
-              lineHeight: '1.5',
-              opacity: 0.9
-            }}>
-              {REGION_INFO[hoveredRegion].details}
-            </div>
-            {activeRegions.includes(hoveredRegion) && (
-              <div style={{ 
-                color: '#00d4ff',
-                fontSize: '0.9em',
-                marginTop: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '8px',
-                background: 'rgba(0, 212, 255, 0.1)',
-                borderRadius: '6px'
-              }}>
-                <span style={{ fontSize: '1.2em' }}>✨</span>
-                Active in this lab
-              </div>
-            )}
-          </div>
-        </Html>
-      )}
     </>
   );
 }

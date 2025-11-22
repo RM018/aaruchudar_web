@@ -99,13 +99,14 @@ export default function BlogPage() {
       </AnimatePresence>
 
       {/* Main Container */}
-      <div className="blog-container">
+      <div className="blog-container" role="main" aria-label="Blog content">
         {/* Back Button */}
         <motion.button
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           onClick={() => window.location.href = '/'}
-          className="fixed top-6 left-6 z-40 px-6 py-3 bg-white/10 backdrop-blur-lg text-white font-semibold rounded-full hover:bg-white/20 transition-all border border-white/20 shadow-xl hover:scale-105"
+          className="absolute top-4 left-4 md:fixed md:top-6 md:left-6 z-40 px-4 md:px-6 py-2 md:py-3 bg-white/10 backdrop-blur-lg text-white text-sm md:text-base font-semibold rounded-full hover:bg-white/20 transition-all border border-white/20 shadow-xl hover:scale-105"
+          aria-label="Go back to home"
         >
           ← Back to Home
         </motion.button>
@@ -149,6 +150,7 @@ export default function BlogPage() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="search-input"
+                  aria-label="Search blog posts"
                 />
                 <Search className="search-icon" />
               </div>
@@ -181,7 +183,7 @@ export default function BlogPage() {
                 className="featured-card"
               >
                 <div className="featured-image">
-                  <img src={featuredPost.image} alt={featuredPost.title} />
+                  <img src={featuredPost.image} alt={featuredPost.title} loading="lazy" />
                   <span className="featured-badge">⭐ Featured</span>
                 </div>
                 <div className="featured-content">
@@ -224,7 +226,7 @@ export default function BlogPage() {
                   className="post-card"
                 >
                   <div className="post-image">
-                    <img src={post.image} alt={post.title} />
+                    <img src={post.image} alt={post.title} loading="lazy" />
                     <span className="post-badge">{post.category}</span>
                   </div>
                   <div className="post-content">
@@ -262,8 +264,8 @@ export default function BlogPage() {
               Join thousands of innovators who rely on our insights to stay informed about the latest trends.
             </p>
             <div className="newsletter-form">
-              <input type="email" placeholder="Enter your email" className="newsletter-input" />
-              <button className="newsletter-btn">Subscribe Now</button>
+              <input type="email" placeholder="Enter your email" className="newsletter-input" aria-label="Email address" />
+              <button className="newsletter-btn" aria-label="Subscribe to newsletter">Subscribe Now</button>
             </div>
             <div className="newsletter-features">
               <span>✓ No spam, ever</span>

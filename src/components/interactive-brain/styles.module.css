@@ -367,3 +367,160 @@
     opacity: 0.8;
   }
 }
+
+.brainCanvasWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 600px;
+  background: radial-gradient(circle at 50% 35%, rgba(6,255,165,0.04), transparent 60%),
+              linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+  border: 1px solid rgba(6,255,165,0.12);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.regionPanelsWrap {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 320px;
+  z-index: 20;
+  pointer-events: none;
+  max-height: calc(100% - 24px);
+  overflow-y: auto;
+}
+
+.regionPanelsWrap .regionInfoFloating {
+  position: relative;
+  top: auto;
+  right: auto;
+  width: 100%;
+}
+
+@media (max-width: 860px) {
+  .regionPanelsWrap {
+    position: static;
+    max-width: none;
+    padding: 0;
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+.regionInfoFloating {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.1rem;
+  width: auto;
+  max-width: clamp(260px, 30vw, 360px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  background: rgba(10,12,14,0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0,212,255,0.25);
+  border-radius: 14px;
+  padding: 1rem 1rem 1.1rem;
+  box-shadow: 0 8px 28px -6px rgba(0,0,0,0.55), 0 0 0 1px rgba(6,255,165,0.15) inset;
+  animation: panelFade 0.35s cubic-bezier(.4,.75,.3,1);
+  pointer-events: none; /* passive until we decide to make it interactive */
+}
+.regionInfoFloating::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(6,255,165,0.08));
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.regionInfoHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding-bottom: .45rem;
+}
+.regionInfoTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: .03em;
+  background: linear-gradient(90deg,#06ffa5,#00d4ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.regionBadge {
+  font-size: .6rem;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  background: rgba(6,255,165,0.12);
+  padding: .3rem .55rem;
+  border-radius: 6px;
+  border: 1px solid rgba(6,255,165,0.4);
+  color: #06ffa5;
+  font-weight: 600;
+}
+.regionShort {
+  font-size: .72rem;
+  line-height: 1.4;
+  color: #d4e4ec;
+  margin: 0; 
+  font-weight: 500;
+}
+.regionDetails {
+  font-size: .68rem;
+  line-height: 1.5;
+  color: #9aa9b4;
+  margin: 0;
+  opacity: .95;
+}
+.activeNotice {
+  margin-top: .35rem;
+  font-size: .6rem;
+  letter-spacing: .08em;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  background: linear-gradient(90deg, rgba(0,212,255,0.15), rgba(6,255,165,0.15));
+  border: 1px solid rgba(0,212,255,0.35);
+  color: #00e3ff;
+  padding: .4rem .6rem;
+  border-radius: 6px;
+  font-weight: 600;
+  box-shadow: 0 0 0 1px rgba(0,212,255,0.25) inset, 0 4px 12px -4px rgba(0,0,0,0.5);
+}
+
+@keyframes panelFade {
+  from { opacity: 0; transform: translateY(-8px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 860px) {
+  .regionInfoFloating {
+    position: static;
+    width: 100%;
+    max-width: none;
+    margin: .9rem auto 0;
+    box-shadow: 0 4px 16px -6px rgba(0,0,0,0.55);
+    pointer-events: auto;
+  }
+  .brainCanvasWrapper { min-height: 480px; }
+}
+
+@media (max-width: 520px) {
+  .regionInfoTitle { font-size: .85rem; }
+  .regionShort { font-size: .68rem; }
+  .regionDetails { font-size: .64rem; }
+}
+
+@media (min-width:1400px){
+  .regionInfoFloating {
+    max-width: 400px;
+  }
+}

@@ -15,12 +15,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+      </head>
       <body
         className={`antialiased`}
         suppressHydrationWarning
       >
         <Navbar />
-        <main className="pt-20">{children}</main>
+        <main className="pt-20 md:pt-24 pb-24 md:pb-0 min-h-screen safe-bottom" aria-label="Page content">
+          {children}
+        </main>
       </body>
     </html>
   );

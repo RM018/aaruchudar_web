@@ -7,6 +7,7 @@ import Link from "next/link";
 function Navbar() {
 	const [show, setShow] = useState(true);
 	const [activeTab, setActiveTab] = useState('home');
+	const [mobileOpen, setMobileOpen] = useState(false);
 	const lastScrollY = useRef(0);
 
 	useEffect(() => {
@@ -35,82 +36,119 @@ function Navbar() {
 	];
 
 	return (
-		<header
-			className={`fixed z-[999] left-1/2 -translate-x-1/2 transition-all duration-500 ${
-				show ? "top-6" : "-top-28"
-			}`}
-			role="navigation"
-			aria-label="Primary Navigation"
-		>
-			<div className="bg-gray-900 rounded-full px-96 py-2 shadow-2xl border border-white/10 backdrop-blur-lg flex items-center gap-32">
-				{/* Logo + Title */}
-				<Link href="/" className="flex items-center gap-8 pr-8 border-r border-white/20">
-					<div className="w-10 h-10 bg-white/90 rounded-xl flex items-center justify-center overflow-hidden transition-transform duration-300 hover:scale-105">
-						<Image src="/logo2.png" alt="Aaruchudar logo" width={40} height={40} className="object-cover" />
+		<>
+			{/* Desktop / Large Screen Navbar */}
+			<header
+				className={`hidden md:block fixed z-[999] left-1/2 -translate-x-1/2 transition-all duration-500 ${
+					show ? "top-6" : "-top-32"
+				}`}
+				role="navigation"
+				aria-label="Primary Navigation"
+			>
+				<div className="bg-gray-900/95 rounded-full px-8 lg:px-14 py-3 shadow-2xl border border-white/10 backdrop-blur-lg flex items-center gap-10">
+					<Link href="/" className="flex items-center gap-3 pr-6 border-r border-white/15" aria-label="Home">
+						<div className="w-10 h-10 bg-white/90 rounded-xl flex items-center justify-center overflow-hidden transition-transform duration-300 hover:scale-105">
+							<Image src="/logo2.png" alt="Aaruchudar logo" width={40} height={40} className="object-cover" />
+						</div>
+						<span className="text-lg font-bold text-white tracking-tight">Aaruchudar</span>
+					</Link>
+
+					<nav className="flex items-center gap-4 lg:gap-6" aria-label="Main menu">
+						{navItems.map((item) => {
+							const isActive = activeTab === item.id;
+							return (
+								<Link
+									key={item.id}
+									href={item.href}
+									onClick={() => setActiveTab(item.id)}
+									className={`relative p-2 rounded-full transition-all duration-300 ease-in-out group ${
+										isActive
+											? 'bg-gradient-to-br from-orange-400 to-orange-500 shadow-lg shadow-orange-500/40 scale-110'
+											: 'hover:bg-gray-800 hover:scale-105'
+									}`}
+									aria-label={item.label}
+									aria-current={isActive ? 'page' : undefined}
+								>
+									<span className={`text-xl ${isActive ? '' : 'grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100'}`}>{item.icon}</span>
+									<span className="sr-only">{item.label}</span>
+								</Link>
+							);
+						})}
+					</nav>
+
+					<Link
+						aria-label="Login"
+						className={`relative p-2 rounded-full transition-all duration-300 ease-in-out group ${activeTab === 'login' ? 'bg-gradient-to-br from-blue-400 to-blue-500 shadow-lg shadow-blue-500/40 scale-110' : 'hover:bg-gray-800 hover:scale-105'}`}
+						href="/login"
+						onClick={() => setActiveTab('login')}
+					>
+						<span className={`text-xl ${activeTab === 'login' ? '' : 'grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100'}`}>👤</span>
+						<span className="sr-only">Login</span>
+					</Link>
+				</div>
+			</header>
+
+			{/* Mobile Top Bar */}
+			<div className={`md:hidden fixed top-0 left-0 right-0 z-[998] transition-transform ${show ? 'translate-y-0' : '-translate-y-full'}`}>
+				<div className="flex items-center justify-between bg-gray-900/95 backdrop-blur-md px-4 py-3 border-b border-white/10">
+					<Link href="/" className="flex items-center gap-2" aria-label="Home">
+						<Image src="/logo2.png" alt="Logo" width={32} height={32} className="rounded-lg" />
+						<span className="text-base font-semibold text-white">Aaruchudar</span>
+					</Link>
+					<div className="flex items-center gap-2">
+						<Link href="/login" aria-label="Login" onClick={() => setActiveTab('login')} className={`p-2 rounded-full ${activeTab === 'login' ? 'bg-blue-500/20 text-blue-400' : 'text-white/70 hover:bg-white/10'}`}>👤</Link>
+						<button
+							aria-label="Toggle menu"
+							aria-expanded={mobileOpen}
+							onClick={() => setMobileOpen((o) => !o)}
+							className="p-2 rounded-md text-white/80 hover:bg-white/10 active:scale-95 transition"
+						>
+							{mobileOpen ? '✕' : '☰'}
+						</button>
 					</div>
-					<span className="text-xl font-bold text-white tracking-wide">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span>
-				</Link>
-
-				{/* Login Icon */}
-				<Link
-					href="/login"
-					onClick={() => setActiveTab('login')}
-					className={`
-						relative p-2 rounded-full transition-all duration-300 ease-in-out group
-						${activeTab === 'login'
-							? 'bg-gradient-to-br from-blue-400 to-blue-500 shadow-lg shadow-blue-500/50 scale-110' 
-							: 'hover:bg-gray-800 hover:scale-105'
-						}
-					`}
-					aria-label="Login"
-					aria-current={activeTab === 'login' ? 'page' : undefined}
-					title="Login"
+				</div>
+				{/* Mobile dropdown panel */}
+				<div
+					className={`bg-gray-900/95 backdrop-blur-md border-b border-white/10 px-4 overflow-hidden transition-all duration-300 ${mobileOpen ? 'max-h-80 py-4' : 'max-h-0 py-0'}`}
 				>
-					<span className={`text-xl ${activeTab === 'login' ? '' : 'grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100'}`}>
-						👤
-					</span>
-					{/* Tooltip */}
-					<span className="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-lg">
-						Login
-					</span>
-				</Link>
-
-				{/* Navigation Icons */}
-				<nav className="flex items-center gap-8 pr-32">
-					{navItems.map((item) => {
-						const isActive = activeTab === item.id;
-						
-						return (
-							<Link
-								key={item.id}
-								href={item.href}
-								onClick={() => setActiveTab(item.id)}
-								className={`
-									relative p-2 rounded-full transition-all duration-300 ease-in-out group
-									${isActive 
-										? 'bg-gradient-to-br from-orange-400 to-orange-500 shadow-lg shadow-orange-500/50 scale-110' 
-										: 'hover:bg-gray-800 hover:scale-105'
-									}
-								`}
-								aria-label={item.label}
-								aria-current={isActive ? 'page' : undefined}
-								title={item.label}
-							>
-								<span className={`text-xl ${isActive ? '' : 'grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100'}`}>
-									{item.icon}
-								</span>
-								{/* Tooltip */}
-								<span className="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-lg">
+					<nav className="grid grid-cols-2 gap-3" aria-label="Mobile navigation">
+						{navItems.map(item => {
+							const isActive = activeTab === item.id;
+							return (
+								<Link
+									key={item.id}
+									href={item.href}
+									onClick={() => { setActiveTab(item.id); setMobileOpen(false); }}
+									className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition ${isActive ? 'bg-orange-500/20 text-orange-400' : 'text-white/70 hover:bg-white/10'}`}
+								>
+									<span>{item.icon}</span>
 									{item.label}
-								</span>
-							</Link>
-						);
-					})}
-					{/* spacer to give extra gap after the last icon */}
-					<div className="w-1" aria-hidden="true" />
-				</nav>
+								</Link>
+							);
+						})}
+					</nav>
+				</div>
 			</div>
-		</header>
+
+			{/* Mobile Bottom Nav */}
+			<nav className="md:hidden fixed bottom-0 left-0 right-0 z-[998] bg-gray-900/95 backdrop-blur-md border-t border-white/10 flex justify-around py-2">
+				{navItems.map(item => {
+					const isActive = activeTab === item.id;
+					return (
+						<Link
+							key={item.id}
+							href={item.href}
+							onClick={() => setActiveTab(item.id)}
+							className={`flex flex-col items-center gap-0 px-2 py-1 rounded-md text-xs font-medium ${isActive ? 'text-orange-400' : 'text-white/60'} active:scale-95`}
+							aria-label={item.label}
+						>
+							<span className={`text-xl leading-none ${isActive ? 'scale-110' : ''}`}>{item.icon}</span>
+							<span className="mt-0.5">{item.label}</span>
+						</Link>
+					);
+				})}
+			</nav>
+		</>
 	);
 }
 

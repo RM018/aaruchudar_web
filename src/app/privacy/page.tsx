@@ -4,14 +4,14 @@ import Link from 'next/link';
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="privacy-page-wrapper">
+    <div className="privacy-page-wrapper" role="main" aria-label="Privacy policy page">
       {/* Hero Section */}
-      <section className="privacy-hero">
+      <section className="privacy-hero" aria-labelledby="privacy-heading">
         <div className="privacy-container">
           <Link href="/" className="back-link">
             ← Back to Home
           </Link>
-          <h1 className="privacy-main-title">Privacy Policy</h1>
+          <h1 id="privacy-heading" className="privacy-main-title">Privacy Policy</h1>
           <p className="privacy-subtitle">
             Last updated: November 14, 2025
           </p>
@@ -24,14 +24,14 @@ export default function PrivacyPolicyPage() {
           <div className="privacy-content">
             
             <div className="privacy-section">
-              <h2 className="section-title">Introduction</h2>
+              <h2 className="section-title" id="intro" aria-label="Introduction section">Introduction</h2>
               <p className="section-text">
                 At Aaruchudar, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
               </p>
             </div>
 
             <div className="privacy-section">
-              <h2 className="section-title">Information We Collect</h2>
+              <h2 className="section-title" aria-label="Information we collect">Information We Collect</h2>
               <h3 className="subsection-title">Personal Information</h3>
               <p className="section-text">
                 We may collect personal information that you voluntarily provide to us when you:
@@ -61,7 +61,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             <div className="privacy-section">
-              <h2 className="section-title">How We Use Your Information</h2>
+              <h2 className="section-title" aria-label="How we use information">How We Use Your Information</h2>
               <p className="section-text">
                 We use the information we collect for various purposes, including:
               </p>
@@ -78,7 +78,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             <div className="privacy-section">
-              <h2 className="section-title">Information Sharing and Disclosure</h2>
+              <h2 className="section-title" aria-label="Information sharing">Information Sharing and Disclosure</h2>
               <p className="section-text">
                 We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:
               </p>
@@ -91,7 +91,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             <div className="privacy-section">
-              <h2 className="section-title">Cookies and Tracking Technologies</h2>
+              <h2 className="section-title" aria-label="Cookies and tracking">Cookies and Tracking Technologies</h2>
               <p className="section-text">
                 We use cookies and similar tracking technologies to enhance your experience on our website. Cookies are small data files stored on your device that help us:
               </p>
@@ -107,7 +107,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             <div className="privacy-section">
-              <h2 className="section-title">Data Security</h2>
+              <h2 className="section-title" aria-label="Data security">Data Security</h2>
               <p className="section-text">
                 We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. These measures include:
               </p>
@@ -124,7 +124,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             <div className="privacy-section">
-              <h2 className="section-title">Your Rights and Choices</h2>
+              <h2 className="section-title" aria-label="Your rights and choices">Your Rights and Choices</h2>
               <p className="section-text">
                 You have certain rights regarding your personal information:
               </p>
@@ -142,14 +142,14 @@ export default function PrivacyPolicyPage() {
             </div>
 
             <div className="privacy-section">
-              <h2 className="section-title">Children's Privacy</h2>
+              <h2 className="section-title" aria-label="Children's privacy">Children's Privacy</h2>
               <p className="section-text">
                 Our services are not directed to individuals under the age of 13. We do not knowingly collect personal information from children. If you believe we have collected information from a child, please contact us immediately, and we will take appropriate steps to delete such information.
               </p>
             </div>
 
             <div className="privacy-section">
-              <h2 className="section-title">Changes to This Privacy Policy</h2>
+              <h2 className="section-title" aria-label="Changes to policy">Changes to This Privacy Policy</h2>
               <p className="section-text">
                 We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of any material changes by:
               </p>
@@ -164,7 +164,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             <div className="privacy-section">
-              <h2 className="section-title">Contact Us</h2>
+              <h2 className="section-title" aria-label="Contact information">Contact Us</h2>
               <p className="section-text">
                 If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:
               </p>
@@ -372,6 +372,12 @@ export default function PrivacyPolicyPage() {
 
           .contact-info {
             padding: 20px;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .privacy-hero {
+            padding-top: 110px;
           }
         }
       `}</style>

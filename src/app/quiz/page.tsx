@@ -266,16 +266,16 @@ function QuizPage() {
       </div>
 
       {/* Floating decorative elements */}
-      <FloatingElement className="top-20 left-20" delay={0}>
+      <FloatingElement className="top-20 left-20 hidden xs:block" delay={0}>
         <QuizIcon />
       </FloatingElement>
-      <FloatingElement className="top-32 right-32" delay={1}>
+      <FloatingElement className="top-32 right-32 hidden sm:block" delay={1}>
         <BrainIcon />
       </FloatingElement>
-      <FloatingElement className="bottom-40 left-32" delay={2}>
+      <FloatingElement className="bottom-40 left-32 hidden md:block" delay={2}>
         <StarIcon />
       </FloatingElement>
-      <FloatingElement className="bottom-32 right-40" delay={0.5}>
+      <FloatingElement className="bottom-32 right-40 hidden lg:block" delay={0.5}>
         <BrainIcon />
       </FloatingElement>
 
@@ -293,7 +293,7 @@ function QuizPage() {
                 animate={{ y: 0, opacity: 1 }} 
                 transition={{ duration: 0.6 }}
               >
-                <h1 className="text-7xl font-black mb-6 bg-gradient-to-r from-black via-gray-700 to-black bg-clip-text text-transparent">
+                <h1 className="font-black mb-6 bg-gradient-to-r from-black via-gray-700 to-black bg-clip-text text-transparent text-[clamp(2.25rem,7vw,4.5rem)] leading-tight">
                   {quizData.quiz.title}
                 </h1>
                 <p className="text-2xl text-gray-600 mb-8 italic">
@@ -384,6 +384,7 @@ function QuizPage() {
                 <motion.button
                   onClick={handlePrevious}
                   disabled={currentQuestion === 0}
+                  aria-disabled={currentQuestion === 0}
                   whileHover={{ scale: currentQuestion === 0 ? 1 : 1.05 }}
                   whileTap={{ scale: currentQuestion === 0 ? 1 : 0.95 }}
                   className={`px-8 py-4 rounded-full font-bold border-3 border-black transition-all ${
@@ -398,6 +399,7 @@ function QuizPage() {
                 <motion.button
                   onClick={handleNext}
                   disabled={selectedAnswers[currentQuestion] === -1}
+                  aria-disabled={selectedAnswers[currentQuestion] === -1}
                   whileHover={{ scale: selectedAnswers[currentQuestion] === -1 ? 1 : 1.05 }}
                   whileTap={{ scale: selectedAnswers[currentQuestion] === -1 ? 1 : 0.95 }}
                   className={`px-8 py-4 rounded-full font-bold border-3 border-black transition-all ${
@@ -419,7 +421,7 @@ function QuizPage() {
                 animate={{ scale: 1, opacity: 1 }} 
                 transition={{ type: "spring", duration: 0.6 }}
               >
-                <h1 className="text-6xl font-black mb-6 bg-gradient-to-r from-black via-gray-700 to-black bg-clip-text text-transparent">
+                <h1 className="font-black mb-6 bg-gradient-to-r from-black via-gray-700 to-black bg-clip-text text-transparent text-[clamp(2.25rem,7vw,4rem)] leading-tight">
                   {getResultMessage().title}
                 </h1>
                 <div className="text-5xl font-bold text-black mb-8">

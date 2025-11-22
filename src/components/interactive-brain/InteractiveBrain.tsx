@@ -5,6 +5,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stage, Html, Loader } from '@react-three/drei';
 import { BrainScene } from './BrainScene';
 import * as THREE from 'three';
+import brainStyles from './styles.module.css';
 
 export type RegionKey = 'Frontal' | 'Parietal' | 'Temporal' | 'Occipital' | 'Cerebellum' | 'Brainstem';
 
@@ -110,8 +111,11 @@ export function InteractiveBrain({
   onRegionSelect,
   isolationOpacity = 0.12
 }: InteractiveBrainProps) {
+  const [hoveredRegion, setHoveredRegion] = React.useState<RegionKey | null>(null);
+  // When hovering, show only hovered region. Otherwise, show all active regions (so multi-region labs display their info panels too)
+  const panelRegions: RegionKey[] = hoveredRegion ? [hoveredRegion] : activeRegions;
   return (
-    <div style={{ width: '100%', height: '100%', minHeight: '600px', position: 'relative' }}>
+    <div style={{ width: '100%', height: '100%', minHeight: '600px', position: 'relative' }} className={brainStyles.brainCanvasWrapper}>
       <Canvas 
         camera={{ position: [0, 0, 4], fov: 45 }}
         gl={{ antialias: true }}
@@ -149,6 +153,7 @@ export function InteractiveBrain({
                 autoRotate={autoRotate}
                 onRegionSelect={onRegionSelect}
                 isolationOpacity={isolationOpacity}
+                onHoverRegion={setHoveredRegion}
               />
             </Stage>
           </ModelErrorBoundary>
@@ -165,6 +170,23 @@ export function InteractiveBrain({
         />
       </Canvas>
       <Loader />
+      {panelRegions.length > 0 && (
+        <div className={brainStyles.regionPanelsWrap} aria-live="polite">
+          {panelRegions.map((region) => (
+            <div key={region} className={brainStyles.regionInfoFloating}>
+              <div className={brainStyles.regionInfoHeader}>
+                <span className={brainStyles.regionInfoTitle}>{REGION_INFO[region].title}</span>
+                <span className={brainStyles.regionBadge}>{activeRegions.includes(region) ? 'Active' : 'Info'}</span>
+              </div>
+              <p className={brainStyles.regionShort}>{REGION_INFO[region].short}</p>
+              <p className={brainStyles.regionDetails}>{REGION_INFO[region].details}</p>
+              {activeRegions.includes(region) && (
+                <div className={brainStyles.activeNotice}>⚡ Region engaged in current lab mapping</div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

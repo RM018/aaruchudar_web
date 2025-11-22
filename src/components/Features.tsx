@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 
 function CardsPage() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -14,22 +15,26 @@ function CardsPage() {
     {
       title: "HI Labs",
       description: "Cutting-edge research and experiential learning spaces designed to foster innovation, critical thinking, and leadership development",
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop&q=80"
+      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop&q=80",
+      href: '/hi-labs'
     },
     {
       title: "HI Courses",
       description: "Transformative educational programs that blend practical skills with deep personal insights for holistic career growth",
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=800&fit=crop&q=80"
+      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=800&fit=crop&q=80",
+      href: '/hi-courses'
     },
     {
       title: "HI Workshops",
       description: "Hands-on collaborative sessions that empower teams with practical tools for creative problem-solving and strategic execution",
-      image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&h=800&fit=crop&q=80"
+      image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&h=800&fit=crop&q=80",
+      href: '/hi-workshops'
     },
     {
       title: "HI Events",
       description: "Immersive gatherings that bring together thought leaders, innovators, and change-makers for meaningful connections and growth",
-      image: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=1200&h=800&fit=crop&q=80"
+      image: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=1200&h=800&fit=crop&q=80",
+      href: '/hi-events'
     }
   ];
 
@@ -287,6 +292,7 @@ function CardsPage() {
                   onMouseEnter={(e) => handleCardHover(e, true)}
                   onMouseLeave={(e) => handleCardHover(e, false)}
                 >
+                  <Link href={card.href} className="block h-full" aria-label={`Navigate to ${card.title}`}> 
                   <div className="relative h-full rounded-3xl overflow-hidden shadow-2xl">
                     <img
                       src={card.image}
@@ -313,14 +319,11 @@ function CardsPage() {
                             {card.description}
                           </p>
                         </div>
-
-                        {/* tags removed per request */}
                       </div>
 
                       <div className="flex items-center justify-center pb-32 sm:pb-36 md:pb-40">
-                        <button 
-                          suppressHydrationWarning 
-                          className="flex items-center justify-center gap-2 sm:gap-3 bg-white text-black rounded-full hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white border-2 border-white transition-all duration-300 shadow-2xl font-bold text-xs sm:text-sm tracking-wide px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-3.5 hover:scale-105 hover:shadow-3xl"
+                        <span 
+                          className="flex items-center justify-center gap-2 sm:gap-3 bg-white text-black rounded-full group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 group-hover:text-white border-2 border-white transition-all duration-300 shadow-2xl font-bold text-xs sm:text-sm tracking-wide px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-3.5 group-hover:scale-105 group-hover:shadow-3xl"
                         >
                           <span className="font-bold uppercase tracking-wider">Explore Now</span>
                           <div className="w-6 h-6 sm:w-7 sm:h-7 bg-black group-hover:bg-white rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0">
@@ -334,7 +337,7 @@ function CardsPage() {
                               <path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
                             </svg>
                           </div>
-                        </button>
+                        </span>
                       </div>
                     </div>
 
@@ -342,6 +345,7 @@ function CardsPage() {
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -translate-x-full group-hover:animate-[shine_1.2s_ease-out]" />
                     </div>
                   </div>
+                  </Link>
                 </div>
               ))}
             </div>
