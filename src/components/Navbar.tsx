@@ -50,7 +50,7 @@ function Navbar() {
 						<div className="w-10 h-10 bg-white/90 rounded-xl flex items-center justify-center overflow-hidden transition-transform duration-300 hover:scale-105">
 							<Image src="/logo2.png" alt="Aaruchudar logo" width={40} height={40} className="object-cover" />
 						</div>
-						<span className="text-lg font-bold text-white tracking-tight">Aaruchudar</span>
+						<span className="text-lg font-bold text-white tracking-tight">Aaruchudar &nbsp;</span>
 					</Link>
 
 					<nav className="flex items-center gap-4 lg:gap-6" aria-label="Main menu">
@@ -96,7 +96,7 @@ function Navbar() {
 						<span className="text-base font-semibold text-white">Aaruchudar</span>
 					</Link>
 					<div className="flex items-center gap-2">
-						<Link href="/login" aria-label="Login" onClick={() => setActiveTab('login')} className={`p-2 rounded-full ${activeTab === 'login' ? 'bg-blue-500/20 text-blue-400' : 'text-white/70 hover:bg-white/10'}`}>👤</Link>
+						<Link href="/login" aria-label="Login" onClick={() => setActiveTab('login')} className={`p-2 rounded-full ${activeTab === 'login' ? 'bg-blue-500/20 text-blue-400' : 'text-white/70 hover:bg-white/10'}`}>👤 </Link>
 						<button
 							aria-label="Toggle menu"
 							aria-expanded={mobileOpen}

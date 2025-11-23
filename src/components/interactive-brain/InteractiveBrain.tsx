@@ -126,8 +126,10 @@ export function InteractiveBrain({
         }}
         style={{ background: 'transparent' }}
       >
-        <ambientLight intensity={0.8} />
-        <directionalLight position={[5, 5, 5]} intensity={0.6} />
+        <ambientLight intensity={1.2} />
+        <directionalLight position={[5, 5, 5]} intensity={1} />
+        <directionalLight position={[-5, -3, -5]} intensity={0.4} />
+        <pointLight position={[0, 5, 0]} intensity={0.5} />
         <Suspense fallback={
           <Html center>
             <div style={{ 
@@ -141,21 +143,14 @@ export function InteractiveBrain({
           </Html>
         }>
           <ModelErrorBoundary>
-            <Stage 
-              intensity={0.6} 
-              environment="city"
-              adjustCamera={true}
-              shadows={false}
-            >
-              <BrainScene 
-                activeRegions={activeRegions}
-                labHighlight={labHighlight}
-                autoRotate={autoRotate}
-                onRegionSelect={onRegionSelect}
-                isolationOpacity={isolationOpacity}
-                onHoverRegion={setHoveredRegion}
-              />
-            </Stage>
+            <BrainScene 
+              activeRegions={activeRegions}
+              labHighlight={labHighlight}
+              autoRotate={autoRotate}
+              onRegionSelect={onRegionSelect}
+              isolationOpacity={isolationOpacity}
+              onHoverRegion={setHoveredRegion}
+            />
           </ModelErrorBoundary>
         </Suspense>
         <OrbitControls 

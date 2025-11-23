@@ -72,20 +72,14 @@ export default function Hero() {
   return (
     <div className="flex flex-col items-center w-full">
       <div className="w-full max-w-[100vw]">
-        <section ref={heroRef} className="hero-section-with-bg min-h-screen flex items-center justify-center relative overflow-hidden w-full">
-          {/* Background Image with Overlay */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url('/gem.png')`,
-            }}
-          >
-            {/* Dark Overlay for better text readability */}
-            <div className="absolute inset-0 bg-black/50"></div>
-            
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-900/70 via-purple-900/60 to-indigo-900/70 mix-blend-overlay"></div>
-          </div>
+        <section ref={heroRef} className="hero-section-with-bg min-h-screen flex items-center justify-center relative overflow-hidden w-full" style={{
+          background: 'linear-gradient(135deg, #000000 0%, #0a0a0a 20%, #1a1a1a 40%, #2a2a2a 60%, #1a1a1a 80%, #000000 100%)'
+        }}>
+          {/* Dark overlay for better text contrast */}
+          <div className="absolute inset-0 bg-black/40"></div>
+          
+          {/* Enhanced gradient overlay with deeper black tones */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-gray-900/50 to-black/60"></div>
 
           {/* Floating Background Elements */}
           <div ref={floatingRef} className="absolute inset-0 overflow-hidden">
@@ -107,7 +101,7 @@ export default function Hero() {
           </div>
 
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <center>
+        <div className="flex justify-center items-center w-full">
         <div className="max-w-4xl mx-auto text-center w-full">
           {/* Badge */}
           
@@ -169,7 +163,7 @@ export default function Hero() {
             </div>
           </div>
         </div>
-        </center>
+        </div>
       </div>
 
       <style jsx>{`
@@ -329,6 +323,8 @@ export default function Hero() {
           grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
           gap: 2rem;
           margin-top: 3rem;
+          justify-items: center;
+          text-align: center;
         }
 
         .feature-item {
@@ -339,6 +335,10 @@ export default function Hero() {
           padding: 2rem 1.5rem;
           text-align: center;
           transition: all 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
         }
 
         .feature-item:hover {
@@ -349,6 +349,10 @@ export default function Hero() {
         .feature-icon {
           font-size: 2.5rem;
           margin-bottom: 1rem;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
 
         .feature-item h3 {
@@ -356,12 +360,16 @@ export default function Hero() {
           font-weight: 600;
           margin-bottom: 0.5rem;
           font-size: 1.1rem;
+          text-align: center;
+          width: 100%;
         }
 
         .feature-item p {
           color: rgba(255, 255, 255, 0.8);
           font-size: 0.9rem;
           line-height: 1.4;
+          text-align: center;
+          width: 100%;
         }
 
         .trust-indicators {

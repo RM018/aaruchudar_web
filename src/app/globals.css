@@ -1,4 +1,5 @@
 @import "tailwindcss";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -244,8 +245,8 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   background: linear-gradient(
     135deg,
-    var(--dark-bg) 0%,
-    var(--primary-dark) 100%
+    #ffffff 0%,
+    #f8fafc 100%
   );
 }
 
@@ -290,7 +291,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-section-centered {
   position: relative;
   min-height: 90vh;
-  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #0a0a0a 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -307,7 +308,7 @@ h1, h2, h3, h4, h5, h6 {
 .float-circle {
   position: absolute;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(128, 128, 128, 0.03));
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.05), rgba(14, 165, 233, 0.03));
 }
 
 .float-circle:nth-child(1) {
@@ -343,8 +344,8 @@ h1, h2, h3, h4, h5, h6 {
 .hero-badge-center {
   display: inline-block;
   padding: 0.5rem 1.5rem;
-  background: #ffffff;
-  color: #000000;
+  background: #000000;
+  color: #ffffff;
   border-radius: 9999px;
   font-size: 0.875rem;
   font-weight: 600;
@@ -355,7 +356,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 4rem;
   font-weight: 800;
   line-height: 1.1;
-  color: #ffffff;
+  color: #000000;
   margin-bottom: 2rem;
 }
 
@@ -364,7 +365,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #ffffff, #cccccc);
+  background: linear-gradient(135deg, #000000, #475569);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -372,7 +373,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-description-center {
   font-size: 1.25rem;
-  color: #cccccc;
+  color: #475569;
   line-height: 1.8;
   margin: 0 auto 3rem;
   max-width: 700px;
@@ -389,8 +390,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-primary-lg {
   padding: 1rem 2rem;
-  background: #ffffff !important;
-  color: #000000 !important;
+  background: #000000 !important;
+  color: #ffffff !important;
   border: none;
   border-radius: 0.5rem;
   font-size: 1rem;
@@ -402,23 +403,23 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block !important;
   text-decoration: none;
   white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   opacity: 1 !important;
   visibility: visible !important;
   transform: scale(1) !important;
 }
 
 .btn-primary-lg:hover {
-  background: #e5e5e5 !important;
+  background: #1a1a1a !important;
   transform: translateY(-2px) scale(1) !important;
-  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .btn-outline-lg {
   padding: 1rem 2rem;
-  background: rgba(0, 0, 0, 0.3) !important;
-  color: #ffffff !important;
-  border: 2px solid #ffffff !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
   border-radius: 0.5rem;
   font-size: 1rem;
   font-weight: 600;
@@ -429,36 +430,36 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block !important;
   text-decoration: none;
   white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   opacity: 1 !important;
   visibility: visible !important;
   transform: scale(1) !important;
 }
 
 .btn-outline-lg:hover {
-  border-color: #cccccc !important;
-  color: #cccccc !important;
-  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: #1a1a1a !important;
+  color: #1a1a1a !important;
+  background: rgba(255, 255, 255, 1) !important;
   transform: translateY(-2px) scale(1) !important;
 }
 
 .quiz-info {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
   padding: 2.5rem;
   border-radius: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   max-width: 600px;
   margin: 0 auto;
   position: relative;
   z-index: 10;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .quiz-info h3 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #000000;
   margin-bottom: 1.5rem;
 }
 
@@ -471,7 +472,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .quiz-item {
   font-size: 1rem;
-  color: #cccccc;
+  color: #475569;
   line-height: 1.6;
 }
 
@@ -810,8 +811,8 @@ h1, h2, h3, h4, h5, h6 {
 /* ==================== INTEGRATION SECTION ==================== */
 .integration-section {
   padding: 5rem 0;
-  background: #0a0a0a;
-  color: white;
+  background: #000000;
+  color: #ffffff;
 }
 
 .integration-title {
@@ -823,14 +824,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .integration-subtitle {
   font-size: 1rem;
-  color: #999999;
+  color: #cccccc;
   margin-bottom: 1.5rem;
 }
 
 .btn-link {
   background: none;
   border: none;
-  color: white;
+  color: #ffffff;
   font-weight: 600;
   cursor: pointer;
   margin-bottom: 3rem;
@@ -843,7 +844,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .integration-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: #f8fafc;
   backdrop-filter: blur(10px);
   padding: 1.5rem;
   border-radius: 1rem;
@@ -851,13 +852,14 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .integration-card:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: #ffffff;
   transform: translateY(-5px);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .integration-icon {
@@ -958,8 +960,8 @@ h1, h2, h3, h4, h5, h6 {
 /* ==================== CTA SECTION ==================== */
 .cta-section {
   padding: 5rem 0;
-  background: #0a0a0a;
-  color: white;
+  background: #f8fafc;
+  color: #000000;
 }
 
 .cta-box {
@@ -971,12 +973,12 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 800;
   margin-bottom: 2rem;
   line-height: 1.2;
-  color: #ffffff;
+  color: #000000;
 }
 
 .highlight {
   text-decoration: underline;
-  text-decoration-color: #ffffff;
+  text-decoration-color: #000000;
   text-decoration-thickness: 3px;
 }
 
@@ -989,8 +991,8 @@ h1, h2, h3, h4, h5, h6 {
 .btn-outline-white {
   padding: 1rem 2rem;
   background: transparent;
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #000000;
+  border: 2px solid rgba(0, 0, 0, 0.3);
   border-radius: 0.5rem;
   font-size: 1rem;
   font-weight: 600;
@@ -999,14 +1001,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-outline-white:hover {
-  border-color: white;
-  background: rgba(255, 255, 255, 0.1);
+  border-color: #000000;
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .btn-cta-primary {
   padding: 1rem 2rem;
-  background: #ffffff;
-  color: #000000;
+  background: #000000;
+  color: #ffffff;
   border: none;
   border-radius: 0.5rem;
   font-size: 1rem;
@@ -1016,9 +1018,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-cta-primary:hover {
-  background: #e5e5e5;
+  background: #1a1a1a;
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 /* ==================== RESPONSIVE ==================== */
@@ -1142,4 +1144,117 @@ h1, h2, h3, h4, h5, h6 {
 /* Card Layout */
 .card {
   @apply bg-white rounded-lg shadow-sm p-6;
+}
+
+/* ==================== COURSES PAGE STYLES ==================== */
+/* Override global text color for courses page dark theme */
+.courses-page-container {
+  color: #ffffff !important;
+  text-align: center;
+}
+
+.courses-page-container * {
+  border-color: rgb(55, 65, 81); /* gray-700 */
+}
+
+.courses-page-container h1,
+.courses-page-container h2,
+.courses-page-container h3,
+.courses-page-container h4,
+.courses-page-container h5,
+.courses-page-container h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Gradient text support for headings */
+.bg-clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.text-transparent {
+  color: transparent;
+}
+
+.module-section {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.module-border {
+  padding: 10px;
+}
+
+.category-border {
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.category-button {
+  padding: 8px;
+}
+
+.Course-grid {
+  padding: 5px;
+}
+
+.enroll-btn {
+  background-color: rgb(38, 95, 209);
+  color: white;
+  border-radius: 25px;
+  padding: 8px 16px;
+  min-width: 100px;
+  text-align: center;
+  vertical-align: center;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.enroll-btn:hover {
+  background-color: rgb(29, 78, 180);
+  transform: translateY(-2px);
+}
+
+.End-section-course {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.Header {
+  padding-top: 50px;
+}
+
+.course-duration {
+  padding: 5px;
+}
+
+.course-level {
+  padding: 5px;
+}
+
+.search-bar {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* Fade-in animation for expanded modules */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
 }

@@ -1,18 +1,19 @@
+"use client";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
-
-export const metadata: Metadata = {
-  title: "Aaruchudar - Transform Your Mind",
-  description: "Enhance your mental capabilities and unlock your true potential",
-};
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+  const isQuizPage = pathname === "/quiz";
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -22,8 +23,8 @@ export default function RootLayout({
         className={`antialiased`}
         suppressHydrationWarning
       >
-        <Navbar />
-        <main className="pt-20 md:pt-24 pb-24 md:pb-0 min-h-screen safe-bottom" aria-label="Page content">
+        {!isQuizPage && <Navbar />}
+        <main className={`${!isQuizPage ? 'pt-20 md:pt-24 pb-24 md:pb-0' : ''} min-h-screen safe-bottom`} aria-label="Page content">
           {children}
         </main>
       </body>
