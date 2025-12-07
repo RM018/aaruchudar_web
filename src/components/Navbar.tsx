@@ -45,7 +45,7 @@ function Navbar() {
 				role="navigation"
 				aria-label="Primary Navigation"
 			>
-				<div className="bg-gray-900/95 rounded-full px-8 lg:px-14 py-3 shadow-2xl border border-white/10 backdrop-blur-lg flex items-center gap-10">
+				<div className="bg-gray-900/95 rounded-full px-8 lg:px-14 pr-10 lg:pr-16 py-3 shadow-2xl border border-white/10 backdrop-blur-lg flex items-center gap-10">
 					<Link href="/" className="flex items-center gap-3 pr-6 border-r border-white/15" aria-label="Home">
 						<div className="w-10 h-10 bg-white/90 rounded-xl flex items-center justify-center overflow-hidden transition-transform duration-300 hover:scale-105">
 							<Image src="/logo2.png" alt="Aaruchudar logo" width={40} height={40} className="object-cover" />

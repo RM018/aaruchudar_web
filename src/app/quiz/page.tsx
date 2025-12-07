@@ -192,7 +192,7 @@ function QuizPage() {
         aria-label="Go to Home"
       >
         <span className="text-xl">🏠</span>
-        <span className="text-sm font-semibold hidden sm:inline">Home &nbsp;</span>
+        <span className="text-sm font-semibold hidden sm:inline">Home</span>
       </a>
       
       <div className="max-w-4xl w-full mx-auto">
@@ -278,12 +278,12 @@ function QuizPage() {
                   className="w-full max-w-10xl text-center bg-white rounded-2xl p-8 shadow-lg"
                 >
                   {/* Question */}
-                  <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 mb-16 leading-relaxed tracking-tight font-serif">
+                  <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 leading-relaxed tracking-tight font-serif" style={{ marginBottom: '1cm' }}>
                     {quizData.quiz.questions[currentQuestion].question}
                   </h2>
 
                   {/* Options */}
-                  <div className="grid gap-6 max-w-2xl mx-auto">
+                  <div className="grid gap-3 w-full px-4">
                     {quizData.quiz.questions[currentQuestion].options.map((option, index) => {
                       const isSelected = selectedAnswers[currentQuestion] === index;
                       const optionLetter = String.fromCharCode(65 + index);
@@ -294,7 +294,7 @@ function QuizPage() {
                           onClick={() => handleAnswerSelect(index)}
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
-                          className={`w-full p-8 text-left rounded-3xl transition-all ${
+                          className={`w-full max-w-full p-8 text-left rounded-3xl transition-all ${
                             isSelected
                               ? "bg-indigo-50 border-2 border-indigo-600 shadow-lg"
                               : "bg-white hover:bg-slate-50 border-2 border-slate-200 hover:border-slate-300"
@@ -308,7 +308,7 @@ function QuizPage() {
                             }`}>
                               {optionLetter}
                             </div>
-                            <span className="text-2xl font-medium leading-relaxed text-left flex-1 text-slate-800">{option}</span>
+                            <span className="text-2xl font-normal leading-relaxed text-left flex-1 text-slate-800">{option}</span>
                           </div>
                         </motion.button>
                       );

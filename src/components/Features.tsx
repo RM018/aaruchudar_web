@@ -321,9 +321,9 @@ function CardsPage() {
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-center pb-32 sm:pb-36 md:pb-40">
+                      <div className="flex items-center justify-center pb-32 sm:pb-36 md:pb-40 relative z-[100]">
                         <span 
-                          className="flex items-center justify-center gap-2 sm:gap-3 bg-white text-black rounded-full group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 group-hover:text-white border-2 border-white transition-all duration-300 shadow-2xl font-bold text-xs sm:text-sm tracking-wide px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-3.5 group-hover:scale-105 group-hover:shadow-3xl"
+                          className="flex items-center justify-center gap-2 sm:gap-3 bg-white text-black rounded-full group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 group-hover:text-white border-2 border-white transition-all duration-300 shadow-2xl font-bold text-xs sm:text-sm tracking-wide px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-3.5 group-hover:scale-105 group-hover:shadow-3xl relative z-[100]"
                         >
                           <span className="font-bold uppercase tracking-wider">Explore Now</span>
                           <div className="w-6 h-6 sm:w-7 sm:h-7 bg-black group-hover:bg-white rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0">
@@ -352,7 +352,7 @@ function CardsPage() {
           </div>
 
           {/* Dot Indicators */}
-          <div className="flex justify-center gap-3 mt-8 sm:mt-12">
+          <div className="flex justify-center gap-3 mt-12 sm:mt-16 md:mt-20">
             {cards.map((_, index) => (
               <button
                 key={index}
