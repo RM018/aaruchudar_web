@@ -18,7 +18,7 @@ export default function Chatbot() {
     script2.defer = true;
 
     const handleScriptError = (ev: any) => {
-      console.error('Botpress script failed to load', ev);
+      // Silently handle script load failure and show fallback UI
       setScriptsError(true);
     };
 
