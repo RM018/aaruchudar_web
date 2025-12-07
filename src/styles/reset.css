@@ -1,0 +1,16 @@
+/* Global reset to remove white gaps and ensure consistent rendering */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #000; /* match hero dark background */
+  min-height: 100%;
+}
+
+/* Ensure the root fills viewport and no overflow gaps */
+#__next, body > div:first-child {
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}

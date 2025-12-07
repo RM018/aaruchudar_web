@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './styles.module.css';
 import { InteractiveBrain, RegionKey, REGION_INFO } from '@/components/interactive-brain/InteractiveBrain';
-import { Search, ArrowRight } from 'lucide-react';
+import { Search, ArrowRight, Filter, Clock, Layers } from 'lucide-react';
 
 // Define swatch colors (mirror BrainScene)
 const REGION_COLORS: Record<RegionKey, string> = {
@@ -79,27 +79,25 @@ type LabStatsMap = {
 export default function HILabs() {
   const router = useRouter();
   const [selectedRegion, setSelectedRegion] = useState<RegionKey | null>(null);
-  const [isolationOpacity, setIsolationOpacity] = useState(0.06); // lowered default transparency
+  const [isolationOpacity, setIsolationOpacity] = useState(0.06);
   const [selectedLab, setSelectedLab] = useState<keyof typeof LAB_BRAIN_MAP | null>(null);
   const [labStats, setLabStats] = useState<LabStatsMap>({});
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Generate random stats once when component mounts
   useEffect(() => {
     const stats: LabStatsMap = {};
     Object.keys(LAB_BRAIN_MAP).forEach(key => {
       stats[key] = {
         experiments: Math.floor(Math.random() * 50) + 20,
-        successRate: Math.floor(Math.random() * 100) + 50
+        successRate: Math.floor(Math.random() * 50) + 50
       };
     });
     setLabStats(stats);
   }, []);
 
   const handleLabClick = (labKey: keyof typeof LAB_BRAIN_MAP) => {
-    // Toggle same lab off if clicking again
     setSelectedLab(prev => prev === labKey ? null : labKey);
-    setSelectedRegion(null); // prioritize lab mapping when lab selected
+    setSelectedRegion(null);
   };
 
   const navigateToLab = (labNumber: number) => {
@@ -117,32 +115,48 @@ export default function HILabs() {
   });
 
   return (
-    <div className={styles.hiLabsContainer}>
+    <div className={`${styles.hiLabsContainer} pt-16 md:pt-24 pb-20`}>
+      {/* Page header */}
+      <div className={`${styles.labsHeader} px-6 max-w-7xl mx-auto`}>
+        <h1>Human Intelligence Labs</h1>
+        <p>Explore applied neuroscience labs with interactive brain mapping, experimental drills, and measurable outcomes.</p>
+        <div className={styles.headerBadges}>
+          <span className={styles.headerBadge}><Clock className={styles.badgeIcon} /> Real-time interaction</span>
+          <span className={styles.headerBadge}><Layers className={styles.badgeIcon} /> Region-level focus</span>
+          <span className={styles.headerBadge}><Filter className={styles.badgeIcon} /> Smart filters</span>
+        </div>
+      </div>
+
       {/* Lab Neural Mapping + Brain Filter Panel */}
-      <div className={styles.labMappingGrid}>
+      <div className={`${styles.labMappingGrid} px-6 max-w-7xl mx-auto`}>
         <div className={styles.brainFilterPanel}>
           <h2 className={styles.panelTitle}>Interactive 3D Brain</h2>
-          <p className={styles.panelSubtitle}>Rotate the neural model with mouse drag, zoom with scroll. Click any brain region to isolate it and explore neural pathways.</p>
-          <div className={styles.brainFilterButtons}>
+          <p className={styles.panelSubtitle}>Rotate, zoom, and isolate regions. Click any brain area to highlight neural pathways and related lab modules.</p>
+          <div className={styles.brainFilterButtons} role="tablist" aria-label="Brain region filters">
             <button
               className={`${styles.brainFilterBtn} ${(!selectedRegion && !selectedLab) ? styles.brainFilterBtnActive : ''}`}
               onClick={() => { setSelectedRegion(null); setSelectedLab(null); }}
+              role="tab"
+              aria-selected={!selectedRegion && !selectedLab}
             >Show All</button>
             {(Object.keys(REGION_INFO) as RegionKey[]).map((region, idx) => (
               <button
                 key={region}
                 className={`${styles.brainFilterBtn} ${selectedRegion === region ? styles.brainFilterBtnActive : ''}`}
                 onClick={() => { setSelectedRegion(region); setSelectedLab(null); }}
+                role="tab"
+                aria-selected={selectedRegion === region}
               >{idx+1}. {region}</button>
             ))}
             <button
               className={styles.resetMapBtn}
               onClick={clearSelection}
+              aria-label="Reset neural map"
             >Reset Neural Map</button>
           </div>
           <div className={styles.networkMappingBlock}>
             <h4>Neural Network Mapping:</h4>
-            <ul className={styles.networkList}>
+            <ul className={styles.networkList} aria-label="Brain region legend">
               {(Object.keys(REGION_INFO) as RegionKey[]).map((region, idx) => (
                 <li key={region} className={styles.networkItem}>
                   <span className={styles.networkDot} style={{ background: REGION_COLORS[region] }} />
@@ -151,8 +165,8 @@ export default function HILabs() {
               ))}
             </ul>
             <div className={styles.opacityControlInline}>
-              <label>Neural Isolation Opacity: {isolationOpacity.toFixed(2)}</label>
-              <input type="range" min={0.02} max={0.5} step={0.01} value={isolationOpacity} onChange={e=>setIsolationOpacity(parseFloat(e.target.value))} />
+              <label htmlFor="isolationOpacity">Neural Isolation Opacity: {isolationOpacity.toFixed(2)}</label>
+              <input id="isolationOpacity" type="range" min={0.02} max={0.5} step={0.01} value={isolationOpacity} onChange={e=>setIsolationOpacity(parseFloat(e.target.value))} />
             </div>
           </div>
         </div>
@@ -167,14 +181,15 @@ export default function HILabs() {
                   className={`${styles.labMapBtn} ${active ? styles.labMapBtnActive : ''}`}
                   onClick={() => handleLabClick(labKey as keyof typeof LAB_BRAIN_MAP)}
                   title={LAB_BRAIN_MAP[labKey as keyof typeof LAB_BRAIN_MAP].name}
+                  aria-pressed={active}
                 >Lab {i+1}</button>
               );
             })}
           </div>
           <div className={styles.labMappingActions}>
-            <button onClick={clearSelection} className={styles.clearAllBtn}>Clear All</button>
+            <button onClick={clearSelection} className={styles.clearAllBtn} aria-label="Clear selections">Clear All</button>
             {selectedLab && (
-              <button onClick={() => navigateToLab(Object.keys(LAB_BRAIN_MAP).indexOf(selectedLab)+1)} className={styles.exploreLabBtn}>Explore Lab →</button>
+              <button onClick={() => navigateToLab(Object.keys(LAB_BRAIN_MAP).indexOf(selectedLab)+1)} className={styles.exploreLabBtn} aria-label="Open selected lab">Explore Lab →</button>
             )}
           </div>
           <p className={styles.mappingHint}>Select a lab to highlight its active brain regions in the 3D model</p>
@@ -193,7 +208,7 @@ export default function HILabs() {
         </div>
       </div>
 
-      <div className={styles.brainModelSection}>
+      <div className={`${styles.brainModelSection} px-6 max-w-6xl mx-auto`}>
         <InteractiveBrain
           activeRegions={selectedRegion ? [selectedRegion] : (selectedLab ? LAB_BRAIN_MAP[selectedLab].regions : [])}
           labHighlight={!!(selectedRegion || selectedLab)}
@@ -204,7 +219,7 @@ export default function HILabs() {
       </div>
 
       {/* Region Legend */}
-      <div className={styles.regionLegend}>
+      <div className={`${styles.regionLegend} px-6 max-w-6xl mx-auto`} aria-label="Region legend">
         {Object.keys(REGION_INFO).map((key) => {
           const region = key as RegionKey;
           const active = selectedRegion === region || (selectedLab && LAB_BRAIN_MAP[selectedLab].regions.includes(region));
@@ -221,24 +236,23 @@ export default function HILabs() {
           );
         })}
       </div>
-      { (selectedLab || selectedRegion) && (
-        <button className={styles.clearSelectionBtn} onClick={clearSelection}>✖ Clear Selection</button>
+      {(selectedLab || selectedRegion) && (
+        <button className={`${styles.clearSelectionBtn} mx-6`} onClick={clearSelection} aria-label="Clear current selection">✖ Clear Selection</button>
       )}
+
       {/* Opacity control */}
-      <div style={{maxWidth:'380px',margin:'0 auto 2.5rem'}}>
-        <label style={{display:'block',color:'#cbd5e1',fontSize:'0.75rem',marginBottom:4}}>Non-active region transparency ({isolationOpacity.toFixed(2)})</label>
-        <input type="range" min={0.02} max={0.5} step={0.01} value={isolationOpacity} onChange={e=>setIsolationOpacity(parseFloat(e.target.value))} style={{width:'100%'}} />
+      <div style={{maxWidth:'420px',margin:'0 auto 2.5rem'}}>
+        <label htmlFor="opacitySlider" style={{display:'block',color:'#cbd5e1',fontSize:'0.75rem',marginBottom:4}}>Non-active region transparency ({isolationOpacity.toFixed(2)})</label>
+        <input id="opacitySlider" type="range" min={0.02} max={0.5} step={0.01} value={isolationOpacity} onChange={e=>setIsolationOpacity(parseFloat(e.target.value))} style={{width:'100%'}} />
       </div>
 
-      <div className={styles.labsHeader}>
-        <h1>Human Intelligence Labs</h1>
-        <p>Explore our advanced human intelligence research facilities and cutting-edge brain analysis tools</p>
-      </div>
-
-      <div style={{maxWidth:'520px',margin:'0 auto 2rem',display:'flex',gap:'0.5rem',alignItems:'center'}}>
+      {/* Search */}
+      <div style={{maxWidth:'640px',margin:'0 auto 2rem',display:'flex',gap:'0.5rem',alignItems:'center',paddingLeft:'1.5rem',paddingRight:'1.5rem'}}>
         <div style={{position:'relative',flex:1}}>
-          <Search size={18} style={{position:'absolute',left:10,top:'50%',transform:'translateY(-50%)',color:'#06ffa5'}} />
+          <label htmlFor="labSearch" className="sr-only">Search labs</label>
+          <Search size={18} style={{position:'absolute',left:10,top:'50%',transform:'translateY(-50%)',color:'#06ffa5'}} aria-hidden />
           <input
+            id="labSearch"
             value={searchQuery}
             onChange={e=>setSearchQuery(e.target.value)}
             placeholder="Search labs by name or description"
@@ -246,31 +260,36 @@ export default function HILabs() {
           />
         </div>
         {searchQuery && (
-          <button onClick={()=>setSearchQuery('')} style={{padding:'0.65rem 0.9rem',borderRadius:8,border:'1px solid rgba(6,255,165,0.3)',background:'rgba(6,255,165,0.1)',cursor:'pointer',color:'#06ffa5'}}>Clear</button>
+          <button onClick={()=>setSearchQuery('')} style={{padding:'0.65rem 0.9rem',borderRadius:8,border:'1px solid rgba(6,255,165,0.3)',background:'rgba(6,255,165,0.1)',cursor:'pointer',color:'#06ffa5'}} aria-label="Clear search">Clear</button>
         )}
       </div>
 
-      <div className={styles.labsGrid}>
+      {/* Labs grid */}
+      <div className={`${styles.labsGrid} px-6 max-w-7xl mx-auto`}>
         {filteredLabs.map(([key, lab], index) => {
           const labNumber = Object.keys(LAB_BRAIN_MAP).indexOf(key) + 1;
           const stats = labStats[key];
-          
+          const active = selectedLab === key;
+
           return (
-            <div 
-              key={key} 
-              className={styles.labCard} 
+            <div
+              key={key}
+              className={`${styles.labCard} ${active ? styles.labCardActive : ''}`}
               onClick={() => handleLabClick(key as keyof typeof LAB_BRAIN_MAP)}
+              role="button"
+              aria-pressed={active}
+              aria-label={`Select ${lab.name}`}
             >
               <div className={styles.labContent}>
-                <div className={styles.labIcon}>🧪</div>
+                <div className={styles.labIcon} aria-hidden>🧪</div>
                 <h3>{lab.name}</h3>
                 <p>{lab.description}</p>
-                
+
                 <div className={styles.labRegions}>
                   <h4>Active Brain Regions:</h4>
                   <div className={styles.regionTags}>
-                    {lab.regions.map((region, i) => (
-                      <span key={i} className={styles.regionTag}>
+                    {lab.regions.map((region) => (
+                      <span key={region} className={styles.regionTag} style={{ borderColor: REGION_COLORS[region], color: '#cbd5e1' }}>
                         {region}
                       </span>
                     ))}
@@ -279,35 +298,36 @@ export default function HILabs() {
 
                 <div className={styles.labStats}>
                   <div className={styles.statItem}>
-                    <span className={styles.statValue}>
-                      {stats?.experiments || '-'}
-                    </span>
+                    <span className={styles.statValue}>{stats?.experiments ?? '-'}</span>
                     <span className={styles.statLabel}>Experiments</span>
                   </div>
                   <div className={styles.statItem}>
-                    <span className={styles.statValue}>
-                      {stats?.successRate ? `${stats.successRate}%` : '-'}
-                    </span>
+                    <span className={styles.statValue}>{stats?.successRate ? `${stats.successRate}%` : '-'}</span>
                     <span className={styles.statLabel}>Success Rate</span>
                   </div>
                 </div>
 
-                <button onClick={(e)=>{e.stopPropagation(); navigateToLab(labNumber);}} className={styles.exploreButton} style={{display:'flex',justifyContent:'center',alignItems:'center',gap:6}}>
-                  Open Lab {labNumber} <ArrowRight size={18} />
-                </button>
+                <div className={styles.cardActions}>
+                  <button
+                    onClick={(e)=>{e.stopPropagation(); navigateToLab(labNumber);}}
+                    className={styles.exploreButton}
+                    aria-label={`Open Lab ${labNumber}`}
+                  >
+                    Open Lab {labNumber} <ArrowRight size={18} />
+                  </button>
+                </div>
               </div>
             </div>
           );
         })}
       </div>
 
-      <div className={styles.dashboardPromo}>
-        <div className={styles.promoContent}>
+      {/* Dashboard promo */}
+      <div className={`${styles.dashboardPromo} px-6`}>
+        <div className={`${styles.promoContent} max-w-5xl mx-auto`}>
           <h2>Download Research Dashboard</h2>
           <p>Access comprehensive analytics and visualization tools for brain pattern analysis</p>
-          <button className={styles.downloadButton}>
-            Get Sample Report ⬇️
-          </button>
+          <button className={styles.downloadButton} aria-label="Get sample report">Get Sample Report ⬇️</button>
         </div>
       </div>
     </div>

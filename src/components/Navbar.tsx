@@ -32,7 +32,8 @@ function Navbar() {
 		{ id: 'blog', label: 'Blog', href: '/blog', icon: '📜' },
 		{ id: 'research', label: 'Research', href: '/research', icon: '🔬' },
 		{ id: 'quiz', label: 'Quiz', href: '/quiz', icon: '🧠' },
-		{ id: 'contact', label: 'Contact', href: '/contact', icon: '📧' }
+		{ id: 'contact', label: 'Contact', href: '/contact', icon: '📧' },
+		{ id: 'product', label: 'Product', href: '/productpage', icon: '🛍️' }
 	];
 
 	return (
@@ -40,20 +41,20 @@ function Navbar() {
 			{/* Desktop / Large Screen Navbar */}
 			<header
 				className={`hidden md:block fixed z-[999] left-1/2 -translate-x-1/2 transition-all duration-500 ${
-					show ? "top-6" : "-top-32"
+					show ? "top-0" : "-top-28"
 				}`}
 				role="navigation"
 				aria-label="Primary Navigation"
 			>
-				<div className="bg-gray-900/95 rounded-full px-8 lg:px-14 py-3 shadow-2xl border border-white/10 backdrop-blur-lg flex items-center gap-10">
-					<Link href="/" className="flex items-center gap-3 pr-6 border-r border-white/15" aria-label="Home">
-						<div className="w-10 h-10 bg-white/90 rounded-xl flex items-center justify-center overflow-hidden transition-transform duration-300 hover:scale-105">
-							<Image src="/logo2.png" alt="Aaruchudar logo" width={40} height={40} className="object-cover" />
+				<div className="max-w-3xl mx-auto bg-gray-900/95 rounded-full px-6 lg:px-8 py-2.5 shadow-2xl border border-white/10 backdrop-blur-lg flex items-center justify-between gap-6">
+					<Link href="/" className="flex items-center gap-2 pr-4 border-r border-white/15" aria-label="Home">
+						<div className="w-9 h-9 bg-white/90 rounded-xl flex items-center justify-center overflow-hidden transition-transform duration-300 hover:scale-105">
+							<Image src="/logo2.png" alt="Aaruchudar logo" width={36} height={36} className="object-cover" />
 						</div>
-						<span className="text-lg font-bold text-white tracking-tight">Aaruchudar &nbsp;</span>
+						<span className="text-base font-bold text-white tracking-tight">Aaruchudar&nbsp;</span>
 					</Link>
 
-					<nav className="flex items-center gap-4 lg:gap-6" aria-label="Main menu">
+					<nav className="flex items-center gap-3 lg:gap-4" aria-label="Main menu">
 						{navItems.map((item) => {
 							const isActive = activeTab === item.id;
 							return (
@@ -61,15 +62,15 @@ function Navbar() {
 									key={item.id}
 									href={item.href}
 									onClick={() => setActiveTab(item.id)}
-									className={`relative p-2 rounded-full transition-all duration-300 ease-in-out group ${
+									className={`relative p-1.5 rounded-full transition-all duration-300 ease-in-out group ${
 										isActive
-											? 'bg-gradient-to-br from-orange-400 to-orange-500 shadow-lg shadow-orange-500/40 scale-110'
+											? 'bg-gradient-to-br from-orange-400 to-orange-500 shadow-lg shadow-orange-500/40 scale-105'
 											: 'hover:bg-gray-800 hover:scale-105'
 									}`}
 									aria-label={item.label}
 									aria-current={isActive ? 'page' : undefined}
 								>
-									<span className={`text-xl ${isActive ? '' : 'grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100'}`}>{item.icon}</span>
+									<span className={`text-lg ${isActive ? '' : 'grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100'}`}>{item.icon}</span>
 									<span className="sr-only">{item.label}</span>
 								</Link>
 							);
@@ -78,11 +79,11 @@ function Navbar() {
 
 					<Link
 						aria-label="Login"
-						className={`relative p-2 rounded-full transition-all duration-300 ease-in-out group ${activeTab === 'login' ? 'bg-gradient-to-br from-blue-400 to-blue-500 shadow-lg shadow-blue-500/40 scale-110' : 'hover:bg-gray-800 hover:scale-105'}`}
+						className={`relative p-1.5 rounded-full transition-all duration-300 ease-in-out group ${activeTab === 'login' ? 'bg-gradient-to-br from-blue-400 to-blue-500 shadow-lg shadow-blue-500/40 scale-105' : 'hover:bg-gray-800 hover:scale-105'}`}
 						href="/login"
 						onClick={() => setActiveTab('login')}
 					>
-						<span className={`text-xl ${activeTab === 'login' ? '' : 'grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100'}`}>👤</span>
+						<span className={`text-lg ${activeTab === 'login' ? '' : 'grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100'}`}>👤</span>
 						<span className="sr-only">Login</span>
 					</Link>
 				</div>

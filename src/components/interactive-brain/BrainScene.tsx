@@ -33,6 +33,9 @@ interface BrainSceneProps {
   isolationOpacity?: number;
   regionColorsOverride?: Partial<Record<RegionKey, number>>; // allow overriding colors
   onHoverRegion?: (region: RegionKey | null) => void; // new callback
+  colorCycle?: boolean; // auto change colors while rotating
+  disassemble?: boolean; // explode/disassemble animation
+  showLabelsSmall?: boolean; // render small labels near parts
 }
 
 export function BrainScene({ 
@@ -43,12 +46,19 @@ export function BrainScene({
   onRegionSelect,
   isolationOpacity = 0.12,
   regionColorsOverride,
-  onHoverRegion
+  onHoverRegion,
+  colorCycle = true,
+  disassemble = false,
+  showLabelsSmall = false,
 }: BrainSceneProps) {
   const { scene } = useGLTF('/models/brain_areas.glb');
   const [hoveredRegion, setHoveredRegion] = useState<RegionKey | null>(null);
   const [hoveredMesh, setHoveredMesh] = useState<THREE.Mesh | null>(null);
   const [hoveredPosition, setHoveredPosition] = useState<[number, number, number]>([0, 0, 0]);
+  const [time, setTime] = useState(0);
+
+  // Store original positions for disassemble animation
+  const originalPositions = useMemo(() => new Map<THREE.Object3D, THREE.Vector3>(), []);
 
   // Merge default colors with overrides
   const regionColors = useMemo(() => ({
@@ -68,15 +78,59 @@ export function BrainScene({
       scene.rotation.x = -0.2; // Tilt forward slightly
       scene.rotation.y = 0.5;  // Turn slightly to show more detail
       
+      // Cache original positions of meshes
+      scene.traverse((child) => {
+        if (child instanceof THREE.Mesh && !originalPositions.has(child)) {
+          originalPositions.set(child, child.position.clone());
+        }
+      });
+
       // Call onLoad when scene is ready
       onLoad?.();
     }
-  }, [scene, onLoad]);
+  }, [scene, onLoad, originalPositions]);
 
-  // Handle continuous slow rotation (always active)
+  // Handle continuous slow rotation and color cycling
   useFrame((state, delta) => {
-    if (scene) {
-      scene.rotation.y += delta * 0.15; // slow, constant rotation
+    if (!scene) return;
+    scene.rotation.y += delta * 0.15; // slow rotation
+    setTime((t) => t + delta);
+
+    if (colorCycle && meshes.length) {
+      // Cycle colors smoothly using HSL based on time, with slight per-mesh phase shift
+      const speed = 0.05;
+      meshes.forEach((mesh, idx) => {
+        const material = mesh.material;
+        const baseHue = ((time * speed * 360) + idx * 15) % 360;
+        const targetColor = new THREE.Color();
+        targetColor.setHSL(baseHue / 360, 0.6, 0.55);
+        // Lerp to target for smooth transition
+        material.color.lerp(targetColor, 0.08);
+        // Subtle emissive glow for animation effect
+        material.emissive.lerp(new THREE.Color(0x111111), 0.05);
+        material.needsUpdate = true;
+      });
+    }
+
+    // Disassemble/explode animation: move meshes slightly away from center
+    if (meshes.length) {
+      const center = new THREE.Vector3(0, 0, 0);
+      meshes.forEach((mesh, idx) => {
+        const orig = originalPositions.get(mesh) || center;
+        const dir = new THREE.Vector3().subVectors(mesh.position, center);
+        if (dir.lengthSq() === 0) {
+          // compute direction from geometry bounding box
+          const bbox = new THREE.Box3().setFromObject(mesh);
+          const c = bbox.getCenter(new THREE.Vector3());
+          dir.copy(c).normalize();
+        } else {
+          dir.normalize();
+        }
+        const distance = disassemble ? 0.18 + (idx % 3) * 0.05 : 0; // outward offset amount
+        const target = new THREE.Vector3().copy(orig).addScaledVector(dir, distance);
+        // Smoothly animate positions
+        mesh.position.lerp(target, 0.08);
+      });
     }
   });
 
@@ -113,6 +167,13 @@ export function BrainScene({
     return regions[meshIndex % regions.length];
   }
   
+  // Helper: region color as THREE.Color
+  const getRegionColor = (r: RegionKey | null) => {
+    if (!r) return new THREE.Color('#8aa0b6');
+    const hex = regionColors[r] ?? 0x8aa0b6;
+    return new THREE.Color(hex);
+  };
+
   // Prepare meshes with materials
   const meshes = useMemo(() => {
     const m: THREE.Mesh<THREE.BufferGeometry, MeshStandardMaterial>[] = [];
@@ -152,25 +213,26 @@ export function BrainScene({
         } else {
           material.opacity = isolationOpacity;
           if (r && regionColors[r]) {
-            material.color.setHex(regionColors[r]);
+            // softly transition to base color
+            const baseColor = new THREE.Color(regionColors[r]);
+            material.color.lerp(baseColor, 0.15);
           }
           material.emissive.setHex(0x000000);
         }
       } else {
         material.opacity = 1;
         if (r && regionColors[r]) {
-          material.color.setHex(regionColors[r]);
+          const base = new THREE.Color(regionColors[r]);
           if (isHovered) {
-            material.emissive.setHex(0x888888);
-            const baseColor = new THREE.Color(regionColors[r]);
-            baseColor.multiplyScalar(1.5);
-            material.color.set(baseColor);
+            material.emissive.setHex(0x666666);
+            const hoverColor = base.clone().multiplyScalar(1.3);
+            material.color.lerp(hoverColor, 0.2);
           } else {
-            material.emissive.setHex(0x000000);
+            material.emissive.setHex(0x111111);
+            material.color.lerp(base, 0.12);
           }
         }
       }
-      
       material.depthWrite = material.opacity > 0.5;
       material.needsUpdate = true;
     });
@@ -229,6 +291,49 @@ export function BrainScene({
     }
   }
 
+  // Small label component with mount transition
+  function Label({ position, text, accent }: { position: [number, number, number]; text: string; accent: string }) {
+    const [visible, setVisible] = React.useState(false);
+    React.useEffect(() => {
+      const t = setTimeout(() => setVisible(true), 10);
+      return () => clearTimeout(t);
+    }, [text]);
+    return (
+      <Html position={position} distanceFactor={6} center transform>
+        <div style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 6,
+          fontSize: 12,
+          fontWeight: 600,
+          letterSpacing: 0.2,
+          padding: '4px 8px',
+          borderRadius: 10,
+          background: 'linear-gradient(180deg, rgba(14,16,20,0.65), rgba(10,12,14,0.55))',
+          border: `1px solid ${accent}30`,
+          color: '#eaf3ff',
+          boxShadow: `0 4px 12px ${accent}25`,
+          backdropFilter: 'blur(4px)',
+          pointerEvents: 'none',
+          whiteSpace: 'nowrap',
+          transform: visible ? 'translateY(0px)' : 'translateY(4px)',
+          opacity: visible ? 1 : 0,
+          transition: 'opacity 240ms ease, transform 240ms ease',
+          zIndex: 10
+        }}>
+          <span style={{
+            width: 6,
+            height: 6,
+            borderRadius: 999,
+            background: accent,
+            boxShadow: `0 0 6px ${accent}`
+          }} />
+          {text}
+        </div>
+      </Html>
+    );
+  }
+
   return (
     <>
       <primitive 
@@ -240,6 +345,35 @@ export function BrainScene({
         onPointerMove={onPointerMove}
         onPointerDown={onPointerDown}
       />
+      {showLabelsSmall && (
+        <>
+          {/* Hover label if any */}
+          {hoveredRegion && (() => {
+            const c = getRegionColor(hoveredRegion);
+            const accent = `#${c.getHexString()}`;
+            const pos: [number, number, number] = [hoveredPosition[0], hoveredPosition[1] + 0.08, hoveredPosition[2]];
+            return <Label position={pos} text={REGION_INFO[hoveredRegion].title} accent={accent} />;
+          })()}
+          {/* Active region labels near their meshes */}
+          {activeRegions.map((r) => {
+            const mesh = meshes.find(m => m.userData.regionKey === r);
+            let pos: [number, number, number];
+            if (mesh) {
+              const box = new THREE.Box3().setFromObject(mesh);
+              const c = box.getCenter(new THREE.Vector3());
+              pos = [c.x, c.y + 0.08, c.z];
+            } else {
+              // Fallback near center if mesh not found yet
+              pos = [0, 0.08, 0];
+            }
+            const col = getRegionColor(r);
+            const accent = `#${col.getHexString()}`;
+            return (
+              <Label key={r} position={pos} text={REGION_INFO[r].title} accent={accent} />
+            );
+          })}
+        </>
+      )}
     </>
   );
 }

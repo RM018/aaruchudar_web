@@ -99,7 +99,7 @@ export default function BlogPage() {
       </AnimatePresence>
 
       {/* Main Container */}
-      <div className="blog-container" role="main" aria-label="Blog content">
+      <div className="blog-container pt-16 md:pt-24 pb-20" role="main" aria-label="Blog content">
         {/* Back Button */}
         <motion.button
           initial={{ opacity: 0, x: -20 }}
@@ -112,7 +112,7 @@ export default function BlogPage() {
         </motion.button>
 
         {/* Hero Section */}
-        <section className="hero-section">
+        <section className="hero-section px-6">
           <div className="hero-bg" />
           <div className="hero-content-wrapper">
             <motion.div
@@ -173,7 +173,7 @@ export default function BlogPage() {
 
         {/* Featured Post */}
         {featuredPost && (
-          <section className="section">
+          <section className="section px-6">
             <div className="container">
               <h2 className="section-title">Featured Article</h2>
               <motion.article
@@ -212,7 +212,7 @@ export default function BlogPage() {
         )}
 
         {/* Posts Grid */}
-        <section className="section">
+        <section className="section px-6">
           <div className="container">
             <h2 className="section-title">Latest Articles</h2>
             <div className="posts-grid">
@@ -257,7 +257,7 @@ export default function BlogPage() {
         </section>
 
         {/* Newsletter */}
-        <section className="newsletter">
+        <section className="newsletter px-6">
           <div className="container text-center">
             <h2 className="newsletter-title">Stay Ahead of the Curve</h2>
             <p className="newsletter-subtitle">

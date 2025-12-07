@@ -1,17 +1,20 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import styles from './styles.module.css';
+import { motion } from 'framer-motion';
+import { Filter, Star, Clock, Layers, ArrowRight } from 'lucide-react';
 
-// Type & data extraction for clarity and scalability
 interface Workshop {
   type: string;
   icon: string;
   title: string;
   items: string[];
-  accent: string; // semantic accent label
+  accent: string;
+  duration?: string;
+  level?: 'Beginner' | 'Intermediate' | 'Advanced';
+  rating?: number;
+  price?: string;
 }
 
 const WORKSHOPS: Workshop[] = [
@@ -21,10 +24,14 @@ const WORKSHOPS: Workshop[] = [
     title: 'Mind Architecture',
     accent: 'Psychological Pathway',
     items: [
-      'Neural Detox Protocol – Advanced stress release + cognitive restructuring',
-      'Emotional Intelligence Engine – Master emotional processing algorithms',
-      'Decision Matrix Optimization – High-speed clarity and choice frameworks'
-    ]
+      'Neural Detox Protocol',
+      'Emotional Intelligence Engine',
+      'Decision Matrix Optimization'
+    ],
+    duration: '2 days',
+    level: 'Intermediate',
+    rating: 4.8,
+    price: '$199'
   },
   {
     type: 'intellectual',
@@ -32,10 +39,14 @@ const WORKSHOPS: Workshop[] = [
     title: 'Cognitive Networks',
     accent: 'Intellectual Pathway',
     items: [
-      'Critical Thinking Accelerator – Process complex problems with AI-like precision',
-      'Deep Listening Protocols – Enhanced neural reception and processing',
-      'Conflict Resolution Engine – Transform chaos into structured solutions'
-    ]
+      'Critical Thinking Accelerator',
+      'Deep Listening Protocols',
+      'Conflict Resolution Engine'
+    ],
+    duration: '1 day',
+    level: 'Beginner',
+    rating: 4.7,
+    price: '$149'
   },
   {
     type: 'innovative',
@@ -43,190 +54,197 @@ const WORKSHOPS: Workshop[] = [
     title: 'Innovation Circuits',
     accent: 'Innovation Pathway',
     items: [
-      'Creative Neural Networks – Rapid ideation under pressure conditions',
-      'Leadership Algorithm Labs – Authentic influence without replication',
-      'Innovation Sprint Engine – Build and deploy breakthrough ideas fast'
-    ]
+      'Creative Neural Networks',
+      'Leadership Algorithm Labs',
+      'Innovation Sprint Engine'
+    ],
+    duration: '2 days',
+    level: 'Advanced',
+    rating: 4.9,
+    price: '$249'
   }
 ];
 
-// Predefined pattern positions to avoid hydration mismatch
-const PATTERN_POSITIONS = [
-  { left: 10, top: 20 },
-  { left: 20, top: 40 },
-  { left: 30, top: 60 },
-  { left: 40, top: 30 },
-  { left: 50, top: 70 },
-  { left: 60, top: 20 },
-  { left: 70, top: 50 },
-  { left: 80, top: 30 },
-  { left: 15, top: 80 },
-  { left: 25, top: 45 },
-  { left: 35, top: 65 },
-  { left: 45, top: 25 },
-  { left: 55, top: 85 },
-  { left: 65, top: 35 },
-  { left: 75, top: 75 },
-  { left: 85, top: 15 },
-  { left: 90, top: 40 },
-  { left: 20, top: 90 },
-  { left: 40, top: 10 },
-  { left: 60, top: 60 }
-];
+const PATHWAYS = ['All', 'Psychological', 'Intellectual', 'Innovation'] as const;
 
 export default function HIWorkshopsPage() {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const { scrollYProgress } = useScroll();
-  const prefersReducedMotion = useReducedMotion();
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+  const [activePathway, setActivePathway] = useState<(typeof PATHWAYS)[number]>('All');
 
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.onChange(setScrollProgress);
-    return () => unsubscribe();
-  }, [scrollYProgress]);
-
-  // Placeholder action – would navigate or open modal in future
-  const logExplore = (type: string) => {
-    console.log(`Workshop path selected: ${type}`);
-  };
+  const filteredWorkshops = useMemo(() => {
+    if (activePathway === 'All') return WORKSHOPS;
+    const key = activePathway.toLowerCase();
+    return WORKSHOPS.filter((w) => w.type === key);
+  }, [activePathway]);
 
   return (
-    <div className={styles.hiWorkshops} role="main" aria-label="HI Workshops professional development pathways">
-      {/* Background Patterns (decorative) */}
-      <div className={`${styles.patternOverlay} hidden xs:block`} aria-hidden="true">
-        {PATTERN_POSITIONS.map((position, i) => (
-          <motion.div
-            key={i}
-            className={styles.pattern}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={prefersReducedMotion ? {} : { opacity: [0.08, 0.25, 0.08], scale: [1, 1.15, 1], rotate: [0, 180, 360] }}
-            transition={{ duration: 24, delay: i * 0.4, repeat: Infinity, ease: 'linear' }}
-            style={{ left: `${position.left}%`, top: `${position.top}%` }}
-          />
-        ))}
+    <div className="min-h-screen bg-[#0b0e17] pt-16 md:pt-24 pb-20">
+      {/* Back Button */}
+      <div className="max-w-7xl mx-auto px-6">
+        <Link
+          href="/"
+          className="absolute top-6 left-6 z-20 border border-purple-500/40 text-purple-300 flex items-center gap-2 px-4 py-2 rounded-md bg-transparent hover:bg-purple-600 hover:text-white transition"
+          aria-label="Go back to home"
+        >
+          <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
+            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+          </svg>
+          <span>Home</span>
+        </Link>
       </div>
 
-      {/* Scroll Progress */}
-      <motion.div className={styles.scrollProgress} style={{ scaleX: scrollProgress }} aria-hidden="true" />
+      {/* HERO SECTION */}
+      <header className="relative flex items-center justify-center overflow-hidden py-24 md:py-28 px-6 min-h-[54vh]">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-20"
+          style={{ backgroundImage: "url('/images/hi-workshops-banner.jpg')" }}
+          aria-hidden
+        />
 
-      {/* Hero Section */}
-      <section className={styles.hero} aria-labelledby="hero-heading" aria-describedby="hero-tagline">
-        <motion.div className={styles.neuralNetwork} style={{ opacity, scale }} aria-hidden="true">
-          {[...Array(8)].map((_, i) => (
-            <motion.div
-              key={i}
-              className={`${styles.neuralNode} ${styles[`node${i + 1}`]}`}
-              animate={prefersReducedMotion ? {} : { scale: [1, 1.15, 1], boxShadow: ['0 0 16px rgba(0, 153, 255, 0.25)', '0 0 32px rgba(0, 153, 255, 0.45)', '0 0 16px rgba(0, 153, 255, 0.25)'] }}
-              transition={{ duration: 6, repeat: Infinity, delay: i * 0.4, ease: 'easeInOut' }}
-            />
-          ))}
-          {[...Array(10)].map((_, i) => (
-            <motion.div
-              key={i}
-              className={styles.neuralConnection}
-              style={{ top: `${15 + i * 7}%`, left: `${12 + (i % 5) * 15}%`, width: '140px', transform: `rotate(${(i * 27) % 360}deg)` }}
-              animate={prefersReducedMotion ? {} : { opacity: [0.15, 0.5, 0.15] }}
-              transition={{ duration: 5, repeat: Infinity, delay: i * 0.25, ease: 'linear' }}
-            />
-          ))}
-        </motion.div>
-
-        {/* Brain Inspired Orbs */}
-        {!prefersReducedMotion && (
-          <>
-            <motion.div className={`${styles.brainOrb} ${styles.orbLarge}`} animate={{ y: [0, -30, 0], x: [0, 20, 0] }} transition={{ duration: 26, repeat: Infinity }} aria-hidden="true" />
-            <motion.div className={`${styles.brainOrb} ${styles.orbMedium}`} animate={{ y: [0, -35, 0], x: [0, -18, 0] }} transition={{ duration: 24, repeat: Infinity, delay: -6 }} aria-hidden="true" />
-            <motion.div className={`${styles.brainOrb} ${styles.orbSmall}`} animate={{ y: [0, -20, 0] }} transition={{ duration: 18, repeat: Infinity, delay: -9 }} aria-hidden="true" />
-          </>
-        )}
-
-        <motion.div className={styles.heroContent} initial={{ opacity: 0, y: 64 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>
-          <motion.h1 id="hero-heading" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9, delay: 0.5 }}>
-            HI Workshops
+        <div className="relative z-10 max-w-5xl mx-auto text-center">
+          <motion.h1
+            className="text-5xl md:text-6xl font-extrabold mb-4 text-white"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            HI <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-purple-500 bg-clip-text text-transparent">Workshops</span>
           </motion.h1>
-          <motion.p className={styles.heroSubtitle} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.7 }}>
-            Neural Networks of Learning
-          </motion.p>
-          <motion.p id="hero-tagline" className={styles.heroTagline} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.9 }}>
-            Enhance professional capabilities through structured, evidence-based workshops developing advanced cognitive skills and strategic thinking methodology.
-          </motion.p>
-          <Link href="#workshops" aria-label="Explore professional development programs">
-            <motion.div className={styles.ctaPrimary} initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, delay: 1.1 }} whileHover={{ scale: 1.04, y: -6 }} whileTap={{ scale: 0.95 }}>
-              Explore Programs
-            </motion.div>
-          </Link>
-        </motion.div>
-      </section>
 
-      {/* Workshops Section */}
-      <section className={`${styles.scrollSection} ${styles.workshopsSection}`} id="workshops" aria-labelledby="workshops-heading">
-        <div className={styles.container}>
-          <motion.h2 id="workshops-heading" className={styles.sectionTitle} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
-            Professional Development Pathways
-          </motion.h2>
-          <motion.p className={styles.sectionSubtitle} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }} viewport={{ once: true }}>
-            Specialized programs enhancing leadership, decision-making, and strategic cognition.
+          <motion.p
+            className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+          >
+            Practical, immersive sessions to build clarity, cognition, and innovation skills.
           </motion.p>
 
-          <div className={styles.workshopsGrid} role="list" aria-label="Workshop pathways">
-            {WORKSHOPS.map((workshop, index) => (
-              <motion.article
-                key={workshop.type}
-                className={`${styles.workshopCard} ${styles[workshop.type]}`}
-                initial={{ opacity: 0, y: 72 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: index * 0.15 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -12, scale: 1.015 }}
-                role="listitem"
-                aria-label={`${workshop.title} – ${workshop.accent}`}
+          {/* Hero stat badges (matching courses page style) */}
+          <motion.div className="mt-8 flex flex-wrap justify-center gap-3" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
+            <span className="px-3 py-1 rounded-full text-xs md:text-sm border border-white/10 bg-white/5 text-gray-200">Hands-on & cohort-based</span>
+            <span className="px-3 py-1 rounded-full text-xs md:text-sm border border-white/10 bg-white/5 text-gray-200">Certificate of completion</span>
+            <span className="px-3 py-1 rounded-full text-xs md:text-sm border border-white/10 bg-white/5 text-gray-200">Action-focused sessions</span>
+          </motion.div>
+        </div>
+      </header>
+
+      {/* FILTERS BAR */}
+      <section className="px-6">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2 text-gray-300">
+            <Filter className="w-4 h-4" aria-hidden />
+            <span className="text-sm">Filter by pathway</span>
+          </div>
+          <div className="flex flex-wrap gap-2" role="tablist" aria-label="Workshop pathways">
+            {PATHWAYS.map((p) => (
+              <button
+                key={p}
+                role="tab"
+                aria-selected={activePathway === p}
+                onClick={() => setActivePathway(p)}
+                className={`px-3 py-2 rounded-md text-sm border transition ${
+                  activePathway === p
+                    ? 'border-purple-500 text-white bg-purple-600'
+                    : 'border-white/10 text-gray-300 bg-white/5 hover:border-purple-400/40 hover:text-white'
+                }`}
               >
-                <div className={styles.workshopIcon} aria-hidden="true">{workshop.icon}</div>
-                <h3 className={styles.workshopTitle}>{workshop.title}</h3>
-                <ul className={styles.workshopList} aria-label={`${workshop.title} key modules`}>
-                  {workshop.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-                <Link
-                  href={`/hi-workshops/${workshop.type}`}
-                  onClick={() => logExplore(workshop.type)}
-                  aria-label={`Explore ${workshop.title} pathway`}
-                >
-                  <motion.div className={styles.ctaPrimary} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.95 }}>
-                    Explore Path
-                  </motion.div>
-                </Link>
-              </motion.article>
+                {p}
+              </button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className={`${styles.scrollSection} ${styles.ctaSection}`} aria-labelledby="cta-heading">
-        <div className={styles.container}>
-          <motion.h2 id="cta-heading" className={styles.sectionTitle} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
-            Ready to Rewire Your Mind?
-          </motion.h2>
-          <motion.p className={styles.sectionSubtitle} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }} viewport={{ once: true }}>
-            Join our network and transform cognitive capability through immersive workshops.
-          </motion.p>
-          <motion.div className={styles.ctaButtons} initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }} viewport={{ once: true }}>
-            <Link href="#signup" aria-label="Start your professional development journey">
-              <motion.div className={styles.ctaPrimary} whileHover={{ scale: 1.04, y: -4 }} whileTap={{ scale: 0.95 }}>
-                Start Your Neural Upgrade
-              </motion.div>
-            </Link>
-            <Link href="#calendar" aria-label="View workshop calendar">
-              <motion.div className={styles.ctaSecondary} whileHover={{ y: -4 }} whileTap={{ scale: 0.95 }}>
-                Explore Workshop Calendar
-              </motion.div>
-            </Link>
-          </motion.div>
+      {/* WORKSHOPS GRID */}
+      <main className="py-12 md:py-14 px-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 max-w-7xl mx-auto">
+          {filteredWorkshops.map((w, index) => (
+            <motion.article
+              key={w.title}
+              className="rounded-2xl p-7 flex flex-col backdrop-blur-md shadow-xl bg-white/5 border border-white/10 hover:border-purple-400/40 transition hover:-translate-y-2"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+            >
+              {/* Header */}
+              <div className="flex items-start justify-between gap-3 mb-4">
+                <h3 className="text-2xl font-semibold text-white flex items-center gap-2">
+                  <span className="text-2xl">{w.icon}</span>
+                  {w.title}
+                </h3>
+                {typeof w.rating === 'number' && (
+                  <div className="flex items-center gap-1 text-yellow-400" aria-label={`${w.rating} out of 5 stars`}>
+                    <Star className="w-4 h-4 fill-yellow-400" />
+                    <span className="text-sm">{w.rating}</span>
+                  </div>
+                )}
+              </div>
+
+              {/* accent / pathway */}
+              <p className="text-gray-300 text-sm mb-4">{w.accent}</p>
+
+              {/* badges */}
+              <div className="flex flex-wrap items-center gap-2 mb-6">
+                {w.duration && (
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-gray-300">
+                    <Clock className="w-3.5 h-3.5" /> {w.duration}
+                  </span>
+                )}
+                {w.level && (
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-gray-300">
+                    <Layers className="w-3.5 h-3.5" /> {w.level}
+                  </span>
+                )}
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-gray-300">
+                  {activePathway === 'All' ? w.type.charAt(0).toUpperCase() + w.type.slice(1) : activePathway}
+                </span>
+              </div>
+
+              {/* modules list */}
+              <ul className="space-y-3 mb-8" aria-label={`${w.title} modules`}>
+                {w.items.map((item) => (
+                  <li key={item} className="flex items-center gap-3 text-sm text-gray-300">
+                    <span className="w-2 h-2 rounded-full bg-purple-400" aria-hidden />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* price & CTA */}
+              <div className="mt-auto">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="text-white text-lg font-bold" aria-label="Price">{w.price}</div>
+                  <span className="text-xs text-gray-400">Includes materials & support</span>
+                </div>
+
+                <div className="flex gap-3">
+                  <Link
+                    href={{ pathname: '/productpage', query: { workshop: w.title } }}
+                    className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-md border border-purple-500/40 text-purple-300 hover:bg-purple-600 hover:text-white transition font-medium"
+                    aria-label={`Learn more about ${w.title}`}
+                  >
+                    Learn More
+                    <ArrowRight size={16} />
+                  </Link>
+
+                  <Link
+                    href={`/hi-workshops/${w.type}`}
+                    className="px-4 py-3 rounded-md border border-white/10 text-gray-200 hover:bg-white/10 transition"
+                    aria-label={`Explore ${w.title} pathway`}
+                  >
+                    Explore Path
+                  </Link>
+                </div>
+              </div>
+            </motion.article>
+          ))}
         </div>
-      </section>
+
+        {/* Empty state */}
+        {filteredWorkshops.length === 0 && (
+          <div className="max-w-7xl mx-auto mt-10 text-center text-gray-300">No workshops match this filter.</div>
+        )}
+      </main>
     </div>
   );
 }

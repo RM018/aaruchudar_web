@@ -10,10 +10,12 @@ const HIEventsPage = () => {
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [typeFilter, setTypeFilter] = useState<'all' | 'webinar' | 'campus'>('all');
+  const [rsvpEvent, setRsvpEvent] = useState<any | null>(null);
 
   // Animation refs
   const containerRef = useRef(null);
-  const heroRef = useRef(null);
 
   useEffect(() => {
     setIsLoading(false);
@@ -95,6 +97,33 @@ const HIEventsPage = () => {
     }
   ];
 
+  const rawEvents = activeTab === 'upcoming' ? upcomingEvents : pastEvents;
+  const filteredEvents = rawEvents.filter((event: any) => {
+    const matchesType = typeFilter === 'all' ? true : event.type === typeFilter;
+    const q = searchQuery.trim().toLowerCase();
+    const matchesQuery = !q
+      ? true
+      : [event.title, event.description, event.speaker, event.location, event.platform]
+          .filter(Boolean)
+          .some((v: string) => v.toLowerCase().includes(q));
+    return matchesType && matchesQuery;
+  });
+
+  const downloadICS = (event: any) => {
+    const start = new Date();
+    const end = new Date(start.getTime() + 60 * 60 * 1000);
+    const toICSDate = (d: Date) =>
+      `${d.getUTCFullYear()}${String(d.getUTCMonth() + 1).padStart(2, '0')}${String(d.getUTCDate()).padStart(2, '0')}T${String(d.getUTCHours()).padStart(2, '0')}${String(d.getUTCMinutes()).padStart(2, '0')}${String(d.getUTCSeconds()).padStart(2, '0')}Z`;
+    const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//HI Events//EN\nBEGIN:VEVENT\nUID:${event.id}@hi-events\nDTSTAMP:${toICSDate(new Date())}\nDTSTART:${toICSDate(start)}\nDTEND:${toICSDate(end)}\nSUMMARY:${event.title}\nDESCRIPTION:${(event.description || '').replace(/\n/g, ' ')}\nLOCATION:${event.location || event.platform || ''}\nEND:VEVENT\nEND:VCALENDAR`;
+    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${event.title.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}-hi.ics`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   if (isLoading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
@@ -112,171 +141,207 @@ const HIEventsPage = () => {
   }
 
   return (
-    <div ref={containerRef} className={styles.eventContainer}>
-      <Link 
-        href="/" 
-        className={styles.backButton}
-      >
-        <svg className={styles.backButtonIcon} viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" />
-        </svg>
-        <span>Back</span>
-      </Link>
-
-      {/* Hero Section */}
-      <div ref={heroRef} className={styles.hero}>
-        <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>
-            HI Events
-          </h1>
-          <p className={styles.heroSubtitle}>
-            Join our community of learners exploring the fascinating intersections of{' '}
-            <span className="text-purple-600 font-medium">Psychology</span>,{' '}
-            <span className="text-blue-600 font-medium">Innovation</span>, and{' '}
-            <span className="text-indigo-600 font-medium">Human Growth</span>
-          </p>
-        </div>
+    <div ref={containerRef} className={`${styles.eventContainer} min-h-screen pt-16 md:pt-24 pb-20`}>
+      {/* Back Button (match courses style) */}
+      <div className="max-w-7xl mx-auto px-6">
+        <Link
+          href="/"
+          className="absolute top-6 left-6 z-20 border border-purple-500/40 text-purple-300 flex items-center gap-2 px-4 py-2 rounded-md bg-transparent hover:bg-purple-600 hover:text-white transition"
+          aria-label="Go back to home"
+        >
+          <svg className="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
+            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+          </svg>
+          <span>Home</span>
+        </Link>
       </div>
 
-      {/* Event Categories */}
-      <div className={styles.categoryGrid}>
-        {[
-          {
-            icon: "M17 10.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-3.5l4 2v-7l-4 2z",
-            title: "Live Webinars",
-            description: "Interactive online sessions with industry experts and thought leaders",
-            stats: ["2K+ Attendees", "150+ Sessions"]
-          },
-          {
-            icon: "M12 14l9-5-9-5-9 5 9 5z",
-            title: "Campus Events",
-            description: "Immersive in-person experiences at leading institutions",
-            stats: ["50+ Campuses", "10K+ Students"]
-          }
-        ].map((category, idx) => (
-          <motion.div
-            key={idx}
-            className={styles.categoryCard}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.2 }}
-          >
-            <div className={styles.categoryIcon}>
-              <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-                <path d={category.icon} />
-              </svg>
-            </div>
-            <h3 className={styles.categoryTitle}>{category.title}</h3>
-            <p className={styles.categoryDescription}>{category.description}</p>
-            <div className="flex space-x-4 mt-4">
-              {category.stats.map((stat, i) => (
-                <div key={i} className="text-sm text-gray-600">
-                  <span className="font-semibold">{stat}</span>
-                  <span className="text-gray-400 ml-1">and growing</span>
-                </div>
-              ))}
-            </div>
+      {/* HERO SECTION (match courses header) */}
+      <header className="relative flex items-center justify-center overflow-hidden py-24 md:py-28 px-6 min-h-[54vh]">
+        <div className="absolute inset-0 bg-cover bg-center opacity-20" style={{ backgroundImage: "url('/images/hi-events-banner.jpg')" }} aria-hidden />
+        <div className="relative z-10 max-w-5xl mx-auto text-center">
+          <motion.h1 className="text-5xl md:text-6xl font-extrabold mb-4 text-white" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            HI <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-purple-500 bg-clip-text text-transparent">Events</span>
+          </motion.h1>
+          <motion.p className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
+            Live webinars and campus sessions on psychology, innovation, and human growth. Join the community and never stop learning.
+          </motion.p>
+          <motion.div className="mt-8 flex flex-wrap justify-center gap-3" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
+            <span className="px-3 py-1 rounded-full text-xs md:text-sm border border-white/10 bg-white/5 text-gray-200">Expert speakers</span>
+            <span className="px-3 py-1 rounded-full text-xs md:text-sm border border-white/10 bg-white/5 text-gray-200">Interactive Q&A</span>
+            <span className="px-3 py-1 rounded-full text-xs md:text-sm border border-white/10 bg-white/5 text-gray-200">Recordings available</span>
           </motion.div>
-        ))}
-      </div>
+        </div>
+      </header>
 
-      {/* Tab Navigation */}
-      <div className={styles.tabNav} role="tablist" aria-label="Event tabs">
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-2 shadow-lg">
-          <div className="flex space-x-2">
+      {/* FILTERS BAR (match courses style) */}
+      <section className="px-6">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2 text-gray-300">
+            <span className="text-sm">Filter by type</span>
+          </div>
+          <div className="flex flex-wrap gap-2" role="tablist" aria-label="Event tabs">
             {['upcoming', 'past'].map((tab) => (
-              <motion.button
+              <button
                 key={tab}
                 role="tab"
                 aria-selected={activeTab === tab}
-                aria-controls={`panel-${tab}`}
-                id={`tab-${tab}`}
                 onClick={() => setActiveTab(tab)}
-                className={`${styles.tabButton} ${activeTab === tab ? styles.active : ''}`}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className={`px-3 py-2 rounded-md text-sm border transition ${
+                  activeTab === tab
+                    ? 'border-purple-500 text-white bg-purple-600'
+                    : 'border-white/10 text-gray-300 bg-white/5 hover:border-purple-400/40 hover:text-white'
+                }`}
               >
-                {tab === 'upcoming' ? '📅 Upcoming Events' : '📚 Past Events'}
-              </motion.button>
+                {tab === 'upcoming' ? 'Upcoming' : 'Past'}
+              </button>
             ))}
           </div>
         </div>
-      </div>
+        {/* Search + Type filter inline */}
+        <div className="max-w-7xl mx-auto mt-4 flex flex-wrap gap-3 items-center">
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search events, speakers, platforms..."
+            className="flex-1 min-w-[240px] px-3 py-2 rounded-md border border-white/10 bg-white/5 text-gray-200 placeholder:text-gray-400"
+            aria-label="Search events"
+          />
+          <select
+            value={typeFilter}
+            onChange={(e) => setTypeFilter(e.target.value as any)}
+            className="px-3 py-2 rounded-md border border-white/10 bg-white/5 text-gray-200"
+            aria-label="Filter by event type"
+          >
+            <option value="all">All</option>
+            <option value="webinar">Webinars</option>
+            <option value="campus">Campus</option>
+          </select>
+        </div>
+      </section>
 
-      {/* Events Grid */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeTab}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="grid gap-6 sm:gap-8 md:grid-cols-2"
-          id={`panel-${activeTab}`}
-          role="tabpanel"
-          aria-labelledby={`tab-${activeTab}`}
-        >
-          {(activeTab === 'upcoming' ? upcomingEvents : pastEvents).map((event, idx) => (
-            <motion.div
+      {/* EVENTS GRID (match courses grid) */}
+      <main className="py-12 md:py-14 px-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 max-w-7xl mx-auto">
+          {filteredEvents.map((event: any, index: number) => (
+            <motion.article
               key={event.id}
-              className={styles.eventCard}
-              initial={{ opacity: 0, y: 20 }}
+              className="rounded-2xl p-7 flex flex-col backdrop-blur-md shadow-xl bg-white/5 border border-white/10 hover:border-purple-400/40 transition hover:-translate-y-2"
+              initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
             >
-              <div className={styles.eventHeader}>
-                <span className={`${styles.eventType} ${styles[event.type]}`}>
-                  {event.type === 'webinar' ? '🎥 Webinar' : '🏛️ Campus Event'}
-                </span>
+              {/* Header */}
+              <div className="flex items-start justify-between gap-3 mb-2">
+                <h3 className="text-xl font-semibold text-white">{event.title}</h3>
                 {event.isFeatured && (
-                  <span className={styles.featuredBadge}>
-                    ⭐ Featured
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-yellow-500/20 text-yellow-300 border border-yellow-500/30">Featured</span>
+                )}
+              </div>
+
+              <p className="text-gray-300 text-sm mb-4 leading-relaxed">{event.description}</p>
+
+              {/* badges */}
+              <div className="flex flex-wrap items-center gap-2 mb-4">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-gray-300">
+                  📅 {event.date}
+                </span>
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-gray-300">
+                  ⏰ {event.time}
+                </span>
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-gray-300">
+                  {event.platform ? `🔗 ${event.platform}` : `📍 ${event.location}`}
+                </span>
+                {event.attendees && (
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs border border-white/10 bg-white/5 text-gray-300">
+                    👥 {event.attendees}
                   </span>
                 )}
               </div>
 
-              <div className={styles.eventContent}>
-                <h3 className={styles.eventTitle}>{event.title}</h3>
-                <p className={styles.eventDescription}>{event.description}</p>
-
-                <div className={styles.eventDetails} aria-label="Event details">
-                  <div className={styles.eventDetail}>
-                    <svg className={styles.eventDetailIcon} viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-                    </svg>
-                    {event.date}
-                  </div>
-                  <div className={styles.eventDetail}>
-                    <svg className={styles.eventDetailIcon} viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                    </svg>
-                    {event.time}
-                  </div>
-                  <div className={styles.eventDetail}>
-                    {event.platform ? (
-                      <>
-                        <svg className={styles.eventDetailIcon} viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clipRule="evenodd" />
-                        </svg>
-                        {event.platform}
-                      </>
-                    ) : (
-                      <>
-                        <svg className={styles.eventDetailIcon} viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                        </svg>
-                        {event.location}
-                      </>
-                    )}
-                  </div>
-                </div>
-
-                <button className={styles.registerButton} aria-label={`Register for ${event.title}`}>
+              {/* CTA */}
+              <div className="mt-auto flex gap-3">
+                <button
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-md border border-purple-500/40 text-purple-300 hover:bg-purple-600 hover:text-white transition font-medium"
+                  aria-label={`Register for ${event.title}`}
+                  onClick={() => setRsvpEvent(event)}
+                >
                   Register Now
                 </button>
+                <button
+                  className="px-4 py-3 rounded-md border border-white/10 text-gray-200 hover:bg-white/10 transition"
+                  aria-label={`Add ${event.title} to calendar`}
+                  onClick={() => downloadICS(event)}
+                >
+                  Add to Calendar
+                </button>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
-        </motion.div>
+        </div>
+
+        {/* Empty state */}
+        {filteredEvents.length === 0 && (
+          <div className="max-w-7xl mx-auto mt-10 text-center text-gray-300">No events match your filters.</div>
+        )}
+      </main>
+
+      {/* RSVP Modal */}
+      <AnimatePresence>
+        {rsvpEvent && (
+          <motion.div
+            className={styles.modalOverlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            aria-modal="true"
+            role="dialog"
+          >
+            <motion.div
+              className={styles.modal}
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+            >
+              <div className={styles.modalHeader}>
+                <h3 className={styles.modalTitle}>Register for {rsvpEvent.title}</h3>
+                <button
+                  className={styles.modalClose}
+                  aria-label="Close registration"
+                  onClick={() => setRsvpEvent(null)}
+                >
+                  ✕
+                </button>
+              </div>
+              <form
+                className={styles.modalForm}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setRsvpEvent(null);
+                  alert('Registration submitted!');
+                }}
+              >
+                <div className={styles.formRow}>
+                  <label className={styles.formLabel}>Name</label>
+                  <input className={styles.formInput} required placeholder="Your name" />
+                </div>
+                <div className={styles.formRow}>
+                  <label className={styles.formLabel}>Email</label>
+                  <input type="email" className={styles.formInput} required placeholder="you@example.com" />
+                </div>
+                <div className={styles.formRow}>
+                  <label className={styles.formLabel}>Notes</label>
+                  <textarea className={styles.formInput} placeholder="Any questions or preferences?" />
+                </div>
+                <div className={styles.modalActions}>
+                  <button type="button" className={styles.secondaryButton} onClick={() => setRsvpEvent(null)}>Cancel</button>
+                  <button type="submit" className={styles.primaryButton}>Submit</button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
       </AnimatePresence>
 
       {/* Newsletter Section */}

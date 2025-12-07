@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
 export default function Testimonials() {
   const testimonials = [
@@ -41,64 +42,111 @@ export default function Testimonials() {
     }
   ];
 
+  const [current, setCurrent] = useState(0);
+  const total = testimonials.length;
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((c) => (c === total - 1 ? 0 : c + 1));
+    }, 4000); // Change every 4 seconds
+    return () => clearInterval(timer);
+  }, [total]);
+
+  const prev = () => setCurrent((c) => (c === 0 ? total - 1 : c - 1));
+  const next = () => setCurrent((c) => (c === total - 1 ? 0 : c + 1));
+
   return (
-    <section className="testimonials-grid-section">
-      <div className="testimonials-container">
+    <section className="testimonials-carousel-section">
+      <div className="testimonials-carousel-container">
         <h2 className="testimonials-main-title" style={{ color: '#1a202c', textAlign: 'center', marginBottom: 40 }}>Testimonials</h2>
-        <div className="testimonials-grid">
-          {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="testimonial-card">
+        <div className="carousel-wrapper">
+          <button className="carousel-arrow left" onClick={prev} aria-label="Previous testimonial">&#8592;</button>
+          <div className="carousel-card">
+            {/* Only show the current testimonial */}
+            <div className="testimonial-card">
               <div className="testimonial-header">
                 <img
-                  src={testimonial.image}
-                  alt={testimonial.name}
+                  src={testimonials[current].image}
+                  alt={testimonials[current].name}
                   className="testimonial-avatar"
                 />
                 <div className="testimonial-info">
-                  <h3 className="testimonial-name" style={{ color: '#1a202c' }}>{testimonial.name}</h3>
-                  <p className="testimonial-role" style={{ color: '#718096' }}>{testimonial.role}</p>
+                  <h3 className="testimonial-name" style={{ color: '#1a202c' }}>{testimonials[current].name}</h3>
+                  <p className="testimonial-role" style={{ color: '#718096' }}>{testimonials[current].role}</p>
                 </div>
               </div>
               <div className="testimonial-rating">
-                {[...Array(testimonial.rating)].map((_, i) => (
+                {[...Array(testimonials[current].rating)].map((_, i) => (
                   <span key={i} className="star" style={{ color: '#f59e0b' }}>★</span>
                 ))}
               </div>
-              <p className="testimonial-text" style={{ color: '#4a5568' }}>{testimonial.text}</p>
-              <div className="testimonial-date" style={{ color: '#a0aec0' }}>{testimonial.date}</div>
+              <p className="testimonial-text" style={{ color: '#4a5568' }}>{testimonials[current].text}</p>
+              <div className="testimonial-date" style={{ color: '#a0aec0' }}>{testimonials[current].date}</div>
             </div>
+          </div>
+          <button className="carousel-arrow right" onClick={next} aria-label="Next testimonial">&#8594;</button>
+        </div>
+        <div className="carousel-dots">
+          {testimonials.map((_, idx) => (
+            <button
+              key={idx}
+              className={"dot" + (idx === current ? " active" : "")}
+              onClick={() => setCurrent(idx)}
+              aria-label={`Go to testimonial ${idx + 1}`}
+            />
           ))}
         </div>
       </div>
       <style jsx>{`
-        .testimonials-grid-section {
+        .testimonials-carousel-section {
           padding: 80px 24px;
-          background: #fff;
+          background: linear-gradient(135deg, #f8fafc 0%, #e9e6f7 100%);
         }
-        .testimonials-container {
-          max-width: 1200px;
+        .testimonials-carousel-container {
+          max-width: 600px;
           margin: 0 auto;
           padding: 0 24px;
         }
-        .testimonials-main-title {
-          font-size: clamp(28px, 4vw, 40px);
-          font-weight: 800;
-          margin-bottom: 40px;
+        .carousel-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0;
         }
-        .testimonials-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-          gap: 32px;
+        .carousel-arrow {
+          background: #fff;
+          border: none;
+          font-size: 2rem;
+          color: #a78bfa;
+          cursor: pointer;
+          border-radius: 50%;
+          width: 48px;
+          height: 48px;
+          box-shadow: 0 2px 8px rgba(102, 126, 234, 0.10);
+          transition: background 0.2s;
+        }
+        .carousel-arrow:hover {
+          background: #e9e6f7;
+        }
+        .carousel-card {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-width: 0;
         }
         .testimonial-card {
           background: #fff;
           border-radius: 20px;
           padding: 32px;
-          box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-          border: 1px solid rgba(0,0,0,0.05);
+          box-shadow: 0 8px 32px rgba(102, 126, 234, 0.10), 0 1.5px 8px rgba(0,0,0,0.04);
+          border: 1px solid #e2e8f0;
           display: flex;
           flex-direction: column;
           gap: 20px;
+          min-width: 320px;
+          max-width: 400px;
+          transition: box-shadow 0.2s, transform 0.2s;
         }
         .testimonial-header {
           display: flex;
@@ -111,6 +159,7 @@ export default function Testimonials() {
           border-radius: 50%;
           object-fit: cover;
           border: 3px solid #667eea;
+          box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
         }
         .testimonial-info {
           flex: 1;
@@ -133,9 +182,10 @@ export default function Testimonials() {
         .star {
           color: #f59e0b;
           font-size: 20px;
+          filter: drop-shadow(0 1px 2px #f6e05e);
         }
         .testimonial-text {
-          font-size: 15px;
+          font-size: 16px;
           color: #4a5568;
           line-height: 1.7;
           margin: 0;
@@ -148,16 +198,35 @@ export default function Testimonials() {
           padding-top: 12px;
           border-top: 1px solid #e2e8f0;
         }
+        .carousel-dots {
+          display: flex;
+          justify-content: center;
+          gap: 10px;
+          margin-top: 24px;
+        }
+        .dot {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: #d1d5db;
+          border: none;
+          cursor: pointer;
+          transition: background 0.2s;
+        }
+        .dot.active {
+          background: #a78bfa;
+        }
         @media (max-width: 768px) {
-          .testimonials-grid-section {
-            padding: 60px 20px;
+          .testimonials-carousel-section {
+            padding: 60px 10px;
           }
-          .testimonials-grid {
-            grid-template-columns: 1fr;
-            gap: 24px;
+          .testimonials-carousel-container {
+            padding: 0 4px;
           }
           .testimonial-card {
-            padding: 24px;
+            padding: 20px;
+            min-width: 220px;
+            max-width: 95vw;
           }
         }
       `}</style>

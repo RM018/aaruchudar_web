@@ -1,0 +1,349 @@
+/* =======================================================
+   PREMIUM HERO - Purple × Neon Cyan Theme
+   File: src/styles/hero.css
+   ======================================================= */
+
+/* ---------- wrapper ---------- */
+.hero-wrapper {
+    position: relative;
+    min-height: 100vh;
+    /* Remove top spacing */
+    padding-top: 0;
+    margin-top: 0;
+    padding-bottom: 4.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    perspective: 1600px;
+    background: radial-gradient(1200px 560px at 14% 12%, rgba(99, 102, 241, 0.18), transparent 62%),
+                radial-gradient(1000px 520px at 86% 24%, rgba(34, 197, 94, 0.14), transparent 64%),
+                linear-gradient(135deg, #0a0f1e 0%, #0b1226 45%, #0c1630 100%);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    animation: bgPulse 12s ease-in-out infinite;
+  }
+  
+  @keyframes bgPulse {
+    0% { filter: saturate(90%) brightness(100%); }
+    50% { filter: saturate(115%) brightness(105%); }
+    100% { filter: saturate(90%) brightness(100%); }
+  }
+  
+  /* ---------- main bg (subtle) ---------- */
+  .professional-hero-bg {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 10%, #19133a 0%, rgba(18,12,34,0.6) 30%, rgba(5,7,20,0.95) 100%);
+  }
+  
+  /* ---------- aurora layer ---------- */
+  .aurora-layer {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(900px 360px at 25% 40%, rgba(34, 197, 94, 0.12), transparent 60%),
+                radial-gradient(900px 360px at 75% 60%, rgba(59, 130, 246, 0.12), transparent 60%),
+                radial-gradient(800px 320px at 50% 52%, rgba(168, 85, 247, 0.10), transparent 60%);
+    mix-blend-mode: screen;
+    filter: blur(60px) saturate(110%);
+    transform: translate3d(0,0,0);
+    pointer-events: none;
+    animation: auroraDrift 18s ease-in-out infinite;
+  }
+  
+  @keyframes auroraDrift {
+    0%   { transform: translate3d(0,0,0) scale(1); opacity: 1; }
+    50%  { transform: translate3d(12px,-8px,0) scale(1.06); opacity: 0.92; }
+    100% { transform: translate3d(0,0,0) scale(1); opacity: 1; }
+  }
+  
+  /* ---------- neural mesh ---------- */
+  .neural-mesh {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px, 40px 40px;
+    opacity: 0.32;
+    mix-blend-mode: overlay;
+    filter: drop-shadow(0 0 10px rgba(140,219,224,0.12));
+    pointer-events: none;
+    animation: meshGlow 10s ease-in-out infinite;
+  }
+  
+  @keyframes meshGlow {
+    0% { filter: drop-shadow(0 0 6px rgba(99,102,241,0.18)); }
+    50% { filter: drop-shadow(0 0 12px rgba(34,197,94,0.18)); }
+    100% { filter: drop-shadow(0 0 6px rgba(99,102,241,0.18)); }
+  }
+  
+  /* ---------- noise ---------- */
+  .noise-layer {
+    position: absolute;
+    inset: 0;
+    background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+    opacity: 0.04;
+    pointer-events: none;
+  }
+  
+  /* ---------- floating blobs ---------- */
+  .floating-area { position: absolute; inset: 0; pointer-events: none; }
+  
+  .float-circle {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.65;
+    transform: translateZ(0);
+  }
+  
+  .circle-1 { left: 10%; top: 16%; background: #60a5fa; }
+  .circle-2 { left: 80%; top: 26%; background: #a78bfa; }
+  .circle-3 { left: 32%; top: 70%; background: #22d3ee; }
+  
+  /* ---------- particles ---------- */
+  .particles-container { position: absolute; inset: 0; pointer-events: none; }
+  
+  .particle {
+    position: absolute;
+    top: -24px;
+    border-radius: 50%;
+    animation: floatDown var(--dur, 16s) linear infinite, particleDrift 6s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+  
+  @keyframes floatDown {
+    0% { transform: translateY(0) translateX(0) scale(var(--scale, 1)); opacity: 0.95; }
+    85% { opacity: 0.55; }
+    100% { transform: translateY(100vh) translateX(0) scale(var(--scale, 1.05)); opacity: 0; }
+  }
+  
+  @keyframes particleDrift {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(var(--drift, 12px)); }
+    100% { transform: translateX(0); }
+  }
+  
+  .particle.c1 { background: #60a5fa; box-shadow: 0 0 10px rgba(96,165,250,0.6); }
+  .particle.c2 { background: #22d3ee; box-shadow: 0 0 10px rgba(34,211,238,0.6); }
+  .particle.c3 { background: #a78bfa; box-shadow: 0 0 10px rgba(167,139,250,0.6); }
+  .particle.c4 { background: #34d399; box-shadow: 0 0 10px rgba(52,211,153,0.6); }
+  .particle.c5 { background: #f59e0b; box-shadow: 0 0 10px rgba(245,158,11,0.55); }
+  
+  .particle.s1 { width: 3px; height: 3px; }
+  .particle.s2 { width: 5px; height: 5px; }
+  .particle.s3 { width: 7px; height: 7px; opacity: 0.9; }
+  .particle.s4 { width: 10px; height: 10px; opacity: 0.85; }
+  
+  /* ---------- neon brain ---------- */
+  .neon-brain-wrap { margin-bottom: 14px; display:flex; justify-content:center; }
+  
+  .neon-ai-brain { width: 170px; height: auto; display:block; }
+  
+  /* small glow stroke */
+  .neon-ai-brain path, .neon-ai-brain circle {
+    vector-effect: non-scaling-stroke;
+  }
+  
+  /* ---------- hero content ---------- */
+  .hero-content {
+    max-width: 980px;
+    width: 100%;
+    padding: 0 20px;
+    text-align: center;
+    z-index: 10;
+    position: relative;
+    transform-style: preserve-3d;
+  }
+  
+  .hero-badge-modern {
+    display: inline-block;
+    background: rgba(255,255,255,0.03);
+    color: #cfe7ff;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(93,118,255,0.22);
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+  
+  /* title */
+  .hero-title-modern {
+    font-size: 3.4rem;
+    line-height: 1.03;
+    font-weight: 900;
+    color: #f7f9fc;
+    margin: 8px 0 12px;
+    letter-spacing: -0.6px;
+  }
+  
+  .gradient-text-modern {
+    background: linear-gradient(90deg, #5d76ff, #48c6e0, #72e6c0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    text-shadow: 0 0 4px rgba(93,118,255,0.18);
+  }
+  
+  /* subtitle */
+  .hero-description-modern {
+    color: #d7e6f8;
+    font-size: 1.05rem;
+    margin: 0 auto 20px;
+    max-width: 680px;
+    line-height: 1.6;
+  }
+  
+  /* ---------- CTAs ---------- */
+  .hero-buttons-modern { margin-top: 18px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  
+  .btn-primary-modern {
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    justify-content:center;
+    background: linear-gradient(90deg, #5d76ff, #48c6e0);
+    color: #06142a;
+    padding: 12px 30px;
+    border-radius: 12px;
+    font-weight: 800;
+    box-shadow: 0 10px 30px rgba(93,118,255,0.16);
+    border: none;
+    cursor: pointer;
+    transition: transform .22s ease, box-shadow .22s ease;
+    text-decoration: none;
+    letter-spacing: 0.2px;
+  }
+  
+  .btn-primary-modern:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(72,198,224,0.14); }
+  .btn-primary-modern:active { transform: translateY(1px); }
+  
+  .btn-secondary-modern {
+    background: transparent;
+    color: #48c6e0;
+    padding: 12px 28px;
+    border-radius: 12px;
+    border: 2px solid rgba(72,198,224,0.22);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease;
+    text-decoration: none;
+    letter-spacing: 0.2px;
+  }
+  
+  .btn-secondary-modern:hover { background: rgba(72,198,224,0.08); color: #eef8ff; }
+  .btn-secondary-modern:active { transform: translateY(1px); }
+  
+  /* Improve focus visibility for keyboard users */
+  .hero-buttons-modern a:focus-visible,
+  .btn-primary-modern:focus-visible,
+  .btn-secondary-modern:focus-visible {
+    outline: 2px solid #00e0ff;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(0,224,255,0.18);
+    border-radius: 12px;
+  }
+  
+  /* Ensure links appear as buttons in Next.js Link */
+  .hero-buttons-modern a.btn-primary-modern,
+  .hero-buttons-modern a.btn-secondary-modern {
+    display: inline-flex;
+  }
+  
+  /* ---------- features ---------- */
+  .features-grid-modern {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  
+  /* Better grid responsiveness for medium screens */
+  @media (max-width: 860px) {
+    .features-grid-modern { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  .feature-item {
+    padding: 18px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.04);
+    color: #e6f0ff;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+  }
+  
+  /* ---------- trust ---------- */
+  .trust-indicators {
+    margin-top: 30px;
+    display:flex;
+    gap: 28px;
+    justify-content:center;
+    color: #b6d6f3;
+    font-weight:600;
+  }
+  
+  /* ---------- responsive ---------- */
+  @media (max-width: 1024px) {
+    .features-grid-modern { grid-template-columns: repeat(2, 1fr); }
+    .hero-title-modern { font-size: 2.6rem; }
+  }
+  
+  @media (max-width: 640px) {
+    .features-grid-modern { grid-template-columns: 1fr; gap:12px; }
+    .hero-title-modern { font-size: 2.2rem; }
+    .float-circle { width: 220px; height: 220px; filter: blur(90px); }
+    .neon-ai-brain { width: 120px; }
+  }
+  
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    .aurora-layer,
+    .neural-mesh,
+    .noise-layer,
+    .floating-area,
+    .particles-container { animation: none !important; transition: none !important; }
+
+    .float-circle { filter: blur(60px); }
+    .particle { display: none; }
+
+    /* Disable hover-driven transforms while keeping states accessible */
+    .btn-primary-modern,
+    .btn-secondary-modern,
+    .float-circle,
+    .neon-ai-brain { transition: none !important; transform: none !important; }
+  }
+
+  /* ---------- hero inner layout ---------- */
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+    margin: 0 auto;
+  }
+
+  .hero-brain {
+    min-height: 520px;
+    height: 100%;
+    display: flex;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-brain { min-height: 420px; }
+  }
+
+  @media (max-width: 640px) {
+    .hero-brain { min-height: 360px; }
+  }

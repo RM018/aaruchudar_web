@@ -3,406 +3,255 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
+import dynamic from 'next/dynamic';
+import './hero.css';
+import type { RegionKey } from './interactive-brain/InteractiveBrain';
+import { REGION_INFO } from './interactive-brain/InteractiveBrain';
+
+const BrainShowpiece = dynamic(() => import('./interactive-brain/BrainShowpiece'), { ssr: false });
 
 export default function Hero() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const floatingRef = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
-  const [particles, setParticles] = useState<Array<{left: string; delay: string; duration: string}>>([]);
+  const heroRef = useRef<HTMLDivElement | null>(null);
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const subtitleRef = useRef<HTMLParagraphElement | null>(null);
+  const ctaRef = useRef<HTMLDivElement | null>(null);
+  const floatingRef = useRef<HTMLDivElement | null>(null);
+  const brainRef = useRef<HTMLDivElement | null>(null);
+  const [particles, setParticles] = useState<Array<any>>([]);
+  const [activeRegions, setActiveRegions] = useState<RegionKey[]>([]);
+  const [currentRegionIndex, setCurrentRegionIndex] = useState(0);
+  const regionOrder: RegionKey[] = Object.keys(REGION_INFO) as RegionKey[];
 
+  // Auto-cycle brain parts on hero
   useEffect(() => {
-    setMounted(true);
-    // Generate particle positions only on client side
+    if (regionOrder.length === 0) return;
+    // initialize first region
+    setActiveRegions([regionOrder[0]]);
+    const interval = setInterval(() => {
+      setCurrentRegionIndex((prev) => {
+        const next = (prev + 1) % regionOrder.length;
+        setActiveRegions([regionOrder[next]]);
+        return next;
+      });
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  function handleRegionSelect(region: RegionKey | null) {
+    // Ignore manual selection on hero, keep auto cycle
+    return;
+  }
+
+  const regionColorsOverride: Partial<Record<RegionKey, number>> = {
+    Frontal: 0xFF5A5F,     // Airbnb Coral
+    Parietal: 0x2DBE7F,    // Mint Green
+    Temporal: 0xF9A825,    // Amber
+    Occipital: 0x1E88E5,   // Blue
+    Cerebellum: 0x8E24AA,  // Purple
+    Brainstem: 0x26C6DA,   // Teal
+  };
+
+  // build richer particles with variants
+  useEffect(() => {
+    const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const particleCount = prefersReducedMotion ? 16 : 42;
+    const colors = ['c1', 'c2', 'c3', 'c4', 'c5'];
+    const sizes = ['s1', 's2', 's3', 's4'];
     setParticles(
-      [...Array(20)].map(() => ({
-        left: `${Math.random() * 100}%`,
-        delay: `${Math.random() * 5}s`,
-        duration: `${15 + Math.random() * 10}s`
-      }))
+      [...Array(particleCount)].map(() => {
+        const left = `${Math.random() * 100}%`;
+        const delay = `${Math.random() * 8}s`;
+        const duration = `${14 + Math.random() * 12}s`;
+        const scale = 0.8 + Math.random() * 0.6;
+        const drift = `${Math.random() * 18 + 6}px`;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const size = sizes[Math.floor(Math.random() * sizes.length)];
+        return { left, delay, duration, scale, drift, color, size } as any;
+      })
     );
   }, []);
 
   useEffect(() => {
-    if (!mounted) return;
+    if (!heroRef.current) return;
+
+    const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      if (!prefersReducedMotion) {
+        const tl = gsap.timeline();
+        tl.from(titleRef.current?.children || [], {
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.08,
+          ease: 'power3.out',
+        });
+        tl.from(
+          subtitleRef.current,
+          { y: 20, opacity: 0, duration: 0.6, ease: 'power3.out' },
+          '-=0.45'
+        );
+        tl.from(
+          ctaRef.current?.children || [],
+          { y: 16, opacity: 0, duration: 0.5, stagger: 0.1, ease: 'power3.out' },
+          '-=0.35'
+        );
+      }
 
-      tl.from(titleRef.current?.children || [], {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-      })
-      .from(subtitleRef.current, {
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-      }, '-=0.3')
-      .from(ctaRef.current?.children || [], {
-        y: 20,
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.1,
-      }, '-=0.2');
+      if (!prefersReducedMotion) {
+        const floats = floatingRef.current?.children;
+        if (floats) {
+          Array.from(floats).forEach((el, i) => {
+            gsap.to(el, {
+              y: `${10 + (i % 3) * 6}px`,
+              x: i % 2 === 0 ? '8px' : '-8px',
+              rotation: i % 2 === 0 ? 2 : -2,
+              duration: 6 + (i % 4),
+              repeat: -1,
+              yoyo: true,
+              ease: 'sine.inOut',
+            });
+          });
+        }
 
-      // Floating animation
-      const floatingElements = floatingRef.current?.children;
-      if (floatingElements) {
-        Array.from(floatingElements).forEach((el, i) => {
-          gsap.to(el, {
-            y: '+=15',
-            x: i % 2 === 0 ? '+=10' : '-=10',
-            rotation: i % 2 === 0 ? 3 : -3,
-            duration: 3 + i,
+        if (brainRef.current) {
+          gsap.to(brainRef.current, {
+            scale: 1.06,
+            duration: 2.8,
             repeat: -1,
             yoyo: true,
             ease: 'sine.inOut',
           });
-        });
+        }
       }
+
+      const moveHandler = (e: PointerEvent) => {
+        if (!heroRef.current) return;
+        const rect = heroRef.current.getBoundingClientRect();
+        const clientX = 'clientX' in e ? e.clientX : 0;
+        const clientY = 'clientY' in e ? e.clientY : 0;
+        const pxLocal = (clientX - rect.left) / rect.width - 0.5;
+        const pyLocal = (clientY - rect.top) / rect.height - 0.5;
+
+        if (!prefersReducedMotion) {
+          const floatEls = document.querySelectorAll('.float-circle');
+          floatEls.forEach((el, idx) => {
+            const x = (idx % 2 === 0 ? pxLocal * 40 : pxLocal * -40);
+            const y = pyLocal * 30;
+            gsap.to(el, { x, y, duration: 1, ease: 'power3.out' });
+          });
+          gsap.to('.aurora-layer', { x: pxLocal * 40, y: pyLocal * 30, duration: 0.9, ease: 'expo.out' });
+          gsap.to('.neural-mesh', { x: pxLocal * 20, y: pyLocal * 16, duration: 1.1, ease: 'expo.out' });
+          if (brainRef.current) {
+            gsap.to(brainRef.current, { x: pxLocal * 28, y: pyLocal * 20, rotationY: pxLocal * 6, rotationX: pyLocal * -6, duration: 0.9, ease: 'expo.out' });
+          }
+        }
+      };
+
+      heroRef.current?.addEventListener('pointermove', moveHandler);
+
+      return () => {
+        heroRef.current?.removeEventListener('pointermove', moveHandler);
+      };
     }, heroRef);
 
     return () => ctx.revert();
-  }, [mounted]);
+  }, [particles]);
 
   return (
-    <div className="flex flex-col items-center w-full">
-      <div className="w-full max-w-[100vw]">
-        <section ref={heroRef} className="hero-section-with-bg min-h-screen flex items-center justify-center relative overflow-hidden w-full" style={{
-          background: 'linear-gradient(135deg, #000000 0%, #0a0a0a 20%, #1a1a1a 40%, #2a2a2a 60%, #1a1a1a 80%, #000000 100%)'
-        }}>
-          {/* Dark overlay for better text contrast */}
-          <div className="absolute inset-0 bg-black/40"></div>
-          
-          {/* Enhanced gradient overlay with deeper black tones */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-gray-900/50 to-black/60"></div>
+    <section ref={heroRef} className="hero-wrapper" aria-label="Hero">
+      <div className="hero-inner">
+        <div className="hero-content" role="region" aria-labelledby="hero-heading">
+          <div className="hero-badge-modern" aria-label="Platform badge">Trusted Cognitive Training Platform</div>
 
-          {/* Floating Background Elements */}
-          <div ref={floatingRef} className="absolute inset-0 overflow-hidden">
-            <div className="float-circle circle-1"></div>
-            <div className="float-circle circle-2"></div>
-            <div className="float-circle circle-3"></div>
-            <div className="float-circle circle-4"></div>
-          </div>
-
-          {/* Animated Particles */}
-          <div className="absolute inset-0 particles-container">
-            {particles.map((particle, i) => (
-              <div key={i} className="particle" style={{
-                left: particle.left,
-                animationDelay: particle.delay,
-                animationDuration: particle.duration
-              }}></div>
-            ))}
-          </div>
-
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="flex justify-center items-center w-full">
-        <div className="max-w-4xl mx-auto text-center w-full">
-          {/* Badge */}
-          
-          
-          {/* Main Title */}
-          <h1 ref={titleRef} className="hero-title-modern mb-4 sm:mb-6 px-2">
-            <span className="block text-white">Unlock Your</span>
-            <span className="gradient-text-modern">Cognitive Potential</span>
+          <h1 id="hero-heading" ref={titleRef} className="hero-title-modern">
+            <span>Elevate Your</span>
+            <br />
+            <span className="gradient-text-modern">Cognitive Intelligence</span>
           </h1>
-          
-          {/* Description */}
-          <p ref={subtitleRef} className="hero-description-modern mb-6 sm:mb-8 px-4 sm:px-6">
-            Discover powerful programs designed to enhance your mental clarity, 
-            critical thinking, and decision-making skills through innovative 
-            learning experiences and personalized assessments.
+
+          <p ref={subtitleRef} className="hero-description-modern">
+            Build measurable mental clarity and performance through research-based exercises,
+            quick assessments, and AI-guided feedback. Train focus, reasoning, and decision-making.
           </p>
 
+          <div ref={ctaRef} className="hero-buttons-modern" role="navigation" aria-label="Hero actions">
+            <Link href="/hi-courses" className="btn-primary-modern" aria-label="Browse courses">Start Training</Link>
+            <Link href="/productpage" className="btn-secondary-modern" aria-label="View product details">Explore Platform</Link>
+          </div>
 
-          {/* Features Grid */}
-          <div className="features-grid-modern">
+          <div className="features-grid-modern" aria-hidden>
             <div className="feature-item">
-              <div className="feature-icon">🧠</div>
-              <h3>Mental Clarity</h3>
-              <p>Clear thinking and focused attention</p>
+              <div className="feature-icon" aria-hidden>🧠</div>
+              <div className="feature-title">Mental Clarity</div>
             </div>
             <div className="feature-item">
-              <div className="feature-icon">⚡</div>
-              <h3>Quick Results</h3>
-              <p>See improvements in weeks</p>
+              <div className="feature-icon" aria-hidden>⚡</div>
+              <div className="feature-title">Rapid Progress</div>
             </div>
             <div className="feature-item">
-              <div className="feature-icon">🎯</div>
-              <h3>Personalized</h3>
-              <p>Tailored to your needs</p>
+              <div className="feature-icon" aria-hidden>🎯</div>
+              <div className="feature-title">Personalized Plans</div>
             </div>
             <div className="feature-item">
-              <div className="feature-icon">🌟</div>
-              <h3>Expert Designed</h3>
-              <p>Based on scientific research</p>
+              <div className="feature-icon" aria-hidden>🧪</div>
+              <div className="feature-title">Science-Backed</div>
             </div>
           </div>
 
-          {/* Trust Indicators */}
-          <div className="trust-indicators mt-12">
-            <div className="flex flex-wrap justify-center items-center gap-8 text-white/80">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span>Daily Quizes</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span>Expert Certified</span>
-                
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span>Free Assessment</span>
-              </div>
+          <div className="trust-indicators" aria-hidden>
+            <div>● Daily Quizzes</div>
+            <div>● Expert-Led Programs</div>
+            <div>● Free Baseline Assessment</div>
+          </div>
+        </div>
+
+        {/* Right side showpiece */}
+        <div className="hero-brain">
+          <div className="neon-brain-wrap" aria-hidden style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+            <div ref={brainRef} style={{ width: '100%', maxWidth: 520, aspectRatio: '1 / 1', margin: '0 auto' }}>
+              <BrainShowpiece 
+                onRegionSelect={handleRegionSelect}
+                activeRegions={activeRegions}
+                labHighlight={true}
+                isolationOpacity={0.18}
+                regionColorsOverride={regionColorsOverride}
+                colorCycle={true}
+                disassemble={false}
+                showLabelsSmall={true}
+              />
             </div>
           </div>
         </div>
-        </div>
       </div>
 
-      <style jsx>{`
-        .hero-section-with-bg {
-          position: relative;
-        }
+      <div className="aurora-layer" aria-hidden />
+      <div className="neural-mesh" aria-hidden />
+      <div className="noise-layer" aria-hidden />
 
-        .float-circle {
-          position: absolute;
-          border-radius: 50%;
-          background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .circle-1 {
-          width: 120px;
-          height: 120px;
-          top: 10%;
-          left: 10%;
-        }
-
-        .circle-2 {
-          width: 80px;
-          height: 80px;
-          top: 70%;
-          left: 85%;
-        }
-
-        .circle-3 {
-          width: 60px;
-          height: 60px;
-          top: 20%;
-          left: 85%;
-        }
-
-        .circle-4 {
-          width: 100px;
-          height: 100px;
-          top: 80%;
-          left: 15%;
-        }
-
-        .particles-container {
-          pointer-events: none;
-        }
-
-        .particle {
-          position: absolute;
-          width: 4px;
-          height: 4px;
-          background: rgba(255, 255, 255, 0.6);
-          border-radius: 50%;
-          animation: floatParticle linear infinite;
-        }
-
-        @keyframes floatParticle {
-          0% {
-            transform: translateY(100vh) rotate(0deg);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(-100px) rotate(360deg);
-            opacity: 0;
-          }
-        }
-
-        .hero-badge-modern {
-          display: inline-flex;
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 50px;
-          padding: 8px 20px;
-        }
-
-        .badge-text {
-          color: white;
-          font-weight: 600;
-          font-size: 0.9rem;
-          letter-spacing: 0.5px;
-        }
-
-        .hero-title-modern {
-          font-size: clamp(2.5rem, 5vw, 4rem);
-          font-weight: 700;
-          line-height: 1.1;
-          color: white;
-        }
-
-        .gradient-text-modern {
-          background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .hero-description-modern {
-          font-size: 1.25rem;
-          line-height: 1.6;
-          color: rgba(255, 255, 255, 0.9);
-          max-width: 600px;
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        .hero-buttons-modern {
-          display: flex;
-          gap: 1rem;
-          justify-content: center;
-          flex-wrap: wrap;
-        }
-
-        .btn-primary-modern {
-          background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-          color: white;
-          padding: 12px 32px;
-          border-radius: 50px;
-          font-weight: 600;
-          text-decoration: none;
-          transition: all 0.3s ease;
-          border: none;
-          cursor: pointer;
-          box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-        }
-
-        .btn-primary-modern:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
-        }
-
-        .btn-secondary-modern {
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
-          color: white;
-          padding: 12px 32px;
-          border-radius: 50px;
-          font-weight: 600;
-          text-decoration: none;
-          transition: all 0.3s ease;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-secondary-modern:hover {
-          background: rgba(255, 255, 255, 0.2);
-          transform: translateY(-2px);
-        }
-
-        .features-grid-modern {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 2rem;
-          margin-top: 3rem;
-          justify-items: center;
-          text-align: center;
-        }
-
-        .feature-item {
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 20px;
-          padding: 2rem 1.5rem;
-          text-align: center;
-          transition: all 0.3s ease;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .feature-item:hover {
-          transform: translateY(-5px);
-          background: rgba(255, 255, 255, 0.15);
-        }
-
-        .feature-icon {
-          font-size: 2.5rem;
-          margin-bottom: 1rem;
-          text-align: center;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .feature-item h3 {
-          color: white;
-          font-weight: 600;
-          margin-bottom: 0.5rem;
-          font-size: 1.1rem;
-          text-align: center;
-          width: 100%;
-        }
-
-        .feature-item p {
-          color: rgba(255, 255, 255, 0.8);
-          font-size: 0.9rem;
-          line-height: 1.4;
-          text-align: center;
-          width: 100%;
-        }
-
-        .trust-indicators {
-          border-top: 1px solid rgba(255, 255, 255, 0.2);
-          padding-top: 2rem;
-        }
-
-        @media (max-width: 768px) {
-          .hero-buttons-modern {
-            flex-direction: column;
-            align-items: center;
-          }
-          
-          .btn-primary-modern,
-          .btn-secondary-modern {
-            width: 100%;
-            max-width: 280px;
-            text-align: center;
-          }
-
-          .features-grid-modern {
-            grid-template-columns: 1fr;
-            gap: 1rem;
-          }
-
-          .trust-indicators .flex {
-            flex-direction: column;
-            gap: 1rem;
-          }
-        }
-      `}</style>
-        </section>
+      <div ref={floatingRef} className="floating-area" aria-hidden>
+        <div className="float-circle circle-1" />
+        <div className="float-circle circle-2" />
+        <div className="float-circle circle-3" />
       </div>
-    </div>
+
+      <div className="particles-container" aria-hidden>
+        {particles.map((p: any, i) => (
+          <div
+            key={i}
+            className={`particle ${p.color} ${p.size}`}
+            style={{
+              left: p.left,
+              animationDelay: p.delay,
+              animationDuration: p.duration,
+              // motion variables
+              ['--scale' as any]: p.scale,
+              ['--drift' as any]: p.drift,
+              ['--dur' as any]: p.duration,
+            }}
+          />
+        ))}
+      </div>
+    </section>
   );
 }

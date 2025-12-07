@@ -1,19 +1,17 @@
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
-import Stats from "@/components/Stats";
+import Landing from "@/components/Landing";
+import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import Chatbot from "@/components/Chatbot";
 
 export default function Home() {
   return (
-    <main className="overflow-hidden bg-white">
-      <div className="flex flex-col items-center w-full">
-        <div className="w-full max-w-[100vw]">
-          <Hero />
-          <Features />
-          <Stats />
-        </div>
-      </div>
+    <main className="overflow-hidden">
+      <Hero />
+      <Features />
+      <Landing />
+      <Testimonials />
       <Footer />
       <Chatbot />
     </main>

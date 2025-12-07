@@ -1,0 +1,83 @@
+/* Footer.module.css */
+.footer {
+  background: linear-gradient(90deg, #1a1333 0%, #2d1847 100%);
+  color: #e5e5e5;
+  border-top: 1px solid #3a2c5a;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.containerMax {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.sectionPadding {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.statsGrid {
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #3a2c5a;
+}
+.statTitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #a78bfa;
+}
+.statDesc {
+  color: #b3b3b3;
+}
+.brand {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+.link {
+  color: #b3b3b3;
+  transition: color 0.2s;
+}
+.link:hover {
+  color: #fff;
+}
+.newsletterInput {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: #2d1847;
+  border: 1px solid #3a2c5a;
+  border-radius: 0.375rem 0 0 0.375rem;
+  color: #fff;
+}
+.newsletterButton {
+  padding: 0.5rem 1rem;
+  background: #a78bfa;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0 0.375rem 0.375rem 0;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.newsletterButton:hover {
+  background: #7c3aed;
+}
+.bottomBar {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #3a2c5a;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.95rem;
+  color: #b3b3b3;
+}
+@media (min-width: 768px) {
+  .bottomBar {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0;
+  }
+}

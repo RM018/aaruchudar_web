@@ -1,5 +1,4 @@
-@import "tailwindcss";
-
+@reference "tailwindcss";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -68,11 +67,28 @@ body {
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
   line-height: 1.6;
-  @apply antialiased text-gray-900;
+  @apply antialiased;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Ensure anchors have offset so content isn't hidden under fixed headers */
+:target {
+  scroll-margin-top: 72px; /* desktop header height */
+}
+@media (max-width: 768px) {
+  :target {
+    scroll-margin-top: 64px; /* mobile top bar height */
+  }
+}
+
+/* Responsive media */
+img, video, canvas {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Modern Container */
@@ -81,6 +97,7 @@ html {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 var(--space-md);
+  overflow-x: hidden;
 }
 
 @media (min-width: 640px) {
@@ -97,10 +114,10 @@ html {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
   color: var(--text-dark);
-  @apply tracking-tight font-bold;
+  letter-spacing: -0.02em;
 }
 
 .heading-1 {
@@ -474,6 +491,200 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1rem;
   color: #475569;
   line-height: 1.6;
+}
+
+/* ==================== PROFESSIONAL HERO SECTION CUSTOM STYLES ==================== */
+.hero-badge-modern {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  background: var(--brand-primary);
+  color: #fff;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-md);
+  letter-spacing: 0.02em;
+}
+
+.hero-title-modern {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.gradient-text-modern {
+  background: linear-gradient(90deg, var(--brand-primary), var(--brand-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  display: inline-block;
+}
+
+.hero-description-modern {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-buttons-modern {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.btn-primary-modern {
+  padding: 0.75rem 2rem;
+  background: var(--brand-primary);
+  color: #fff;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 1.1rem;
+  box-shadow: var(--shadow-md);
+  transition: background 0.2s, transform 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary-modern:hover {
+  background: var(--brand-secondary);
+  transform: translateY(-2px);
+}
+
+.btn-secondary-modern {
+  padding: 0.75rem 2rem;
+  background: #fff;
+  color: var(--brand-primary);
+  border: 2px solid var(--brand-primary);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 1.1rem;
+  box-shadow: var(--shadow-sm);
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-secondary-modern:hover {
+  background: var(--brand-primary);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.features-grid-modern {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin: 2.5rem 0 0 0;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feature-item {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 2rem 1rem;
+  text-align: center;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.feature-item:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.feature-item h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+
+.feature-item p {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.trust-indicators {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.trust-indicators .flex {
+  gap: 2rem;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .hero-title-modern {
+    font-size: 2.2rem;
+  }
+  .features-grid-modern {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title-modern {
+    font-size: 1.5rem;
+  }
+  .features-grid-modern {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .hero-buttons-modern {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+/* Professional Hero Section Background */
+.professional-hero-bg {
+  background: linear-gradient(120deg, #f8fafc 0%, #e0f7fa 60%, #e3e9ff 100%),
+    url('data:image/svg+xml;utf8,<svg width="600" height="600" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.08"><path d="M300 100c60 0 120 40 120 100s-60 100-120 100-120-40-120-100 60-100 120-100z" stroke=\'%2306b6d4\' stroke-width=\'8\' fill=\'none\'/><path d="M300 200c40 0 80 30 80 70s-40 70-80 70-80-30-80-70 40-70 80-70z" stroke=\'%230ea5e9\' stroke-width=\'6\' fill=\'none\'/><ellipse cx="300" cy="300" rx="60" ry="40" stroke=\'%2306d6a0\' stroke-width=\'4\' fill=\'none\'/></g></svg>') no-repeat right 10% top 10%;
+  background-size: 400px 400px, cover;
+}
+
+.professional-hero-bg::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: -120px;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle at 30% 30%, #06b6d4 0%, transparent 70%);
+  opacity: 0.18;
+  z-index: 0;
+}
+
+.professional-hero-bg::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle at 70% 70%, #0ea5e9 0%, transparent 70%);
+  opacity: 0.13;
+  z-index: 0;
 }
 
 /* ==================== FEATURES SECTION ==================== */
@@ -1090,6 +1301,20 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* Utility: section padding adjustments on mobile to keep spacing tight */
+@media (max-width: 640px) {
+  .section,
+  .section-modern,
+  .features-section-modern,
+  .integration-section,
+  .testimonial-section,
+  .stats-section,
+  .cta-section {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+}
+
 /* ==================== CUSTOM SCROLLBAR ==================== */
 ::-webkit-scrollbar {
   width: 8px;
@@ -1110,12 +1335,18 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Custom Container */
 .container-custom {
-  @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-[var(--container-width)];
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: var(--container-width);
+  overflow-x: hidden;
 }
 
 /* Section Padding */
 .section-padding {
-  @apply py-16 md:py-24;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 /* Consistent Button Styles */
@@ -1138,7 +1369,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Section Spacing */
 .section {
-  @apply py-12 md:py-20 px-4 sm:px-6 lg:px-8;
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 /* Card Layout */

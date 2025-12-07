@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "../styles/reset.css";
 import Navbar from "../components/Navbar";
 import { usePathname } from "next/navigation";
 
@@ -24,7 +25,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         {!isQuizPage && <Navbar />}
-        <main className={`${!isQuizPage ? 'pt-20 md:pt-24 pb-24 md:pb-0' : ''} min-h-screen safe-bottom`} aria-label="Page content">
+        <main className={`${!isQuizPage ? '' : ''} min-h-screen safe-bottom pb-16 md:pb-0`} aria-label="Page content">
           {children}
         </main>
       </body>
